@@ -12,6 +12,10 @@ class Product < ApplicationRecord
   validates :price, presence: true
 
 
+  def image(arg = nil)
+    self.images.first.image(arg) if self.images && self.images.first
+  end
+
   private
 
   def slug_candidates

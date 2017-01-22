@@ -1,13 +1,33 @@
-<div class="brands clearfix">
+<h1>Все бренды</h1>
 
-  <h1>Все бренды</h1>
+<div class="brands">
 
   <% @brands.each do |brand| %>
 
-    <div class="brand" style="width:25%;float:left;">
+    <div class="brand">
       <%= link_to image_tag(brand.image(:medium), alt: brand.title, style: "width:100%"), brand %>
     </div>
 
   <% end %>
 
 </div>
+
+
+<style>
+
+  .brands {
+    display: flex;
+    flex-wrap: wrap;
+    }
+    .brands > .brand {
+      width: 20%;
+      padding: 2%;
+      }
+      .brands > .brand img {
+        position: relative;
+        width: 100%;
+        transform: translateY(-50%);
+        top: 50%;
+        }
+
+</style>

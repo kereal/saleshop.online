@@ -12,6 +12,7 @@ gem 'rails_admin', '~> 1.0'
 gem 'closure_tree'
 gem 'friendly_id', '~> 5.1.0'
 gem 'babosa'
+gem 'acts_as_shopping_cart'
 
 
 group :development, :test do

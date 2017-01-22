@@ -5,7 +5,7 @@
   <% @products.each do |product| %>
     <div class="product">
       <div class="image">
-        <%= link_to(image_tag(product.images.first.image(:medium)), product) if product.images.first %>
+        <%= link_to(image_tag(product.image(:medium)), product) if product.images.first %>
       </div>
       <div class="brand"><%= link_to product.brand.title, product.brand %></div>
       <div class="title" style="overflow: hidden;"><%= product.title %></div>
@@ -24,12 +24,15 @@
   .products {}
     .product {
       float: left;
-      width: 18%;
+      width: 18.4%;
       margin-right: 2%;
       margin-bottom: 2%;
       border: 1px dotted #dfdfdf;
       padding: .75%;
       font-size: 13px;
+      }
+    .product:nth-child(5n) {
+      margin-right: 0;
       }
       .product > .image {
         margin-bottom: 8px;

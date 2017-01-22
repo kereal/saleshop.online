@@ -21,7 +21,7 @@
         <%= link_to(image_tag(product.image(:medium)), product) if product.images.first %>
       </div>
       <div class="brand"><%= link_to product.brand.title, product.brand %></div>
-      <div class="title" style="overflow: hidden;"><%= product.title %></div>
+      <div class="title"><%= product.title %></div>
       <div class="price">
         <%= number_to_currency product.price, precision: 0 %>
         <% if product.old_price %><s><%= number_to_currency product.old_price, precision: 0 %></s><% end %>
@@ -42,7 +42,7 @@
       margin-bottom: 2%;
       border: 1px dotted #dfdfdf;
       padding: .75%;
-      font-size: 13px;
+      font-size: 0.929em;
       }
     .product:nth-child(5n) {
       margin-right: 0;
@@ -51,14 +51,17 @@
         margin-bottom: 8px;
         border-bottom: 1px dotted #dfdfdf;
         }
-        .product > .image > img {
+        .product > .image img {
           max-width: 100%;
           }
       .product > .brand {
-        font-size: 12px;
+        font-size: 0.9em;
         }
       .product > .title {
         font-weight: 700;
+        overflow: hidden;
+        white-space: nowrap;
+        text-transform: capitalize;
         }
       .product > .price {
         font-weight: bold;
@@ -66,7 +69,7 @@
         }
         .product > .price > s {
           font-weight: normal;
-          font-size: 12px;
+          font-size: 0.857em;
           color: #666;
           }
   .breadcrumbs {}

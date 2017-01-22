@@ -22,6 +22,10 @@ a:active, a:focus { text-decoration: none; }
   height: 1px;
   }
 
+.container {
+  min-width: 992px;
+  }
+
 #header {
   padding: 20px 0;
   }
@@ -130,7 +134,7 @@ a:active, a:focus { text-decoration: none; }
     padding: 0;
     list-style: none;
     display: table;
-    font-size: 14px;
+    font-size: 1em;
     }
   #mainmenu > ul > li {
     display: table-cell;
@@ -183,3 +187,36 @@ a:active, a:focus { text-decoration: none; }
   padding: 1%;
   margin-top: 69px;
   }
+
+
+/* немного уменьшенная версия по ширине и увеличенными шрифтами */
+
+@media (max-width: 1200px) {
+  body {
+    font-size: 18px;
+    }
+  #header .logo {
+    width: 24%;
+    margin-right: 1%;
+    position: relative;
+    top: 2px;
+    }
+  #brandmenu > ul > li {
+    min-width: 31px;
+    }
+  #header .features {
+    width: 41%;
+    margin-right: 8%;
+    letter-spacing: -.1px;
+    }
+  .products > .product {
+    margin-right: .5%;
+    margin-left: .5%;
+    margin-bottom: .5%;
+    width: 24%;
+    }
+  .products > .product:nth-child(5n) {
+    margin-right: .5%;
+    }
+}
+

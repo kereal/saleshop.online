@@ -18,7 +18,7 @@
   <% @products.each do |product| %>
     <div class="product">
       <div class="image">
-        <%= link_to(image_tag(product.image(:medium)), product) if product.images.first %>
+        <%= link_to(image_tag(product.image(:medium)), product) %>
       </div>
       <div class="brand"><%= link_to product.brand.title, product.brand %></div>
       <div class="title"><%= product.title %></div>
@@ -52,6 +52,7 @@
         border-bottom: 1px dotted #dfdfdf;
         }
         .product > .image img {
+          width: 100%;
           max-width: 100%;
           }
       .product > .brand {

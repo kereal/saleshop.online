@@ -22,9 +22,11 @@
       <%= number_to_currency @product.price, precision: 0 %>
       <% if @product.old_price %><s><%= number_to_currency @product.old_price, precision: 0 %></s><% end %>
     </div>
-    <%= link_to cart_add_path(@product.id) do %>
-      <button>В корзину</button>
-    <% end %>
+    <div class="tocart">
+      <%= link_to cart_add_path(@product.id) do %>
+        <button>В корзину</button>
+      <% end %>
+    </div>
     <div class="description">
       <%= @product.description.html_safe %>
     </div>
@@ -43,7 +45,7 @@
       }
   .product .price {
     font-size: 24px;
-    margin: 10px;
+    margin: 10px 0;
     font-weight: bold;
     color: #ad1d22;
     }
@@ -51,5 +53,15 @@
       font-weight: normal;
       font-size: 16px;
       color: #666;
+      }
+  .product .tocart {
+    margin-bottom: 22px;
+    }
+    .product .tocart button {
+      background: #b10000;
+      color: #fff;
+      border: 0;
+      padding: 12px 29px;
+      outline: none;
       }
 </style>

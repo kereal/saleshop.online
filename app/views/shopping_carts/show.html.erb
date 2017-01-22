@@ -12,6 +12,9 @@
         <div class="price"><%= number_to_currency item.price.to_f %></div>
         <div class="quantity">✕ <%= item.quantity %></div>
         <div class="item-total">= <%= number_to_currency(item.price.to_f * item.quantity) %></div>
+        <div class="item-actions">
+          <%= link_to "&cross;".html_safe, cart_remove_path(item) %>
+        </div>
       </div>
     <% end %>
 
@@ -50,6 +53,12 @@
       .cart-items > .item > .price {
         float: left;
         width: 11%;
+        }
+      .cart-items > .item > .item-total {
+        float: left;
+        }
+      .cart-items > .item > .item-actions {
+        float: right;
         }
   .cart-actions {
     padding: 19px 0 0;

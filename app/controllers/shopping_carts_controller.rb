@@ -15,7 +15,8 @@ class ShoppingCartsController < ApplicationController
 
   # GET /cart/remove/:product_id
   def remove
-    @shopping_cart.remove(@product, params[:product_id])
+    @product = Product.find(params[:product_id])
+    @shopping_cart.remove(@product)
     redirect_to cart_path
   end
 

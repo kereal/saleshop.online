@@ -20,6 +20,9 @@ ru:
       order:
         one: Заказ
         other: Заказы
+      shopping_cart:
+        one: Корзина
+        other: Корзины
 
     attributes:
       brand:

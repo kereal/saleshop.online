@@ -1,4 +1,17 @@
+<nav class="breadcrumbs">
+  <% @category.ancestors.reverse.each do |category| %>
+    <%= link_to category.title, category %> <span class="arr">&rarr;</span>
+  <% end if @category %>
+</nav>
+
+
 <h1><%= @title %></h1>
+
+<nav class="sub-categories">
+  <% @category.children.each do |category| %>
+    <%= link_to category.title, category %>&nbsp;&nbsp;•&nbsp;
+  <% end if @category %>
+</nav>
 
 <div class="products clearfix">
 
@@ -56,5 +69,15 @@
           font-size: 12px;
           color: #666;
           }
+  .breadcrumbs {}
+    .breadcrumbs span:last-child {
+      display: none;
+      }
+  .sub-categories {
+    margin-bottom: 12px;
+    }
+    .sub-categories a {
+      white-space: nowrap;
+      }
 
 </style>

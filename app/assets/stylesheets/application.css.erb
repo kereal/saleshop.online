@@ -15,6 +15,7 @@
  */
 
 a:hover { text-decoration: none; }
+a:active, a:focus { text-decoration: none; }
 
 .turbolinks-progress-bar {
   background-color: #000;
@@ -56,14 +57,14 @@ a:hover { text-decoration: none; }
       #header .features .mag > .icon {
         width: 34px;
         height: 25px;
-        background: url(icons.png) no-repeat;
+        background: url(<%= asset_path "icons.png" %>) no-repeat;
         background-position: 0 0;
         margin-bottom: 1px;
         }
       #header .features .delivery > .icon {
         width: 30px;
         height: 19px;
-        background: url(icons.png) no-repeat;
+        background: url(<%= asset_path "icons.png" %>) no-repeat;
         background-position: 0 -25px;
         margin-top: 5px;
         margin-bottom: 2px
@@ -71,7 +72,7 @@ a:hover { text-decoration: none; }
       #header .features .sales > .icon {
         width: 46px;
         height: 15px;
-        background: url(icons.png) no-repeat;
+        background: url(<%= asset_path "icons.png" %>) no-repeat;
         background-position: 0 -44px;
         margin-top: 8px;
         margin-bottom: 3px
@@ -100,7 +101,7 @@ a:hover { text-decoration: none; }
         right: 6px;
         border: 0;
         outline: none;
-        background: url(icons.png) 0 -98px no-repeat;
+        background: url(<%= asset_path "icons.png" %>) 0 -98px no-repeat;
         }
     #header .right > .cart {
       float: right;
@@ -116,7 +117,7 @@ a:hover { text-decoration: none; }
         height: 23px;
         left: 13px;
         top: -24px;
-        background: url(icons.png) 0 -59px no-repeat;
+        background: url(<%= asset_path "icons.png" %>) 0 -59px no-repeat;
         }
 
 

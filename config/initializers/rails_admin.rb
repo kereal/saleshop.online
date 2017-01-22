@@ -43,9 +43,14 @@ RailsAdmin.config do |config|
     # history_show
 
     collection :categories_as_tree do
-      only ["Category"]
+      only [Category]
       route_fragment "as_tree"
       link_icon "icon-leaf"
+    end
+
+    member :order_more do
+      only [Order]
+      route_fragment "more"
     end
 
   end

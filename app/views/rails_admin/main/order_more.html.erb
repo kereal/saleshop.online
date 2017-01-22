@@ -1,0 +1,34 @@
+<div class="order-more">
+  
+  <h3>Заказ <%= @object.id %></h3>
+  <div class="created_at">Создан в: <%= @object.created_at.strftime("%d.%m.%Y, %H:%M:%S") %></div>
+  <div class="name">Имя: <%= @object.name %></div>
+  <div class="tel">Телефон: <%= @object.tel %></div>
+  <div class="delivery-address">Адрес доставки: <%= @object.delivery_address %></div>
+  <div class="comment">Комментарий: <%= @object.comment %></div>
+
+</div>
+
+<p>&nbsp;</p>
+
+<table class="table">
+  <tr>
+    <th>Продукт</th>
+    <th>Количество</th>
+    <th>Цена</th>
+    <th>Стоимость</th>
+  </tr>
+  <% @object.shopping_cart.shopping_cart_items.each do |item| %>
+    <% product = item.item %>
+    <tr>
+      <td><%= product.title %></td>
+      <td><%= item.quantity %></td>
+      <td><%= number_to_currency item.price  %></td>
+      <td><%= number_to_currency(item.price * item.quantity) %></td>
+    </tr>
+  <% end %>
+  <tr>
+    <td colspan="3"></td>
+    <td><div class="total"><b>Сумма:</b> <%= number_to_currency @object.shopping_cart.subtotal.to_f %></div></td>
+  </tr>
+</table>

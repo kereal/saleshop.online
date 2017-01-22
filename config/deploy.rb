@@ -51,11 +51,11 @@ end
 desc "Restart app server"
 task :puma_restart => :environment do
   in_path(fetch(:current_path)) do
-    invoke :'puma_stop'
-    invoke :'puma_start'
-    #command %{export RAILS_SERVE_STATIC_FILES=true}
-    #command %{export RAILS_ENV=production}
-    #command "bundle exec pumactl -P tmp/pids/server.pid stop || true && bundle exec rails s -b 0.0.0.0 -d -e production"
+    # invoke :'puma_stop'
+    # invoke :'puma_start'
+    command %{export RAILS_SERVE_STATIC_FILES=true}
+    command %{export RAILS_ENV=production}
+    command "bundle exec pumactl -P tmp/pids/server.pid stop || true && bundle exec rails s -b 0.0.0.0 -d -e production"
   end
 end
 

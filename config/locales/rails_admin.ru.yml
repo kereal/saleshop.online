@@ -122,9 +122,9 @@ ru:
         menu: "Дерево категорий"
         breadcrumb: "Дерево"
       order_more:
-        title: Просмотрз заказа
-        menu: "Просмотр заказа"
-        breadcrumb: "Просмотр"
+        title: Просмотр заказа
+        menu: Просмотр заказа
+        breadcrumb: Просмотр
     form:
       cancel: "Отмена"
       basic_info: "Основное"

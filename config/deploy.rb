@@ -35,12 +35,12 @@ task :deploy do
     invoke :'rails:db_migrate'
     invoke :'rails:assets_precompile'
     invoke :'deploy:cleanup'
-    invoke :'puma_restart'
 
     on :launch do
       in_path(fetch(:current_path)) do
         command %{mkdir -p tmp/}
         command %{touch tmp/restart.txt}
+        invoke :'puma_restart'
       end
     end
   end
@@ -51,11 +51,11 @@ end
 desc "Restart app server"
 task :puma_restart => :environment do
   in_path(fetch(:current_path)) do
-    # invoke :'puma_stop'
-    # invoke :'puma_start'
-    command %{export RAILS_SERVE_STATIC_FILES=true}
-    command %{export RAILS_ENV=production}
-    command "bundle exec pumactl -P tmp/pids/server.pid stop || true && bundle exec rails s -b 0.0.0.0 -d -e production"
+    invoke :'puma_stop'
+    invoke :'puma_start'
+    #command %{export RAILS_SERVE_STATIC_FILES=true}
+    #command %{export RAILS_ENV=production}
+    #command "bundle exec pumactl -P tmp/pids/server.pid stop || true && bundle exec rails s -b 0.0.0.0 -d -e production"
   end
 end
 

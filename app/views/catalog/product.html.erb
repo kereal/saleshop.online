@@ -1,0 +1,26 @@
+<h1><%= @product.title %></h1>
+
+<div class="brand">
+  <%= link_to image_tag(@product.brand.image(:medium)), @product.brand %>
+</div>
+
+<div class="category">
+  <%= link_to @product.category.title, @product.category %>
+</div>
+
+<div class="images">
+  <% @product.images.each do |image| %>
+    <%= link_to image_tag(image.image(:medium)), image.image.url %>
+  <% end %>
+</div>
+
+<div class="price">
+  <%= number_to_currency @product.price, precision: 0 %>
+  <% if @product.old_price %><s><%= number_to_currency @product.old_price, precision: 0 %></s><% end %>
+</div>
+
+<button>В корзину</button>
+
+<div class="description">
+  <%= @product.description.html_safe %>
+</div>

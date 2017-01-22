@@ -1,0 +1,184 @@
+/*
+ * This is a manifest file that'll be compiled into application.css, which will include all the files
+ * listed below.
+ *
+ * Any CSS and SCSS file within this directory, lib/assets/stylesheets, vendor/assets/stylesheets,
+ * or any plugin's vendor/assets/stylesheets directory can be referenced here using a relative path.
+ *
+ * You're free to add application-wide styles to this file and they'll appear at the bottom of the
+ * compiled file so the styles you add here take precedence over styles defined in any other CSS/SCSS
+ * files in this directory. Styles in this file should be added after the last require_* statement.
+ * It is generally better to create a new file per style scope.
+ *
+ *= require_tree .
+ *= require_self
+ */
+
+a:hover { text-decoration: none; }
+
+.turbolinks-progress-bar {
+  background-color: #087879;
+  height: 2px;
+  }
+
+#header {
+  padding: 20px 0;
+  }
+  #header .logo {
+    float: left;
+    width: 20%;
+    margin-right: 2%;
+    }
+    #header .logo img {
+      width: 100%;
+      }
+  #header .features {
+    float: left;
+    width: 38%;
+    margin: 0 14% 0 0;
+    padding: 0;
+    list-style: none;
+    position: relative;
+    top: 3px;
+    }
+    #header .features > li {
+      width: 33.3333%;
+      float: left;
+      text-align: center;
+      }
+      #header .features > li > a {
+        font-size: 13px;
+        color: #222;
+        }
+        #header .features > li > a > .icon {
+          margin: 0 auto;
+          }
+      #header .features .mag > .icon {
+        width: 34px;
+        height: 25px;
+        background: url(icons.png) no-repeat;
+        background-position: 0 0;
+        margin-bottom: 1px;
+        }
+      #header .features .delivery > .icon {
+        width: 30px;
+        height: 19px;
+        background: url(icons.png) no-repeat;
+        background-position: 0 -25px;
+        margin-top: 5px;
+        margin-bottom: 2px
+        }
+      #header .features .sales > .icon {
+        width: 46px;
+        height: 15px;
+        background: url(icons.png) no-repeat;
+        background-position: 0 -44px;
+        margin-top: 8px;
+        margin-bottom: 3px
+        }
+  #header .right {
+    float: left;
+    width: 26%;
+    }
+    #search-main {
+      float: left;
+      position: relative;
+      width: 75%;
+      top: 13px;
+      }
+      #search-main input {
+        width: 100%;
+        border: 1px solid #ccc;
+        padding: 2px 5px 2px;
+        outline: none;
+        }
+      #search-main button {
+        width: 13px;
+        height: 13px;
+        position: absolute;
+        top: 6px;
+        right: 6px;
+        border: 0;
+        outline: none;
+        background: url(icons.png) 0 -98px no-repeat;
+        }
+    #header .right > .cart {
+      float: right;
+      position: relative;
+      color: #222;
+      bottom: -29px;
+      font-size: 13px;
+      }
+      #header .right > .cart:before {
+        content: "";
+        position: absolute;
+        width: 23px;
+        height: 23px;
+        left: 13px;
+        top: -24px;
+        background: url(icons.png) 0 -59px no-repeat;
+        }
+
+
+#mainmenu {
+  margin-bottom: 5px;
+  }
+  #mainmenu > ul {
+    width: 100%;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+    display: table;
+    font-size: 14px;
+    }
+  #mainmenu > ul > li {
+    display: table-cell;
+    text-align: center;
+    width: 16.666%;
+    }
+    #mainmenu > ul > li > a {
+      display: block;
+      padding: 2px 0 3px;
+      color: #fff;
+      background: #000;
+      }
+    #mainmenu > ul > li > a:hover {
+      background: #333;
+      }
+
+#brandmenu {
+  margin-bottom: 24px;
+  }
+  #brandmenu > ul {
+    width: 100%;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+    display: table;
+    }
+    #brandmenu > ul > li {
+      display: table-cell;
+      text-align: center;
+      min-width: 36px;
+      }
+    #brandmenu > ul > li:first-child {
+      width: 13.7%;
+      }
+      #brandmenu > ul > li > a {
+        display: block;
+        width: 100%;
+        color: #bbb;
+        }
+      #brandmenu > ul > li > a:hover {
+        background: #f0f0f0;
+        color: #888;
+        }
+
+
+#footer {
+  color: #888;
+  border-top: 1px solid #eee;
+  text-align: right;
+  padding: 1%;
+  margin-top: 69px;
+  }

@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>saleshop.online</title>
+    <%= csrf_meta_tags %>
+    <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
+    <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
+  </head>
+
+  <body>
+
+    <div class="container">
+
+      <header id="header" class="clearfix">
+
+        <div class="logo">
+          <%= link_to image_tag("logo.png", alt: "saleshop.online"), "/" %>
+        </div>
+
+        <ul class="features">
+          <li>
+            <a href="#" class="mag">
+              <div class="icon"></div>
+              <div class="title">Магазин в Москве</div>
+            </a>
+          </li>
+          <li>
+            <a href="#" class="delivery">
+              <div class="icon"></div>
+              <div class="title">Бесплатная доставка</div>
+            </a>
+          </li>
+          <li>
+            <a href="#" class="sales">
+              <div class="icon"></div>
+              <div class="title">Скидки до 70%</div>
+            </a>
+          </li>
+        </ul>
+
+        <div class="right clearfix">
+          <form action="" id="search-main">
+            <input type="text" name="query" placeholder="Поиск">
+            <button type="submit"></button>
+          </form>
+          <a href="#" class="cart">Корзина</a>
+        </div>
+
+      </header>
+
+      
+      <nav id="mainmenu">
+        <ul>
+          <li><%= link_to "Женская одежда", category_path("zhenskaya-odezhda") %></li>
+          <li><%= link_to "Мужская одежда", category_path("muzhskaya-odezhda") %></li>
+          <li><a href="#">Сумки</a></li>
+          <li><a href="#">Аксессуары</a></li>
+          <li><a href="#">Доставка и оплата</a></li>
+          <li><a href="#">Контакты</a></li>
+        </ul>
+      </nav>
+
+      <nav id="brandmenu">
+        <ul>
+          <li><%= link_to "Все бренды", brands_path %></li>
+          <li><a href="#">0-9</a></li>
+          <li><a href="#">A</a></li>
+          <li><a href="#">B</a></li>
+          <li><a href="#">C</a></li>
+          <li><a href="#">D</a></li>
+          <li><a href="#">E</a></li>
+          <li><a href="#">F</a></li>
+          <li><a href="#">G</a></li>
+          <li><a href="#">H</a></li>
+          <li><a href="#">I</a></li>
+          <li><a href="#">J</a></li>
+          <li><a href="#">K</a></li>
+          <li><a href="#">L</a></li>
+          <li><a href="#">M</a></li>
+          <li><a href="#">N</a></li>
+          <li><a href="#">O</a></li>
+          <li><a href="#">P</a></li>
+          <li><a href="#">Q</a></li>
+          <li><a href="#">R</a></li>
+          <li><a href="#">S</a></li>
+          <li><a href="#">T</a></li>
+          <li><a href="#">U</a></li>
+          <li><a href="#">V</a></li>
+          <li><a href="#">W</a></li>
+          <li><a href="#">X</a></li>
+          <li><a href="#">Y</a></li>
+          <li><a href="#">Z</a></li>
+        </ul>
+      </nav>
+
+
+      <%= yield %>
+
+
+      <footer id="footer" class="clearfix">
+        <div class="pull-left">8 (800) 123 07 07</div>
+        <div class="pull-right">&copy; 2017 made.in</div>
+      </footer>
+
+    </div> <!-- /.container -->
+
+  </body>
+</html>
+
+
+
+

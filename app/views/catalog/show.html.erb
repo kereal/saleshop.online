@@ -1,0 +1,57 @@
+<h1><%= @title %></h1>
+
+<div class="products clearfix">
+
+  <% @products.each do |product| %>
+    <div class="product">
+      <div class="image">
+        <%= link_to(image_tag(product.images.first.image(:medium)), product) if product.images.first %>
+      </div>
+      <div class="brand"><%= link_to product.brand.title, product.brand %></div>
+      <div class="title" style="overflow: hidden;"><%= product.title %></div>
+      <div class="price">
+        <%= number_to_currency product.price, precision: 0 %>
+        <% if product.old_price %><s><%= number_to_currency product.old_price, precision: 0 %></s><% end %>
+      </div>
+    </div>
+  <% end %>
+
+</div>
+
+
+<style>
+
+  .products {}
+    .product {
+      float: left;
+      width: 18%;
+      margin-right: 2%;
+      margin-bottom: 2%;
+      border: 1px dotted #dfdfdf;
+      padding: .75%;
+      font-size: 13px;
+      }
+      .product > .image {
+        margin-bottom: 8px;
+        border-bottom: 1px dotted #dfdfdf;
+        }
+        .product > .image > img {
+          max-width: 100%;
+          }
+      .product > .brand {
+        font-size: 12px;
+        }
+      .product > .title {
+        font-weight: 700;
+        }
+      .product > .price {
+        font-weight: bold;
+        color: #ad1d22;
+        }
+        .product > .price > s {
+          font-weight: normal;
+          font-size: 12px;
+          color: #666;
+          }
+
+</style>

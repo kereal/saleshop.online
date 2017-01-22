@@ -56,8 +56,22 @@
       
       <nav id="mainmenu">
         <ul>
-          <li><%= link_to "Женская одежда", category_path("zhenskaya-odezhda") %></li>
-          <li><%= link_to "Мужская одежда", category_path("muzhskaya-odezhda") %></li>
+          <li class="show-pop">
+            <%= link_to "Женская одежда", category_path("zhenskaya-odezhda") %>
+            <div class="pop">
+              <% Category.friendly.find("zhenskaya-odezhda").children.each do |children| %>
+                <%= link_to children.title, children %>
+              <% end %>
+            </div>
+          </li>
+          <li class="show-pop">
+            <%= link_to "Мужская одежда", category_path("muzhskaya-odezhda") %>
+            <div class="pop">
+              <% Category.friendly.find("muzhskaya-odezhda").children.each do |children| %>
+                <%= link_to children.title, children %>
+              <% end %>
+            </div>
+          </li>
           <li><%= link_to "Сумки", category_path("sumki") %></li>
           <li><%= link_to "Аксессуары", category_path("aksessuary") %></li>
           <li><%= link_to "Доставка и оплата", page_path("dostavka-i-oplata") %></li>

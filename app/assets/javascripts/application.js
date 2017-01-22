@@ -14,3 +14,13 @@
 //= require jquery_ujs
 //= require turbolinks
 //= require_tree .
+
+
+$(document).on("turbolinks:load", function() {
+
+  // выпадалки подкатегорий в главном меню
+  $("#mainmenu .show-pop").hover(function() {
+    $(this).find(".pop").toggle();
+  });
+
+});

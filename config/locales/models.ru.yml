@@ -55,7 +55,7 @@ ru:
       order:
         name: Имя
         tel: Телефон
-        deliery_address: Адрес доставки
+        delivery_address: Адрес доставки
         comment: Комментарий
         shopping_cart: Корзина
         status: Статус

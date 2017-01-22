@@ -19,10 +19,11 @@
 
   <p><div class="total"><b>Сумма:</b> <%= number_to_currency @shopping_cart.subtotal.to_f %></div></p>
 
-  <p>
-    <button class="btn btn-default">Оформить заказ</button>
+  <div class="cart-actions">
+    <button disabled>Оформить заказ</button>
+    <%= link_to :back do %><button>Продолжить покупки</button><% end %>
     <%= link_to cart_clear_path do %><button class="btn btn-default">Очистить корзину</button><% end %>
-  </p>
+  </div>
 
 <% else %>
   <p>Ваша корзина пуста.</p>
@@ -50,5 +51,7 @@
         float: left;
         width: 11%;
         }
-
+  .cart-actions {
+    padding: 19px 0 0;
+    }
 </style>

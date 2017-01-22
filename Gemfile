@@ -15,11 +15,8 @@ gem 'babosa'
 gem 'acts_as_shopping_cart'
 
 
-group :development, :test do
-  gem 'byebug', platform: :mri
-end
-
 group :development do
   gem 'spring'
   gem 'spring-watcher-listen', '~> 2.0.0'
+  gem 'mina', require: false
 end

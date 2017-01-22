@@ -86,6 +86,8 @@ ActiveRecord::Schema.define(version: 20170122080826) do
   end
 
   create_table "shopping_carts", force: :cascade do |t|
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
 end

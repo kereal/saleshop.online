@@ -14,4 +14,9 @@ Rails.application.routes.draw do
 
   get "/page/:slug", to: "pages#show", as: :page
 
+  get "/cart", to: "shopping_carts#show"
+  get "/cart/add/:product_id", to: "shopping_carts#add", as: :cart_add
+  get "/cart/remove/:product_id", to: "shopping_carts#remove", as: :cart_remove
+  get "/cart/clear", to: "shopping_carts#clear"
+
 end

@@ -22,7 +22,9 @@
       <%= number_to_currency @product.price, precision: 0 %>
       <% if @product.old_price %><s><%= number_to_currency @product.old_price, precision: 0 %></s><% end %>
     </div>
-    <button>В корзину</button>
+    <%= link_to cart_add_path(@product.id) do %>
+      <button>В корзину</button>
+    <% end %>
     <div class="description">
       <%= @product.description.html_safe %>
     </div>

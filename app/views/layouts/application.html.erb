@@ -43,7 +43,12 @@
             <input type="text" name="query" placeholder="Поиск">
             <button type="submit"></button>
           </form>
-          <a href="#" class="cart">Корзина</a>
+          <%= link_to cart_path, class: "cart" do %>
+            <% if @shopping_cart %>
+              <span class="count"><%= @shopping_cart.total_unique_items %></span>
+            <% end %>
+            Корзина
+          <% end %>
         </div>
 
       </header>

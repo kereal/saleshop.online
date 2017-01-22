@@ -1,0 +1,54 @@
+<h1>Корзина</h1>
+
+
+<% unless @shopping_cart.shopping_cart_items.blank? %>
+
+  <div class="cart-items">
+
+    <% @shopping_cart.shopping_cart_items.each do |item| %>
+      <div class="item clearfix">
+        <!-- <div class="image"><%= image_tag item.item.image(:medium) %></div> -->
+        <div class="title"><%= link_to item.item.title, item.item %></div>
+        <div class="price"><%= number_to_currency item.price.to_f %></div>
+        <div class="quantity">✕ <%= item.quantity %></div>
+        <div class="item-total">= <%= number_to_currency(item.price.to_f * item.quantity) %></div>
+      </div>
+    <% end %>
+
+  </div>
+
+  <p><div class="total"><b>Сумма:</b> <%= number_to_currency @shopping_cart.subtotal.to_f %></div></p>
+
+  <p>
+    <button class="btn btn-default">Оформить заказ</button>
+    <%= link_to cart_clear_path do %><button class="btn btn-default">Очистить корзину</button><% end %>
+  </p>
+
+<% else %>
+  <p>Ваша корзина пуста.</p>
+<% end %>
+
+
+<style>
+  
+  .cart-items {
+    }
+    .cart-items > .item {
+      margin-bottom: 6px;
+      padding-bottom: 6px;
+      border-bottom: 1px dotted #dfdfdf;
+      }
+      .cart-items > .item > .title {
+        float: left;
+        width: 40%;
+        }
+      .cart-items > .item > .quantity {
+        float: left;
+        width: 8%;
+        }
+      .cart-items > .item > .price {
+        float: left;
+        width: 11%;
+        }
+
+</style>

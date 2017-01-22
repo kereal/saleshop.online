@@ -22,7 +22,7 @@ class Brand < ApplicationRecord
       exclude_fields :slug
     end
     list do
-      exclude_fields :description
+      exclude_fields :description, :products
     end
   end
 

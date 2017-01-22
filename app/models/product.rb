@@ -27,7 +27,7 @@ class Product < ApplicationRecord
       exclude_fields :slug
     end
     list do
-      exclude_fields :description
+      exclude_fields :description, :images
     end
   end
 

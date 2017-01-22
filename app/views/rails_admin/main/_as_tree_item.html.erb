@@ -1,0 +1,7 @@
+<li>
+  <%= link_to category.title, rails_admin.show_path(model_name: category.model_name.param_key, id: category.id) %>
+  (<%= category.products.count %>)
+  <%= link_to "[x]" %>
+  <%= link_to "[+]", rails_admin.new_path(model_name: :product, 'product[category_id]': category.id), title: "Добавить продукт в эту категорию" %>
+  <%= link_to "[e]", rails_admin.edit_path(model_name: category.model_name.param_key, id: category.id), title: "Редактировать" %>
+</li>

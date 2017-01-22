@@ -1,0 +1,49 @@
+ru:
+  activerecord:
+    models:
+      brand:
+        one: Бренд
+        other: Бренды
+      category:
+        one: Категория
+        other: Категории
+      product:
+        one: Продукт
+        other: Продукты
+      image:
+        one: Изображение
+        other: Изображения
+      page:
+        one: Страница
+        other: Страницы
+    attributes:
+      brand:
+        title: Название
+        image: Изображение
+        products: Продукты
+        created_at: Создано
+        updated_at: Обновлено
+      category:
+        title: Название
+        parent: Родитель
+        created_at: Создано
+        updated_at: Обновлено
+      product:
+        title: Название
+        category: Категория
+        brand: Бренд
+        price: Цена
+        old_price: Старая цена
+        images: Изображения
+        description: Описание
+        created_at: Создано
+        updated_at: Обновлено
+      image:
+        product: Продукт
+        image: Изображение
+        created_at: Создано
+        updated_at: Обновлено
+      page:
+        title: Назваие
+        created_at: Создано
+        updated_at: Обновлено

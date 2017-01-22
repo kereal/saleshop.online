@@ -51,7 +51,7 @@ end
 desc "Restart app server"
 task :puma_restart => :environment do
   in_path(fetch(:current_path)) do
-    command "RAILS_ENV=production; bundle exec pumactl -P tmp/pids/server.pid stop || true && bundle exec rails s -b 0.0.0.0 -d -e production"
+    command "RAILS_ENV=production; bundle exec pumactl -P tmp/pids/server.pid stop || true && RAILS_SERVE_STATIC_FILES=true; bundle exec rails s -b 0.0.0.0 -d -e production"
   end
 end
 

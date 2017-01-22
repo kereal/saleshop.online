@@ -1,5 +1,6 @@
 ru:
   activerecord:
+
     models:
       brand:
         one: Бренд
@@ -16,6 +17,10 @@ ru:
       page:
         one: Страница
         other: Страницы
+      order:
+        one: Заказ
+        other: Заказы
+
     attributes:
       brand:
         title: Название
@@ -45,5 +50,14 @@ ru:
         updated_at: Обновлено
       page:
         title: Назваие
+        created_at: Создано
+        updated_at: Обновлено
+      order:
+        name: Имя
+        tel: Телефон
+        deliery_address: Адрес доставки
+        comment: Комментарий
+        shopping_cart: Корзина
+        status: Статус
         created_at: Создано
         updated_at: Обновлено

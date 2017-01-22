@@ -4,7 +4,7 @@ class Page < ApplicationRecord
 
   friendly_id :title, use: :slugged
 
-  validates :title, :slug, presence: true, length: { minimum: 2 } 
+  validates :title, :slug, presence: true, length: { minimum: 2 }
 
 
   private

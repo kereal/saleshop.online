@@ -28,7 +28,9 @@ RailsAdmin.config do |config|
   config.actions do
     dashboard                     # mandatory
     index                         # mandatory
-    new
+    new do
+      except [Order]
+    end
     export
     bulk_delete
     show

@@ -1,0 +1,70 @@
+<h1>Оформление заказа</h1>
+
+<div class="row">
+
+  <div class="col-sm-5">
+    <% @shopping_cart.shopping_cart_items.each do |item| %>
+      <div class="item clearfix">
+        <div class="title"><%= link_to item.item.title, item.item %></div>
+        <div class="price"><%= number_to_currency item.price.to_f %></div>
+        <div class="quantity">✕ <%= item.quantity %></div>
+        <div class="item-total">= <%= number_to_currency(item.price.to_f * item.quantity) %></div>
+      </div>
+    <% end %>
+    <p><div class="total"><b>Сумма:</b> <%= number_to_currency @shopping_cart.subtotal.to_f %></div></p>
+  </div>
+
+  <div class="col-sm-7">
+    <%= form_for @order, url: cart_create_order_path, html: { id: "checkout-form" } do |f| %>
+      <%= f.label "Ваше имя", for: nil %>
+      <%= f.text_field :name, required: true %>
+      <%= f.label "Номер телефона для связи", for: nil %>
+      <%= f.text_field :tel, required: true %>
+      <%= f.label "Адрес доставки", for: nil %>
+      <%= f.text_field :delivery_address %>
+      <%= f.label "Ваш комментарий к заказу", for: nil %>
+      <%= f.text_field :comment %>
+      <button type="submit">Оформить заказ</button>
+    <% end %>
+  </div>
+
+</div>
+
+
+<style>
+  .item {
+    margin-bottom: 12px;
+    }
+    .item .price,
+    .item .quantity,
+    .item .item-total {
+      display: inline;
+      }
+  .total {
+    background: #f0f0f0;
+    padding: 10px 15px;
+    margin-top: 30px;
+    }
+  #checkout-form {
+    padding: 0 0 10% 18%;
+    width: 80%;
+    max-width: 440px;
+    margin-top: -40px;
+    }
+    #checkout-form input {
+      display: block;
+      width: 100%;
+      margin-bottom: 6px;
+      outline: none;
+      padding: 3px 7px 2px;
+      font-size: 19px;
+      }
+    #checkout-form label {
+      display: block;
+      width: 100%;
+      margin-bottom: 3px;
+      }
+    #checkout-form button {
+      margin-top: 12px;
+      }
+</style>

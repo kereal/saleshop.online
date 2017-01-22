@@ -26,8 +26,33 @@ class ShoppingCartsController < ApplicationController
     redirect_to cart_path
   end
 
+  # GET /cart/checkout
+  def checkout
+    @order = Order.new
+  end
+
+  # POST /cart/create_order
+  def create_order
+    @order = Order.new(order_params)
+    @order.shopping_cart = @shopping_cart
+    if @order.save
+      redirect_to cart_thanks_path
+      session[:shopping_cart_id] = nil
+    else
+      render "cart/checkout"
+    end
+  end
+
+  # GET /cart/thanks
+  def thanks
+  end
+
   
   private
+
+  def order_params
+    params.require(:order).permit(:name, :tel, :delivery_address, :comment)
+  end
   
   def extract_shopping_cart
     shopping_cart_id = session[:shopping_cart_id]

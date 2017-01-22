@@ -7,7 +7,6 @@
 
     <% @shopping_cart.shopping_cart_items.each do |item| %>
       <div class="item clearfix">
-        <!-- <div class="image"><%= image_tag item.item.image(:medium) %></div> -->
         <div class="title"><%= link_to item.item.title, item.item %></div>
         <div class="price"><%= number_to_currency item.price.to_f %></div>
         <div class="quantity">✕ <%= item.quantity %></div>
@@ -23,7 +22,7 @@
   <p><div class="total"><b>Сумма:</b> <%= number_to_currency @shopping_cart.subtotal.to_f %></div></p>
 
   <div class="cart-actions">
-    <button disabled>Оформить заказ</button>
+    <%= link_to cart_checkout_path do %><button>Перейти к оформлению заказа</button><% end %>
     <%= link_to :back do %><button>Продолжить покупки</button><% end %>
     <%= link_to cart_clear_path do %><button class="btn btn-default">Очистить корзину</button><% end %>
   </div>

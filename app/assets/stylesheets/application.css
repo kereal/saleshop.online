@@ -17,8 +17,8 @@
 a:hover { text-decoration: none; }
 
 .turbolinks-progress-bar {
-  background-color: #087879;
-  height: 2px;
+  background-color: #000;
+  height: 1px;
   }
 
 #header {

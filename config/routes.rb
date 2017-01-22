@@ -12,4 +12,6 @@ Rails.application.routes.draw do
 
   get "/product/:slug", to: "products#show", as: :product
 
+  get "/page/:slug", to: "pages#show", as: :page
+
 end

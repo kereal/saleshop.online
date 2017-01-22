@@ -19,13 +19,13 @@
 
         <ul class="features">
           <li>
-            <a href="#" class="mag">
+            <a href="<%= page_path("kontakty") %>" class="mag">
               <div class="icon"></div>
               <div class="title">Магазин в Москве</div>
             </a>
           </li>
           <li>
-            <a href="#" class="delivery">
+            <a href="<%= page_path("dostavka-i-oplata") %>" class="delivery">
               <div class="icon"></div>
               <div class="title">Бесплатная доставка</div>
             </a>
@@ -55,8 +55,8 @@
           <li><%= link_to "Мужская одежда", category_path("muzhskaya-odezhda") %></li>
           <li><a href="#">Сумки</a></li>
           <li><a href="#">Аксессуары</a></li>
-          <li><a href="#">Доставка и оплата</a></li>
-          <li><a href="#">Контакты</a></li>
+          <li><%= link_to "Доставка и оплата", page_path("dostavka-i-oplata") %></li>
+          <li><%= link_to "Контакты", page_path("kontakty") %></li>
         </ul>
       </nav>
 

@@ -75,7 +75,7 @@ h1, h2, h3 {
         background: url(<%= asset_path "icons.png" %>) no-repeat;
         background-position: 0 -25px;
         margin-top: 5px;
-        margin-bottom: 2px
+        margin-bottom: 2px;
         }
       #header .features .sales > .icon {
         width: 46px;
@@ -83,7 +83,7 @@ h1, h2, h3 {
         background: url(<%= asset_path "icons.png" %>) no-repeat;
         background-position: 0 -44px;
         margin-top: 8px;
-        margin-bottom: 3px
+        margin-bottom: 3px;
         }
   #header .right {
     float: left;
@@ -98,7 +98,7 @@ h1, h2, h3 {
       #search-main input {
         width: 100%;
         border: 1px solid #ccc;
-        padding: 2px 5px 2px;
+        padding: 2px 5px;
         outline: none;
         }
       #search-main button {
@@ -118,15 +118,15 @@ h1, h2, h3 {
       bottom: -29px;
       font-size: 13px;
       }
-      #header .right > .cart:before {
-        content: "";
-        position: absolute;
-        width: 23px;
-        height: 23px;
-        left: 13px;
-        top: -24px;
-        background: url(<%= asset_path "icons.png" %>) 0 -59px no-repeat;
-        }
+    #header .right > .cart::before {
+      content: "";
+      position: absolute;
+      width: 23px;
+      height: 23px;
+      left: 13px;
+      top: -24px;
+      background: url(<%= asset_path "icons.png" %>) 0 -59px no-repeat;
+      }
       #header .right > .cart > .count {
         position: absolute;
         top: -26px;
@@ -135,7 +135,7 @@ h1, h2, h3 {
         height: 19px;
         background: #ea0000;
         color: #fff;
-        font-size: .90em;
+        font-size: .9em;
         border-radius: 50%;
         text-align: center;
         line-height: 20px;
@@ -218,7 +218,6 @@ h1, h2, h3 {
         color: #888;
         }
 
-
 #footer {
   color: #888;
   border-top: 1px solid #eee;
@@ -227,9 +226,7 @@ h1, h2, h3 {
   margin-top: 69px;
   }
 
-
 /* немного уменьшенная версия по ширине и увеличенными шрифтами */
-
 @media (max-width: 1200px) {
   body {
     font-size: 18px;
@@ -257,5 +254,5 @@ h1, h2, h3 {
   .products > .product:nth-child(5n) {
     margin-right: .5%;
     }
-}
+  }
 

@@ -14,6 +14,8 @@ gem 'friendly_id', '~> 5.1.0'
 gem 'babosa'
 gem 'acts_as_shopping_cart'
 
+# build tools
+gem 'autoprefixer-rails'
 
 group :development do
   gem 'spring'

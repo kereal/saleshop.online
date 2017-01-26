@@ -204,6 +204,11 @@ h1, h2, h3 {
       display: table-cell;
       text-align: center;
       min-width: 36px;
+      position: relative;
+      }
+    #brandmenu > ul > li:hover {
+      background: #f0f0f0;
+      color: #888;
       }
     #brandmenu > ul > li:first-child {
       width: 13.7%;
@@ -213,10 +218,35 @@ h1, h2, h3 {
         width: 100%;
         color: #bbb;
         }
-      #brandmenu > ul > li > a:hover {
-        background: #f0f0f0;
-        color: #888;
+    #brandmenu > ul > li .sub {
+      display: none;
+      position: absolute;
+      padding: 16px 21px;
+      background: #fff;
+      position: absolute;
+      text-align: left;
+      border: 1px solid #111;
+      border-top: 0;
+      z-index: 200;
+      min-width: 120px;
+      }
+      #brandmenu > ul > li .sub a {
+        display: block;
+        width: 100%;
+        color: #111;
+        margin-bottom: 2px;
+        white-space: nowrap;
         }
+      #brandmenu > ul > li .sub a:hover {
+        text-decoration: underline;
+        }
+
+  
+.breadcrumbs {}
+  .breadcrumbs span:last-child {
+    display: none;
+    }
+
 
 #footer {
   color: #888;

@@ -23,4 +23,9 @@ $(document).on("turbolinks:load", function() {
     $(this).find(".pop").toggle();
   });
 
+  // выпадалки для брендов по первым буквам в главном меню
+  $("#brandmenu > ul > li").hover(function() {
+    $(this).find(".sub").toggle();
+  });
+
 });

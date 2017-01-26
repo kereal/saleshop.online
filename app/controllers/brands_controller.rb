@@ -8,9 +8,8 @@ class BrandsController < ApplicationController
   # GET /brand/:slug
   def show
     @brand = Brand.friendly.find(params[:slug])
-    @title = @brand.title
     @products = @brand.products.preload(:brand, :images)
-    render "catalog/show"
+    render "catalog/brand-show"
   end
 
 end

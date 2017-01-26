@@ -44,6 +44,7 @@ ru:
         old_price: Старая цена
         images: Изображения
         description: Описание
+        size: Размер
         created_at: Создано
         updated_at: Обновлено
       image:

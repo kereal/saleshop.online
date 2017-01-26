@@ -2,7 +2,7 @@ class PagesController < ApplicationController
 
   # GET /
   def index
-    @brands = Brand.limit(10)
+    @brands = Brand.limit(15)
   end
 
   # GET /page/:slug

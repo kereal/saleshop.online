@@ -1,37 +1,46 @@
+<nav class="breadcrumbs">
+  <% @product.category.ancestors.reverse.each do |category| %>
+    <%= link_to category.title, category %> <span class="arr">&rarr;</span>
+  <% end %>
+</nav>
+
 <div class="product">
 
-<div class="category">
-  <%= link_to @product.category.title, @product.category %>
-</div>
+  <!-- <div class="category">
+    Категория: <%= link_to @product.category.title, @product.category %>
+  </div> -->
 
 
-<div class="row">
-  <div class="col-sm-4">
-    <div class="images">
-      <% @product.images.each do |image| %>
-        <%= link_to image_tag(image.image), image.image.url %>
-      <% end %>
-    </div>    
+  <div class="row">
+    <div class="col-sm-4">
+      <div class="images">
+        <% @product.images.each do |image| %>
+          <%= link_to image_tag(image.image), image.image.url %>
+        <% end %>
+      </div>    
+    </div>
+    <div class="col-sm-8">
+      <h1><%= @product.title %></h1>
+      <div class="brand">
+        <%= link_to image_tag(@product.brand.image(:medium)), @product.brand %>
+      </div>
+      <div class="price">
+        <%= number_to_currency @product.price, precision: 0 %>
+        <% if @product.old_price %><s><%= number_to_currency @product.old_price, precision: 0 %></s><% end %>
+      </div>
+      <div class="size">
+        Размер: <span><%= @product.size %></span>
+      </div>
+      <div class="tocart">
+        <%= link_to cart_add_path(@product.id) do %>
+          <button>В корзину</button>
+        <% end %>
+      </div>
+      <div class="description">
+        <%= @product.description.html_safe %>
+      </div>
+    </div>
   </div>
-  <div class="col-sm-8">
-    <h1><%= @product.title %></h1>
-    <div class="brand">
-      <%= link_to image_tag(@product.brand.image(:medium)), @product.brand %>
-    </div>
-    <div class="price">
-      <%= number_to_currency @product.price, precision: 0 %>
-      <% if @product.old_price %><s><%= number_to_currency @product.old_price, precision: 0 %></s><% end %>
-    </div>
-    <div class="tocart">
-      <%= link_to cart_add_path(@product.id) do %>
-        <button>В корзину</button>
-      <% end %>
-    </div>
-    <div class="description">
-      <%= @product.description.html_safe %>
-    </div>
-  </div>
-</div>
 
 </div>
 
@@ -55,6 +64,10 @@
       font-size: 16px;
       color: #666;
       }
+  .product .size {
+    font-size: 16px;
+    margin-bottom: 16px;
+    }
   .product .tocart {
     margin-bottom: 22px;
     }

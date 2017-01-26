@@ -1,24 +1,9 @@
-<nav class="breadcrumbs">
-  <% @category.ancestors.reverse.each do |category| %>
-    <%= link_to category.title, category %> <span class="arr">&rarr;</span>
-  <% end if @category %>
-</nav>
-
-
-<h1><%= @title %></h1>
-
-<nav class="sub-categories">
-  <% @category.children.each do |category| %>
-    <%= link_to category.title, category %>&nbsp;&nbsp;•&nbsp;
-  <% end if @category %>
-</nav>
-
 <div class="products clearfix">
 
   <% @products.each do |product| %>
     <div class="product">
       <div class="image">
-        <%= link_to(image_tag(product.image(:medium)), product) %>
+        <%= link_to image_tag(product.image(:medium), alt: product.title), product %>
       </div>
       <div class="brand"><%= link_to product.brand.title, product.brand %></div>
       <div class="title"><%= product.title %></div>
@@ -74,10 +59,6 @@
           font-size: 0.857em;
           color: #666;
           }
-  .breadcrumbs {}
-    .breadcrumbs span:last-child {
-      display: none;
-      }
   .sub-categories {
     margin-bottom: 12px;
     }

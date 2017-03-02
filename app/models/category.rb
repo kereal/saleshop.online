@@ -12,17 +12,17 @@ class Category < ApplicationRecord
 
   private
 
-  def slug_candidates
-    [:title, [:title, rand(100)]]
-  end
+    def slug_candidates
+      [:title, [:title, rand(100)]]
+    end
 
-  rails_admin do
-    list do
-      exclude_fields :children, :self_and_ancestors, :self_and_descendants, :products
+    rails_admin do
+      list do
+        exclude_fields :children, :self_and_ancestors, :self_and_descendants, :products
+      end
+      create do
+        exclude_fields :slug, :children, :self_and_ancestors, :self_and_descendants, :products
+      end
     end
-    create do
-      exclude_fields :slug, :children, :self_and_ancestors, :self_and_descendants, :products
-    end
-  end
 
 end

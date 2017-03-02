@@ -30,7 +30,7 @@
       <% end %>
       <div class="price">
         <%= number_to_currency @product.price, precision: 0 %>
-        <%if false%><% if @product.old_price %><s><%= number_to_currency @product.old_price, precision: 0 %></s><% end %><%end%>
+        <% if @product.old_price %><s><%= number_to_currency @product.old_price, precision: 0 %></s><% end %>
       </div>
       <% if @product.properties %>
         <div class="properties">

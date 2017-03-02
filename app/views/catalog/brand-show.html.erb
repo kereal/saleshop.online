@@ -2,7 +2,7 @@
 
 <div class="brand-about">
   <p><%= image_tag @brand.image(:medium), width: 240 %></p>
-  <%= @brand.description.html_safe %>
+  <%= raw @brand.description %>
 </div>
 
 <%= render "catalog/products-list" %>

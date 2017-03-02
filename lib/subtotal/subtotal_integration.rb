@@ -16,16 +16,32 @@ class SubtotalIntegration
     end
   end
 
-  def get_goods
-    get_response_data URI.join(SERVER, CLIENT_ID+'/', 'webapi/', 'goods').to_s, { good_type_id: 2 }
+  def get_goods(page_size = 100, page_num = 1)
+    get_response_data URI.join(SERVER, CLIENT_ID+'/', 'webapi/', 'goods').to_s, { good_type_id: 2, page_size: page_size, page_num: page_num }
   end
 
   def get_good(good_id)
     get_response_data(URI.join(SERVER, CLIENT_ID+'/', 'webapi/', 'goods/', good_id.to_i.to_s).to_s)
   end
 
-  def import_goods
-    get_goods.try(:[], "goods").each do |product|
+  def import_all_goods
+    created = 0
+    page_size = 100
+    goods_batch = get_goods(page_size)
+    len = goods_batch.try(:[], "length")
+    if len
+      batch_count = (len.to_f / page_size).ceil
+      created += import_goods(goods_batch)
+      (2..batch_count).each do |page_number|
+        created += import_goods get_goods(page_size, page_number)
+      end
+    end
+    puts "Created: #{created}"
+  end
+
+  def import_goods(goods_batch)
+    created = 0
+    goods_batch.try(:[], "goods").each do |product|
       provider_product_id = product.try(:[], "id")
       provider_updated_at = DateTime.parse(product.try(:[], "ch_date"))
       # поищем этот товар у нас у базе
@@ -37,7 +53,8 @@ class SubtotalIntegration
       if product_data.try(:[], "good")
         discount = product_data["good"]["discounts"].try(:[], 0)["discounts"][0]["value"]
         description = product_data["good"]["description"].blank? ? nil : product_data["good"]["description"]
-        brand = Brand.select(:id).where("title LIKE ?", product_data["good"]["tags"].try(:[], 0)).take
+        # ищем или создаем бренд
+        brand = Brand.select(:id).where("title LIKE ?", product_data["good"]["tags"].try(:[], 0)).take || Brand.new(title: product_data["good"]["tags"].try(:[], 0))
         properties = product_data["good"]["properties"].map{ |p| {p.try(:[], "name") => p.try(:[], "values").try(:[], 0).try(:[], "value")} if p.try(:[], "name") }
         # ищем категорию среди свойств
         category_title = properties.find{|h| h.keys[0]=="Категория товара"}.try(:values).try(:[], 0)
@@ -48,7 +65,7 @@ class SubtotalIntegration
         gender = if gender_title == "жен" then :female elsif gender_title == "муж" then :male else nil end
         properties.delete_if{|h| h.keys[0]=="Пол"}
       end
-      Product.create(
+      if Product.create(
         title: product.try(:[], "name"),
         description: description,
         price: product.try(:[], "price2"),
@@ -61,19 +78,19 @@ class SubtotalIntegration
         provider_product_id: provider_product_id,
         provider_updated_at: provider_updated_at,
         properties: properties.to_json
-        )
+        ) then created += 1 end;
     end
-    return
+    return created
   end
 
 
   private
 
     # wrapper
-    def get_response_data(url, payload = {})
+    def get_response_data(url, params = {})
       auth if @cookies.nil?
       begin
-        response = RestClient.get(url, { cookies: @cookies, content_type: 'application/json; charset=utf-8' }.merge(payload))
+        response = RestClient.get(url, { cookies: @cookies, content_type: 'application/json; charset=utf-8' }.merge(params: params))
       rescue RestClient::ExceptionWithResponse => error
         return error.response
       else

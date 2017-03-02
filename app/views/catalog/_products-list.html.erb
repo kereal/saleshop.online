@@ -3,19 +3,23 @@
   <% @products.each do |product| %>
     <div class="product">
       <div class="image">
-        <% if product.provider_images %>
-          <%= link_to image_tag("https://app.subtotal.ru" + JSON.parse(product.provider_images).first, alt: product.title), product %>
+        <% if product.image %>
+          <%= link_to image_tag(product.image, alt: product.title), product %>
         <% else %>
           <%= link_to image_tag("http://placehold.it/200x254/fff/777?text=нет+фото"), product %>
         <% end %>
       </div>
-      <% if product.brand %>
-        <div class="brand"><%= link_to product.brand.title, product.brand %></div>
-      <% end %>
+      <div class="brand">
+        <% if product.brand %>
+          <%= link_to product.brand.title, product.brand %>
+        <% else %>
+          &nbsp;
+        <% end %>
+      </div>
       <div class="title" title="<%= product.title %>"><%= product.title %></div>
       <div class="price">
         <%= number_to_currency product.price, precision: 0 %>
-        <%if false%><% if product.old_price %><s><%= number_to_currency product.old_price, precision: 0 %></s><% end %><% end %>
+        <% if product.old_price %><s><%= number_to_currency product.old_price, precision: 0 %></s><% end %>
       </div>
     </div>
   <% end %>
@@ -50,13 +54,11 @@
           max-width: 100%;
           }
       .product > .brand {
-        font-size: 0.9em;
+        font-size: .9em;
         }
       .product > .title {
-        font-weight: 700;
         overflow: hidden;
         white-space: nowrap;
-        text-transform: capitalize;
         }
       .product > .price {
         font-weight: bold;

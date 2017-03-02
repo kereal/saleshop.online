@@ -13,31 +13,39 @@
 
   <div class="row">
     <div class="col-sm-4">
-      <div class="images">
-        <% @product.images.each do |image| %>
-          <%= link_to image_tag(image.image), image.image.url %>
-        <% end %>
-      </div>    
+      <% if @product.provider_images %>
+        <div class="images">
+          <% JSON.parse(@product.provider_images).each do |image| %>
+            <%= image_tag("https://app.subtotal.ru" + image, alt: @product.title) %>
+          <% end %>
+        </div>
+      <% end %>
     </div>
     <div class="col-sm-8">
       <h1><%= @product.title %></h1>
-      <div class="brand">
-        <%= link_to image_tag(@product.brand.image(:medium)), @product.brand %>
-      </div>
+      <% if @product.brand %>
+        <div class="brand">
+          <%= link_to image_tag(@product.brand.image(:medium)), @product.brand %>
+        </div>
+      <% end %>
       <div class="price">
         <%= number_to_currency @product.price, precision: 0 %>
-        <% if @product.old_price %><s><%= number_to_currency @product.old_price, precision: 0 %></s><% end %>
+        <%if false%><% if @product.old_price %><s><%= number_to_currency @product.old_price, precision: 0 %></s><% end %><%end%>
       </div>
-      <div class="size">
-        Размер: <span><%= @product.size %></span>
-      </div>
+      <% if @product.properties %>
+        <div class="properties">
+          <% JSON.parse(@product.properties).each do |prop| %>
+            <div class="property"><%= "#{prop.keys[0]}: #{prop.values[0]}" %></div>
+          <% end %>
+        </div>
+      <% end %>
       <div class="tocart">
         <%= link_to cart_add_path(@product.id) do %>
           <button>В корзину</button>
         <% end %>
       </div>
       <div class="description">
-        <%= @product.description.html_safe %>
+        <%= raw @product.description %>
       </div>
     </div>
   </div>
@@ -64,10 +72,12 @@
       font-size: 16px;
       color: #666;
       }
-  .product .size {
-    font-size: 16px;
+  .product .properties {
+    font-size: 15px;
     margin-bottom: 16px;
     }
+    .product .properties > .property {
+      }
   .product .tocart {
     margin-bottom: 22px;
     }

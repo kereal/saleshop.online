@@ -288,3 +288,4 @@ cookies = response.cookies
 response = RestClient.get('https://app.subtotal.ru/id11542/webapi/goods', { cookies: cookies, good_type_id: 2, content_type: 'application/json; charset=utf-8' })
 
 https://app.subtotal.ru/id11542/good3678147_picviewimage1.php
+

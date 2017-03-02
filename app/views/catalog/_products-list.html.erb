@@ -3,13 +3,19 @@
   <% @products.each do |product| %>
     <div class="product">
       <div class="image">
-        <%= link_to image_tag(product.image(:medium), alt: product.title), product %>
+        <% if product.provider_images %>
+          <%= link_to image_tag("https://app.subtotal.ru" + JSON.parse(product.provider_images).first, alt: product.title), product %>
+        <% else %>
+          <%= link_to image_tag("http://placehold.it/200x254/fff/777?text=нет+фото"), product %>
+        <% end %>
       </div>
-      <div class="brand"><%= link_to product.brand.title, product.brand %></div>
-      <div class="title"><%= product.title %></div>
+      <% if product.brand %>
+        <div class="brand"><%= link_to product.brand.title, product.brand %></div>
+      <% end %>
+      <div class="title" title="<%= product.title %>"><%= product.title %></div>
       <div class="price">
         <%= number_to_currency product.price, precision: 0 %>
-        <% if product.old_price %><s><%= number_to_currency product.old_price, precision: 0 %></s><% end %>
+        <%if false%><% if product.old_price %><s><%= number_to_currency product.old_price, precision: 0 %></s><% end %><% end %>
       </div>
     </div>
   <% end %>
@@ -36,10 +42,12 @@
         margin-bottom: 8px;
         border-bottom: 1px dotted #dfdfdf;
         text-align: center;
+        height: 248px;
+        overflow: hidden;
         }
         .product > .image img {
-          /*width: 100%;*/
-          /*max-width: 100%;*/
+          width: 100%;
+          max-width: 100%;
           }
       .product > .brand {
         font-size: 0.9em;

@@ -1,5 +1,7 @@
 class Product < ApplicationRecord
 
+  enum gender: { female: 0, male: 1 }
+
   extend FriendlyId
 
   friendly_id :slug_candidates, use: :slugged
@@ -10,7 +12,6 @@ class Product < ApplicationRecord
 
   validates :title, :slug, presence: true, length: { minimum: 2 }
   validates :price, presence: true
-
 
   def image(arg = nil)
     self.images.first.image(arg) if self.images && self.images.first
@@ -27,7 +28,7 @@ class Product < ApplicationRecord
       exclude_fields :slug
     end
     list do
-      exclude_fields :description, :images
+      exclude_fields :description, :images, :provider_images, :properties
     end
   end
 

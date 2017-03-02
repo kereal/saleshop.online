@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170126101630) do
+ActiveRecord::Schema.define(version: 20170302152315) do
 
   create_table "brands", force: :cascade do |t|
     t.string   "title"
@@ -29,8 +29,9 @@ ActiveRecord::Schema.define(version: 20170126101630) do
     t.string   "title"
     t.string   "slug"
     t.integer  "parent_id"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.datetime "created_at",     null: false
+    t.datetime "updated_at",     null: false
+    t.string   "provider_title"
   end
 
   create_table "category_hierarchies", id: false, force: :cascade do |t|
@@ -77,13 +78,18 @@ ActiveRecord::Schema.define(version: 20170126101630) do
     t.string   "title"
     t.integer  "category_id"
     t.integer  "brand_id"
-    t.decimal  "price",       precision: 10, scale: 2
-    t.decimal  "old_price",   precision: 10, scale: 2
+    t.decimal  "price",               precision: 10, scale: 2
     t.text     "description"
     t.string   "slug"
-    t.datetime "created_at",                           null: false
-    t.datetime "updated_at",                           null: false
-    t.string   "size"
+    t.datetime "created_at",                                   null: false
+    t.datetime "updated_at",                                   null: false
+    t.integer  "gender"
+    t.integer  "discount"
+    t.string   "country"
+    t.string   "provider_images"
+    t.integer  "provider_product_id"
+    t.datetime "provider_updated_at"
+    t.text     "properties"
     t.index ["brand_id"], name: "index_products_on_brand_id"
     t.index ["category_id"], name: "index_products_on_category_id"
   end

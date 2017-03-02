@@ -21,7 +21,7 @@ class Category < ApplicationRecord
       exclude_fields :children, :self_and_ancestors, :self_and_descendants, :products
     end
     create do
-      exclude_fields :slug
+      exclude_fields :slug, :children, :self_and_ancestors, :self_and_descendants, :products
     end
   end
 

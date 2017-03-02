@@ -28,12 +28,14 @@ ru:
       brand:
         title: Название
         image: Изображение
+        description: Описание
         products: Продукты
         created_at: Создано
         updated_at: Обновлено
       category:
         title: Название
         parent: Родитель
+        provider_title: Название у провайдера данных
         created_at: Создано
         updated_at: Обновлено
       product:
@@ -44,9 +46,11 @@ ru:
         old_price: Старая цена
         images: Изображения
         description: Описание
-        size: Размер
         created_at: Создано
         updated_at: Обновлено
+        gender: Пол
+        discount: Скидка
+        country: Страна
       image:
         product: Продукт
         image: Изображение

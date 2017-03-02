@@ -5,7 +5,7 @@
   <% @brands.each do |brand| %>
 
     <div class="brand">
-      <%= link_to image_tag(brand.image(:medium), alt: brand.title), brand %>
+      <%= link_to image_tag(brand.image(:medium), alt: brand.title), brand, title: brand.title %>
     </div>
 
   <% end %>

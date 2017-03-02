@@ -1,7 +1,9 @@
 <h1><%= @brand.title %></h1>
 
 <div class="brand-about">
-  <p><%= image_tag @brand.image(:medium), width: 240 %></p>
+  <% if @brand.image.exists? %>
+    <p><%= image_tag @brand.image(:medium), width: 240 %></p>
+  <% end %>
   <%= raw @brand.description %>
 </div>
 

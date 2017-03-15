@@ -1,6 +1,6 @@
 class Category < ApplicationRecord
 
-  has_closure_tree
+  has_ancestry
   extend FriendlyId
 
   friendly_id :slug_candidates, use: :slugged
@@ -10,6 +10,10 @@ class Category < ApplicationRecord
   validates :title, :slug, presence: true, length: { minimum: 2 }
 
 
+  def parent_enum
+    Category.where.not(id: id).map { |c| [ c.title, c.id ] }
+  end
+
   private
 
     def slug_candidates
@@ -17,11 +21,21 @@ class Category < ApplicationRecord
     end
 
     rails_admin do
+      nestable_tree true
+      include_all_fields
+      field :parent_id, :enum do
+        enum_method do
+          :parent_enum
+        end
+      end
       list do
-        exclude_fields :children, :self_and_ancestors, :self_and_descendants, :products
+        exclude_fields :products, :ancestry
       end
       create do
-        exclude_fields :slug, :children, :self_and_ancestors, :self_and_descendants, :products
+        exclude_fields :products, :slug, :ancestry
+      end
+      edit do
+        exclude_fields :products, :ancestry
       end
     end
 

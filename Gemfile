@@ -7,15 +7,18 @@ gem 'uglifier', '>= 1.3.0', require: false
 gem 'therubyracer', platforms: :ruby, require: false
 gem 'jquery-rails'
 gem 'turbolinks', '~> 5'
+
+gem 'ancestry'
 gem 'paperclip', '~> 5.0.0'
-gem 'rails_admin', '~> 1.0'
-gem 'closure_tree'
 gem 'friendly_id', '~> 5.1.0'
 gem 'babosa'
 gem 'acts_as_shopping_cart'
 #gem 'rspec'
 gem 'rest-client'
 gem 'whenever', require: false
+gem 'rails_admin', '~> 1.0'
+gem 'rails_admin_nestable', '~> 0.3.2'
+
 
 # build tools
 gem 'autoprefixer-rails'

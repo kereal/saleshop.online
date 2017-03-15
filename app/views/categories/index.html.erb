@@ -1,5 +1,5 @@
 <h1>Все категории</h1>
 
-<ul>
-  <%= categories_tree_for Category.hash_tree %>
-</ul>
+<%= arranged_tree_as_list(Category.arrange) do |category| %>
+  <%= link_to category.title, category %>
+<% end %>

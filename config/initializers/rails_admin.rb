@@ -37,16 +37,10 @@ RailsAdmin.config do |config|
     edit
     delete
     show_in_app
-
+    nestable
     ## With an audit adapter, you can add:
     # history_index
     # history_show
-
-    collection :categories_as_tree do
-      only [Category]
-      route_fragment "as_tree"
-      link_icon "icon-leaf"
-    end
 
     member :order_more do
       only [Order]
@@ -55,6 +49,6 @@ RailsAdmin.config do |config|
 
   end
 
-
+  # ...
 
 end

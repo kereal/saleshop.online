@@ -21,7 +21,7 @@
   <% @object.shopping_cart.shopping_cart_items.each do |item| %>
     <% product = item.item %>
     <tr>
-      <td><%= product.title %></td>
+      <td><%= product.try(:title) %></td>
       <td><%= item.quantity %></td>
       <td><%= number_to_currency item.price  %></td>
       <td><%= number_to_currency(item.price * item.quantity) %></td>

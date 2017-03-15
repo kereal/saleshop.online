@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170302152315) do
+ActiveRecord::Schema.define(version: 20170315233140) do
 
   create_table "brands", force: :cascade do |t|
     t.string   "title"
@@ -28,18 +28,10 @@ ActiveRecord::Schema.define(version: 20170302152315) do
   create_table "categories", force: :cascade do |t|
     t.string   "title"
     t.string   "slug"
-    t.integer  "parent_id"
     t.datetime "created_at",     null: false
     t.datetime "updated_at",     null: false
     t.string   "provider_title"
-  end
-
-  create_table "category_hierarchies", id: false, force: :cascade do |t|
-    t.integer "ancestor_id",   null: false
-    t.integer "descendant_id", null: false
-    t.integer "generations",   null: false
-    t.index ["ancestor_id", "descendant_id", "generations"], name: "category_anc_desc_idx", unique: true
-    t.index ["descendant_id"], name: "category_desc_idx"
+    t.string   "ancestry"
   end
 
   create_table "images", force: :cascade do |t|

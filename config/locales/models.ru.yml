@@ -34,7 +34,7 @@ ru:
         updated_at: Обновлено
       category:
         title: Название
-        parent: Родитель
+        parent_id: Родитель
         provider_title: Название у провайдера данных
         created_at: Создано
         updated_at: Обновлено

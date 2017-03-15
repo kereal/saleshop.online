@@ -13,8 +13,9 @@ gem 'closure_tree'
 gem 'friendly_id', '~> 5.1.0'
 gem 'babosa'
 gem 'acts_as_shopping_cart'
-gem 'rspec'
+#gem 'rspec'
 gem 'rest-client'
+gem 'whenever', require: false
 
 # build tools
 gem 'autoprefixer-rails'
@@ -24,5 +25,6 @@ group :development do
   gem 'spring'
   gem 'spring-watcher-listen', '~> 2.0.0'
   gem 'mina', require: false
+  gem 'mina-whenever', require: false
   gem 'erd', require: false
 end

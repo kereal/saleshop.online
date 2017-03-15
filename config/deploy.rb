@@ -36,6 +36,7 @@ task :deploy do
         command %{mkdir -p tmp/}
         command %{touch tmp/restart.txt}
         invoke :'puma_restart'
+        invoke :'whenever:update'
       end
     end
   end

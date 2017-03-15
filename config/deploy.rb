@@ -1,7 +1,8 @@
-require 'mina/rails'
+require 'mina/rvm'
 require 'mina/git'
 require 'mina/bundler'
-require 'mina/rvm'
+require 'mina/rails'
+require 'mina/whenever'
 
 set :user,              'saleshop'
 set :application_name,  'saleshop'

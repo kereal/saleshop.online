@@ -41,6 +41,9 @@ class Product < ApplicationRecord
       list do
         exclude_fields :description, :images, :provider_images, :properties
       end
+      edit do
+        exclude_fields :self_and_ancestors, :self_and_descendants, :products
+      end
     end
 
 end

@@ -1,17 +1,14 @@
-<nav class="breadcrumbs">
-  <% @category.path.each do |category| %>
-    <%= link_to category.title, category %> <span class="arr">&rarr;</span>
-  <% end if @category %>
-</nav>
-
+<%= render "catalog/breadcrumbs", to: @category %>
 
 <h1><%= @category.title %></h1>
 
-<nav class="sub-categories">
-  <% @category.children.each do |category| %>
-    <%= link_to category.title, category %>&nbsp;&nbsp;•&nbsp;
-  <% end if @category %>
-</nav>
+<% if @category.children.exists? %>
+  <nav class="sub-categories">
+    <% @category.children.each do |category| %>
+      <%= link_to category.title, category %>&nbsp;&nbsp;•&nbsp;
+    <% end if @category %>
+  </nav>
+<% end %>
 
 <%= render "catalog/products-list" %>
 

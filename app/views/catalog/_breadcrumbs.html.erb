@@ -1,0 +1,9 @@
+<% path = to.try(:path) %>
+
+<% unless path.blank? %>
+  <nav class="breadcrumbs">
+    <% to.try(:path).try(:each) do |category| %>
+      <%= link_to category.title, category %> <span class="arr">&rarr;</span>
+    <% end %>
+  </nav>
+<% end %>

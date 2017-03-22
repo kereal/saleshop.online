@@ -1,15 +1,6 @@
-<nav class="breadcrumbs">
-  <% @product.category.path.each do |category| %>
-    <%= link_to category.title, category %> <span class="arr">&rarr;</span>
-  <% end %>
-</nav>
+<%= render "catalog/breadcrumbs", to: @product.category %>
 
 <div class="product">
-
-  <!-- <div class="category">
-    Категория: <%= link_to @product.category.title, @product.category %>
-  </div> -->
-
 
   <div class="row">
     <div class="col-sm-4">

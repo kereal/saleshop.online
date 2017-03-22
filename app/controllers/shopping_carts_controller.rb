@@ -1,7 +1,5 @@
 class ShoppingCartsController < ApplicationController
 
-  before_action :extract_shopping_cart
-
   # GET /cart
   def show
   end
@@ -54,10 +52,4 @@ class ShoppingCartsController < ApplicationController
     params.require(:order).permit(:name, :tel, :delivery_address, :comment)
   end
   
-  def extract_shopping_cart
-    shopping_cart_id = session[:shopping_cart_id]
-    @shopping_cart = session[:shopping_cart_id] ? ShoppingCart.find(shopping_cart_id) : ShoppingCart.create
-    session[:shopping_cart_id] = @shopping_cart.id
-  end
-
 end

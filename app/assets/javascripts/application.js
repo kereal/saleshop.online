@@ -36,4 +36,6 @@ $(document).on("turbolinks:load", function() {
     cursor: "pointer"
   });
 
+  
+
 });

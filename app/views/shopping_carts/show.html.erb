@@ -12,7 +12,7 @@
         <div class="quantity">✕ <%= item.quantity %></div>
         <div class="item-total">= <%= number_to_currency(item.price.to_f * item.quantity) %></div>
         <div class="item-actions">
-          <%= link_to "&cross;".html_safe, cart_remove_path(item) %>
+          <%= link_to "&cross;".html_safe, cart_remove_path(item.item_id) %>
         </div>
       </div>
     <% end %>

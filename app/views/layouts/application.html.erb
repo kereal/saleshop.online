@@ -44,7 +44,7 @@
             <button type="submit"></button>
           </form>
           <%= link_to cart_path, class: "cart" do %>
-            <% if @shopping_cart %>
+            <% if @shopping_cart && @shopping_cart.total_unique_items > 0 %>
               <span class="count"><%= @shopping_cart.total_unique_items %></span>
             <% end %>
             Корзина

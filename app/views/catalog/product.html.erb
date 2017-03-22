@@ -1,5 +1,5 @@
 <nav class="breadcrumbs">
-  <% @product.category.self_and_ancestors.reverse.each do |category| %>
+  <% @product.category.path.each do |category| %>
     <%= link_to category.title, category %> <span class="arr">&rarr;</span>
   <% end %>
 </nav>

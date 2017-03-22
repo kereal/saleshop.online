@@ -6,7 +6,7 @@
         <% if product.image %>
           <%= link_to image_tag(product.image, alt: product.title), product, title: product.title %>
         <% else %>
-          <%= link_to image_tag("http://placehold.it/200x254/fff/777?text=нет+фото", alt: nil), product %>
+          <%= link_to image_tag("http://placehold.it/200x259/f8f8f8/777?text=нет+фото", alt: nil), product %>
         <% end %>
       </div>
       <div class="brand">
@@ -35,16 +35,20 @@
       width: 18.4%;
       margin-right: 2%;
       margin-bottom: 2%;
-      border: 1px dotted #dfdfdf;
+      /*border: 1px dotted #dfdfdf;*/
+      border: 1px dotted #fff;
       padding: .75%;
       font-size: 0.929em;
+      }
+    .product:hover {
+      border: 1px dotted #dfdfdf;
       }
     .product:nth-child(5n) {
       margin-right: 0;
       }
       .product > .image {
         margin-bottom: 8px;
-        border-bottom: 1px dotted #dfdfdf;
+        /*border-bottom: 1px dotted #dfdfdf;*/
         text-align: center;
         height: 248px;
         overflow: hidden;
@@ -59,7 +63,17 @@
       .product > .title {
         overflow: hidden;
         white-space: nowrap;
+        position: relative;
         }
+        .product > .title:after {
+          content: "";
+          position: absolute;
+          top: 0;
+          right: 0;
+          width: 11%;
+          height: 100%;
+          background: linear-gradient(to right, transparent, #fff);
+          }
       .product > .price {
         font-weight: bold;
         color: #ad1d22;

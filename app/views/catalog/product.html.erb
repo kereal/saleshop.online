@@ -6,12 +6,12 @@
     
     <div class="col-sm-4">
       <div class="images">
-        <% unless @product.images.blank? %>
+        <% unless @product.remote_images.blank? %>
           <div class="big">
-            <%= image_tag(@product.images.first, alt: @product.title, data: { zoom_image: @product.images.first }) %>
+            <%= image_tag(@product.remote_images.first, alt: @product.title, data: { zoom_image: @product.remote_images.first }) %>
           </div>
           <div class="thumbs" id="product-gallery">
-            <% @product.images.each_with_index do |image, index| %>
+            <% @product.remote_images.each_with_index do |image, index| %>
               <%= link_to image_tag(image, alt: nil), image, data: { image: image, zoom_image: image }, class: ("zoomGalleryActive" if index==0) %>
             <% end %>
           </div>

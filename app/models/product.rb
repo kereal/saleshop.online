@@ -21,7 +21,7 @@ class Product < ApplicationRecord
   end
 
   # возвращаем массив урлов или nil (только первые 2)
-  def images(limit = 2)
+  def remote_images(limit = 2)
     unless self.provider_images.blank?
       urls = JSON.parse self.provider_images
       urls.first(limit).map{|url| "https://app.subtotal.ru#{url}"}

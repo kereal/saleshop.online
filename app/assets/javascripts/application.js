@@ -29,7 +29,8 @@ $(document).on("turbolinks:load", function() {
     $(this).find(".sub").toggle();
   });
 
-  $('.big > [data-zoom-image]').elevateZoom({
+  // зумилка фоток на странице карточки товара
+  $(".images > .big > [data-zoom-image]").elevateZoom({
     gallery: "product-gallery",
     scrollZoom: true, 
     cursor: "pointer"

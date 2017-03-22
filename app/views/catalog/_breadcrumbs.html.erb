@@ -1,9 +1,13 @@
 <% path = to.try(:path) %>
 
-<% unless path.blank? %>
+<% if not path.blank? and path.count > 1 %>
   <nav class="breadcrumbs">
-    <% to.try(:path).try(:each) do |category| %>
-      <%= link_to category.title, category %> <span class="arr">&rarr;</span>
+    <% path.each_with_index do |category, index| %>
+      <% unless index == path.count-1 %>
+        <%= link_to category.title, category %> <span class="arr">&rarr;</span>
+      <% else %>
+        <%= category.title %>
+      <% end %>
     <% end %>
   </nav>
 <% end %>

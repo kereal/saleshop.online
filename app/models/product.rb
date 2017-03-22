@@ -20,6 +20,14 @@ class Product < ApplicationRecord
     end
   end
 
+  # возвращаем массив урлов или nil (только первые 2)
+  def images(limit = 2)
+    unless self.provider_images.blank?
+      urls = JSON.parse self.provider_images
+      urls.first(limit).map{|url| "https://app.subtotal.ru#{url}"}
+    end
+  end
+
   # прибавляем discount процентов к цене
   def old_price
     unless self.discount.blank?
@@ -42,7 +50,7 @@ class Product < ApplicationRecord
         exclude_fields :description, :images, :provider_images, :properties
       end
       edit do
-        exclude_fields :self_and_ancestors, :self_and_descendants, :products
+        exclude_fields :products
       end
     end
 

@@ -4,10 +4,10 @@
 
   <div class="row">
     <div class="col-sm-4">
-      <% if @product.provider_images %>
+      <% if @product.images.any? %>
         <div class="images">
-          <% JSON.parse(@product.provider_images).each do |image| %>
-            <%= image_tag("https://app.subtotal.ru" + image, alt: @product.title) %>
+          <% @product.images.each do |image| %>
+            <%= image_tag(image, alt: @product.title) %>
           <% end %>
         </div>
       <% end %>

@@ -13,6 +13,7 @@
 //= require jquery
 //= require jquery_ujs
 //= require turbolinks
+//= require jquery.elevatezoom
 //= require_tree .
 
 
@@ -26,6 +27,12 @@ $(document).on("turbolinks:load", function() {
   // выпадалки для брендов по первым буквам в главном меню
   $("#brandmenu > ul > li").hover(function() {
     $(this).find(".sub").toggle();
+  });
+
+  $('.big > [data-zoom-image]').elevateZoom({
+    gallery: "product-gallery",
+    scrollZoom: true, 
+    cursor: "pointer"
   });
 
 });

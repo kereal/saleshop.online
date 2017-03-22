@@ -3,15 +3,24 @@
 <div class="product">
 
   <div class="row">
+    
     <div class="col-sm-4">
-      <% if @product.images.any? %>
-        <div class="images">
-          <% @product.images.each do |image| %>
-            <%= image_tag(image, alt: @product.title) %>
-          <% end %>
-        </div>
-      <% end %>
+      <div class="images">
+        <% unless @product.images.blank? %>
+          <div class="big">
+            <%= image_tag(@product.images.first, alt: @product.title, data: { zoom_image: @product.images.first }) %>
+          </div>
+          <div class="thumbs" id="product-gallery">
+            <% @product.images.each_with_index do |image, index| %>
+              <%= link_to image_tag(image, alt: nil), image, data: { image: image, zoom_image: image }, class: ("zoomGalleryActive" if index==0) %>
+            <% end %>
+          </div>
+        <% else %>
+          <%= image_tag "http://placehold.it/400x508/fff/777?text=нет+фото", alt: nil, style: "border: 1px solid #eee;" %>
+        <% end %>
+      </div>
     </div>
+    
     <div class="col-sm-8">
       <h1><%= @product.title %></h1>
       <% if @product.brand.try(:image).try(:exists?) %>
@@ -39,6 +48,7 @@
         <%= raw @product.description %>
       </div>
     </div>
+  
   </div>
 
 </div>
@@ -52,6 +62,30 @@
     .product .images img {
       width: 100%
       }
+    .product .images > .thumbs {
+      margin-top: 12px;
+      }
+      .product .images > .thumbs > a {
+        display: inline-block;
+        border: 2px solid #ccc;
+        position: relative;
+        width: 70px;
+        height: 100px;
+        overflow: hidden;
+        }
+      .product .images > .thumbs > a.zoomGalleryActive {
+        border-color: #ad1d22;
+        }
+        .product .images > .thumbs > a > img {
+          position: absolute;
+          left: 50%;
+          top: 50%;
+          height: 100%;
+          width: auto;
+          -webkit-transform: translate(-50%,-50%);
+              -ms-transform: translate(-50%,-50%);
+                  transform: translate(-50%,-50%);
+          }
   .product .price {
     font-size: 24px;
     margin: 10px 0;

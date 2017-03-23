@@ -5,6 +5,7 @@
     <%= csrf_meta_tags %>
     <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
     <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
+    <link href="https://fonts.googleapis.com/css?family=Roboto:400,700&amp;subset=cyrillic" rel="stylesheet">
   </head>
 
   <body>
@@ -31,7 +32,7 @@
             </a>
           </li>
           <li>
-            <a href="#" class="sales">
+            <a href="<%= sale_path %>" class="sales">
               <div class="icon"></div>
               <div class="title">Скидки до 70%</div>
             </a>

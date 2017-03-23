@@ -6,7 +6,7 @@
         <% if product.image %>
           <%= link_to image_tag(product.image, alt: product.title), product, title: product.title %>
         <% else %>
-          <%= link_to image_tag("http://placehold.it/200x259/f8f8f8/777?text=нет+фото", alt: nil), product %>
+          <%= link_to image_tag("http://placehold.it/208x248/f9f9f9/777?text=нет+фото", alt: nil), product %>
         <% end %>
       </div>
       <div class="brand">

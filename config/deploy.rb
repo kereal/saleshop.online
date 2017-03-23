@@ -33,22 +33,20 @@ task :deploy do
     invoke :'rails:assets_precompile'
     invoke :'deploy:cleanup'
     on :launch do
-      in_path(fetch(:current_path)) do
+      #in_path(fetch(:current_path)) do
         command %{mkdir -p tmp/}
         command %{touch tmp/restart.txt}
         invoke :'puma_restart'
         invoke :'whenever:update'
-      end
+      #end
     end
   end
 end
 
 desc "Restart app server"
 task :puma_restart => :environment do
-  in_path(fetch(:current_path)) do
-    invoke :'puma_stop'
-    invoke :'puma_start'
-  end
+  invoke :'puma_stop'
+  invoke :'puma_start'
 end
 
 desc "Start app server"

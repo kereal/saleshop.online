@@ -19,7 +19,10 @@
       <div class="title" title="<%= product.title %>"><%= product.title %></div>
       <div class="price">
         <%= number_to_currency product.price %>
-        <% if product.old_price %><s><%= number_to_currency product.old_price %></s><% end %>
+        <% if product.old_price %>
+          <s><%= number_to_currency product.old_price %></s>
+          <em class="discount">&minus;<%= product.discount %>%</em>
+        <% end %>
       </div>
     </div>
   <% end %>
@@ -79,6 +82,14 @@
           font-weight: normal;
           font-size: 0.857em;
           color: #666;
+          }
+        .product > .price > .discount {
+          float: right;
+          background: rgba(12, 148, 148, .86);
+          color: #fff;
+          font-weight: 200;
+          font-style: normal;
+          padding: 0 8px;
           }
   .sub-categories {
     margin-bottom: 12px;

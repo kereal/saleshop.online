@@ -28,11 +28,9 @@ class Product < ApplicationRecord
     end
   end
 
-  # прибавляем discount процентов к цене
-  def old_price
-    unless self.discount.blank?
-      price + price * discount / 100
-    end
+  # price - цена без скидки. если есть скидка, то расчитываем цену со скидкой
+  def discount_price
+    discount.blank? ? price : price - price * discount / 100
   end
 
 

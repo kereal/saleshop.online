@@ -7,7 +7,7 @@ class ShoppingCartsController < ApplicationController
   # GET /cart/add/:product_id
   def add
     @product = Product.find(params[:product_id])
-    @shopping_cart.add(@product, @product.price)
+    @shopping_cart.add(@product, @product.discount_price)
     redirect_to cart_path
   end
 

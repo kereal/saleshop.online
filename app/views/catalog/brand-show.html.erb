@@ -2,7 +2,7 @@
 
 <div class="brand-about">
   <% if @brand.image.exists? %>
-    <p><%= image_tag @brand.image(:medium), width: 240 %></p>
+    <div class="image"><%= image_tag @brand.image(:medium) %></div>
   <% end %>
   <%= raw @brand.description %>
 </div>
@@ -15,4 +15,11 @@
   .brand-about {
     margin-bottom: 24px;
     }
+    .brand-about .image {
+      float: right;
+      margin: 30px 60px 60px;
+      }
+      .brand-about .image > img {
+        max-width: 240px;
+        }
 </style>

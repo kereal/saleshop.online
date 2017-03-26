@@ -1,4 +1,4 @@
-<%= link_to "Смотреть заказ в админке", "http://salesop.online" + rails_admin.show_path(model_name: 'Order', id: @order.id).to_s %>
+<%= link_to "Смотреть заказ в админке", 'http://saleshop.online' + rails_admin.show_path(model_name: 'order', id: @order.id).to_s + '/more' %>
 
 <table>
   <tr>

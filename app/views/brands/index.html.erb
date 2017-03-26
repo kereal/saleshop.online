@@ -5,7 +5,9 @@
   <% @brands.each do |brand| %>
 
     <div class="brand">
-      <%= link_to image_tag(brand.image(:medium), alt: brand.title), brand, title: brand.title %>
+      <%= link_to brand, title: brand.title do 
+        brand.image.present? ? image_tag(brand.image(:medium), alt: brand.title) : tag(:br) + brand.title
+      end %>
     </div>
 
   <% end %>
@@ -23,7 +25,14 @@
       width: 20%;
       padding: 2%;
       float: left;
+      min-height: 120px;
+      text-align: center;
+      font-size: 1.2em;
+      font-weight: 700;
       }
+      .brands > .brand > a {
+        color: #333;
+        }
       .brands > .brand img {
         position: relative;
         width: 100%;

@@ -7,7 +7,13 @@
 
     <% @shopping_cart.shopping_cart_items.each do |item| %>
       <div class="item clearfix">
-        <div class="title"><%= link_to item.item.try(:title), item.item %></div>
+        <div class="title">
+          <% if item.item.blank? %>
+            <em>— товар удален —</em>
+          <% else %>
+            <%= link_to item.item.try(:title), item.item %>
+          <% end %>
+        </div>
         <div class="price"><%= number_to_currency item.price.to_f %></div>
         <div class="quantity">✕ <%= item.quantity %></div>
         <div class="item-total">= <%= number_to_currency(item.price.to_f * item.quantity) %></div>

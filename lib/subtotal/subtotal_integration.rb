@@ -75,7 +75,8 @@ class SubtotalIntegration
           if remote && remote.size > 0
             file = Tempfile.new([(url.match(/good[0-9]+/) || "product").to_s, Rack::Mime::MIME_TYPES.invert[remote.content_type] || ".jpg" ])
             file.binmode.write remote.read
-            images << Image.new(image: file)
+            image = Image.new(image: file)
+            images << image if image.valid?
           end
         end
       end

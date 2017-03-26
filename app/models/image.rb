@@ -2,7 +2,7 @@ class Image < ApplicationRecord
 
   belongs_to :product
 
-  validates :image, :product, presence: true
+  validates :image, presence: true
 
   has_attached_file :image,
       styles: { original: "1024>", medium: "230>", thumb: "70x70#" },

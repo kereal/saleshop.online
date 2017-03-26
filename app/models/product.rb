@@ -13,22 +13,12 @@ class Product < ApplicationRecord
   validates :title, :slug, presence: true, length: { minimum: 2 }
   validates :price, presence: true
 
-  def image
-    unless self.provider_images.blank?
-      imgs = JSON.parse self.provider_images
-      "https://app.subtotal.ru#{imgs.first}" if imgs.try(:first)
-    end
+  # возвращаем Image || nil
+  def image(args = {})
+    self.images.first.try(:image, args) || nil
   end
 
-  # возвращаем массив урлов или nil (только первые 2)
-  def remote_images(limit = 2)
-    unless self.provider_images.blank?
-      urls = JSON.parse self.provider_images
-      urls.first(limit).map{|url| "https://app.subtotal.ru#{url}"}
-    end
-  end
-
-  # price - цена без скидки. если есть скидка, то расчитываем цену со скидкой
+  # считаем цену со скидкой. price - цена без скидки
   def discount_price
     discount.blank? ? price : price - price * discount / 100
   end

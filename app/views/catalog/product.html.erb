@@ -6,18 +6,20 @@
     
     <div class="col-sm-4">
       <div class="images">
-        <% unless @product.remote_images.blank? %>
+
+        <% unless @product.images.blank? %>
           <div class="big">
-            <%= image_tag(@product.remote_images.first, alt: @product.title, data: { zoom_image: @product.remote_images.first }) %>
+            <%= image_tag(@product.image(:original), alt: @product.title, data: { zoom_image: @product.image(:original) }) %>
           </div>
           <div class="thumbs" id="product-gallery">
-            <% @product.remote_images.each_with_index do |image, index| %>
-              <%= link_to image_tag(image, alt: nil), image, data: { image: image, zoom_image: image }, class: ("zoomGalleryActive" if index==0) %>
+            <% @product.images.each_with_index do |image, index| %>
+              <%= link_to image_tag(image.image(:thumb), alt: nil), image.image(:original), data: { image: image.image(:original), zoom_image: image.image(:original) }, class: ("zoomGalleryActive" if index==0) %>
             <% end %>
           </div>
         <% else %>
           <%= image_tag "http://placehold.it/400x508/fff/777?text=нет+фото", alt: nil, style: "border: 1px solid #eee;" %>
         <% end %>
+
       </div>
     </div>
     

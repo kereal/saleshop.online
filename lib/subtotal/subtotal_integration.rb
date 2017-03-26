@@ -39,6 +39,7 @@ class SubtotalIntegration
     puts "Created: #{created}"
   end
 
+  # возвращаем кол-во созданных товаров
   def import_goods(goods_batch)
     created = 0
     goods_batch.try(:[], "goods").each do |product|
@@ -57,17 +58,30 @@ class SubtotalIntegration
         brand = Brand.select(:id).where("title LIKE ?", product_data["good"]["tags"].try(:[], 0)).take || Brand.new(title: product_data["good"]["tags"].try(:[], 0))
         properties = product_data["good"]["properties"].map{ |p| {p.try(:[], "name") => p.try(:[], "values").try(:[], 0).try(:[], "value")} if p.try(:[], "name") }
         # ищем категорию среди свойств
-        category_title = properties.find{|h| h.keys[0]=="Категория товара"}.try(:values).try(:[], 0)
+        category_title = properties.find { |h| h.keys[0]=="Категория товара" }.try(:values).try(:[], 0)
         category = category_title.blank? ? nil : Category.select(:id).find_by_provider_title(category_title)
-        properties.delete_if{|h| h.keys[0]=="Категория товара"}
+        properties.delete_if { |h| h.keys[0]=="Категория товара" }
         # ищем пол среди свойств
         gender_title = properties.find{|h| h.keys[0]=="Пол"}.try(:values).try(:[], 0)
         gender = if gender_title == "жен" then :female elsif gender_title == "муж" then :male else nil end
-        properties.delete_if{|h| h.keys[0]=="Пол"}
+        properties.delete_if { |h| h.keys[0]=="Пол" }
+      end
+      # сформируем массив с объектами картинок, которые скачаются после сохранения (берем первые 2)
+      images = []
+      unless product.try(:[], "images").nil?
+        product["images"].first(2).each do |url|
+          remote = open("https://app.subtotal.ru#{url}")
+          if remote && remote.size > 0
+            file = Tempfile.new([(url.match(/good[0-9]+/) || "product").to_s, Rack::Mime::MIME_TYPES.invert[remote.content_type]])
+            file.binmode.write remote.read
+            images << Image.new(image: file)
+          end
+        end
       end
       if Product.create(
         title: product.try(:[], "name"),
         description: description,
+        images: images,
         price: product.try(:[], "price2"),
         discount: discount,
         category: category,
@@ -80,6 +94,7 @@ class SubtotalIntegration
         properties: properties.to_json
         ) then created += 1 end;
     end
+    # TODO: удалить из базы товары, которых не было в выгрузке
     return created
   end
 

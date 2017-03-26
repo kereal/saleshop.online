@@ -4,7 +4,12 @@ class Image < ApplicationRecord
 
   validates :image, :product, presence: true
 
-  has_attached_file :image, styles: { medium: "200x300>" }, default_url: "/assets/image-missing.jpg"
-  validates_attachment_content_type :image, content_type: /\Aimage\/.*\z/
+  has_attached_file :image,
+      styles: { original: "1024>", medium: "230>", thumb: "70x70#" },
+      url: "/system/:class/:id_partition/:hash.:extension",
+      hash_secret: "u8asnAs7sAd0adg6aAah",
+      default_url: "http://placehold.it/208x248/f9f9f9/777?text=нет+фото",
+      convert_options: { all: "-strip", original: "-quality 82" }
+  validates_attachment :image, content_type: { content_type: /\Aimage/ }
 
 end

@@ -5,6 +5,8 @@ class Category < ApplicationRecord
 
   friendly_id :slug_candidates, use: :slugged
 
+  enum gender: { female: 0, male: 1 }
+
   has_many :products
 
   validates :title, :slug, presence: true, length: { minimum: 2 }
@@ -29,7 +31,7 @@ class Category < ApplicationRecord
         end
       end
       list do
-        exclude_fields :products, :ancestry
+        exclude_fields :products, :ancestry, :parent_id
       end
       create do
         exclude_fields :products, :slug, :ancestry

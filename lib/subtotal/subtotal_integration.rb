@@ -36,6 +36,7 @@ class SubtotalIntegration
         created += import_goods get_goods(page_size, page_number)
       end
     end
+    puts "Found: #{len}"
     puts "Created: #{created}"
   end
 
@@ -57,14 +58,14 @@ class SubtotalIntegration
         # ищем или создаем бренд
         brand = Brand.select(:id).where("title LIKE ?", product_data["good"]["tags"].try(:[], 0)).take || Brand.new(title: product_data["good"]["tags"].try(:[], 0))
         properties = product_data["good"]["properties"].map{ |p| {p.try(:[], "name") => p.try(:[], "values").try(:[], 0).try(:[], "value")} if p.try(:[], "name") }
-        # ищем категорию среди свойств
-        category_title = properties.find { |h| h.keys[0]=="Категория товара" }.try(:values).try(:[], 0)
-        category = category_title.blank? ? nil : Category.select(:id).find_by_provider_title(category_title)
-        properties.delete_if { |h| h.keys[0]=="Категория товара" }
         # ищем пол среди свойств
         gender_title = properties.find{|h| h.keys[0]=="Пол"}.try(:values).try(:[], 0)
         gender = if gender_title == "жен" then :female elsif gender_title == "муж" then :male else nil end
         properties.delete_if { |h| h.keys[0]=="Пол" }
+        # ищем категорию среди свойств
+        category_title = properties.find { |h| h.keys[0]=="Категория товара" }.try(:values).try(:[], 0)
+        category = Category.select(:id).where(gender: gender).find_by_provider_title(category_title)
+        properties.delete_if { |h| h.keys[0]=="Категория товара" }
       end
       # сформируем массив с объектами картинок, которые скачаются после сохранения (берем первые 2)
       images = []
@@ -72,7 +73,7 @@ class SubtotalIntegration
         product["images"].first(2).each do |url|
           remote = open("https://app.subtotal.ru#{url}")
           if remote && remote.size > 0
-            file = Tempfile.new([(url.match(/good[0-9]+/) || "product").to_s, Rack::Mime::MIME_TYPES.invert[remote.content_type]])
+            file = Tempfile.new([(url.match(/good[0-9]+/) || "product").to_s, Rack::Mime::MIME_TYPES.invert[remote.content_type] || ".jpg" ])
             file.binmode.write remote.read
             images << Image.new(image: file)
           end

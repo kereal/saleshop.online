@@ -36,6 +36,7 @@ ru:
         title: Название
         parent_id: Родитель
         provider_title: Название у провайдера данных
+        gender: Пол
         created_at: Создано
         updated_at: Обновлено
       product:

@@ -37,7 +37,7 @@ class SubtotalIntegration
       end
     end
     puts "Found: #{len}"
-    puts "Created: #{created}"
+    puts "Created/updated: #{created}"
     puts "Exists: #{Product.count}"
   end
 

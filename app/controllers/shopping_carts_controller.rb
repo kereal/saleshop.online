@@ -36,6 +36,7 @@ class ShoppingCartsController < ApplicationController
     if @order.save
       redirect_to cart_thanks_path
       session[:shopping_cart_id] = nil
+      OrderMailer.email_to_admin(@order.id).deliver_later
     else
       render "cart/checkout"
     end

@@ -16,5 +16,18 @@ module SaleshopOnline
     config.i18n.default_locale = :ru
     # config.active_job.queue_adapter = :sidekiq
 
+    # почта
+    config.action_mailer.delivery_method = :smtp
+    config.action_mailer.raise_delivery_errors = true
+    config.action_mailer.smtp_settings = {
+      enable_starttls_auto:   true,
+      address:                'smtp.yandex.ru',
+      port:                   587,
+      domain:                 'saleshop.online',
+      authentication:         'plain',
+      user_name:              'robot@saleshop.online',
+      password:               'w26a7sEa'
+    }
+
   end
 end

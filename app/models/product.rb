@@ -31,6 +31,7 @@ class Product < ApplicationRecord
     end
 
     rails_admin do
+      parent 'Category'
       create do
         exclude_fields :slug
       end

@@ -12,4 +12,11 @@ class Image < ApplicationRecord
       convert_options: { all: "-strip", original: "-quality 82" }
   validates_attachment :image, content_type: { content_type: /\Aimage/ }
 
+
+  private
+
+    rails_admin do
+      parent 'Product'      
+    end
+
 end

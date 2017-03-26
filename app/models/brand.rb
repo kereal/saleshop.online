@@ -19,6 +19,7 @@ class Brand < ApplicationRecord
     end
 
     rails_admin do
+      parent 'Product'
       create do
         exclude_fields :slug
       end

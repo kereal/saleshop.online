@@ -38,6 +38,7 @@ class SubtotalIntegration
     end
     puts "Found: #{len}"
     puts "Created: #{created}"
+    puts "Exists: #{Product.count}"
   end
 
   # возвращаем кол-во созданных товаров

@@ -27,25 +27,32 @@ class SubtotalIntegration
   def import_all_goods
     created = 0
     page_size = 100
+    provider_product_ids = []
     goods_batch = get_goods(page_size)
     len = goods_batch.try(:[], "length")
     if len
       batch_count = (len.to_f / page_size).ceil
-      created += import_goods(goods_batch)
+      provider_product_ids += import_goods(goods_batch)
       (2..batch_count).each do |page_number|
-        created += import_goods get_goods(page_size, page_number)
+        provider_product_ids += import_goods get_goods(page_size, page_number)
       end
     end
+    # удалим из базы товары, которых не было в выгрузке
+    (Product.select(:provider_product_id).map(&:provider_product_id) - provider_product_ids.compact).each do |provider_product_id|
+      Product.find_by_provider_product_id(provider_product_id).destroy
+    end
     puts "Found: #{len}"
-    puts "Created/updated: #{created}"
+    #puts "Created/updated: #{created}"
     puts "Exists: #{Product.count}"
   end
 
-  # возвращаем кол-во созданных товаров
+  # возвращаем массив с найденными provider_product_id
   def import_goods(goods_batch)
     created = 0
+    provider_product_ids = []
     goods_batch.try(:[], "goods").each do |product|
-      provider_product_id = product.try(:[], "id")
+      provider_product_id = product.try(:[], "id").try(:to_i)
+      provider_product_ids << provider_product_id
       provider_updated_at = DateTime.parse(product.try(:[], "ch_date"))
       # поищем этот товар у нас у базе
       db_product = Product.find_by_provider_product_id(provider_product_id)
@@ -97,8 +104,7 @@ class SubtotalIntegration
         properties: properties.to_json
         ) then created += 1 end;
     end
-    # TODO: удалить из базы товары, которых не было в выгрузке
-    return created
+    return provider_product_ids
   end
 
 

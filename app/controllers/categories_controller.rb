@@ -5,14 +5,30 @@ class CategoriesController < ApplicationController
   def show
 
     @category = Category.friendly.find(params[:slug])
-    # если эта категория не содержит подкатегории, то возьмем ее товары, если есть подкатегории, то возьмем еще и товары из всех них
-    @products = @category.products.preload(:brand, :images)
-    @products += Product.where(category: @category.child_ids).preload(:brand, :images) unless @category.is_childless?
-    @products = Kaminari.paginate_array(@products).page(params[:page])
+    select_categories_ids = [@category.subtree_ids]
+
+    # доберем через жопу
+    if params[:slug] == 'aksessuary'
+      select_categories_ids += Category.friendly.find("aksessuary-8").subtree_ids + Category.friendly.find("aksessuary-83").subtree_ids
+    end
+    if params[:slug] == 'sumki'
+      select_categories_ids += Category.friendly.find("sumki-38").subtree_ids
+    end
+
+    @products = Product.where(category: select_categories_ids).page(params[:page]).preload(:images, :brand)
 
     render "catalog/category-show"
 
   end
+
+
+  private
+
+    # получаем продукты категории и всех ее детей
+    def get_full_products(category)
+      products = category.products
+      
+    end
 
 
 end

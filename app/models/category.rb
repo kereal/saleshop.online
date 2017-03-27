@@ -22,6 +22,10 @@ class Category < ApplicationRecord
       [:title, [:title, self.gender == "male" ? "muzhskie" : "zhenskie"], [:title, rand(100)]]
     end
 
+    def should_generate_new_friendly_id?
+      gender_changed? || super
+    end
+
     rails_admin do
       nestable_tree true
       include_all_fields

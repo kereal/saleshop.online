@@ -9,10 +9,10 @@ class CategoriesController < ApplicationController
 
     # доберем через жопу
     if params[:slug] == 'aksessuary'
-      select_categories_ids += Category.friendly.find("aksessuary-8").subtree_ids + Category.friendly.find("aksessuary-83").subtree_ids
+      select_categories_ids += Category.friendly.find("aksessuary-zhenskie").subtree_ids + Category.friendly.find("aksessuary-muzhskie").subtree_ids
     end
     if params[:slug] == 'sumki'
-      select_categories_ids += Category.friendly.find("sumki-38").subtree_ids
+      select_categories_ids += Category.friendly.find("sumki-zhenskie").subtree_ids
     end
 
     @products = Product.where(category: select_categories_ids).page(params[:page]).preload(:images, :brand)

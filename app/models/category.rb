@@ -19,7 +19,7 @@ class Category < ApplicationRecord
   private
 
     def slug_candidates
-      [:title, [:title, rand(100)]]
+      [:title, [:title, self.gender == "male" ? "muzhskie" : "zhenskie"], [:title, rand(100)]]
     end
 
     rails_admin do

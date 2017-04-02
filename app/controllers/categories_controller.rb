@@ -22,13 +22,4 @@ class CategoriesController < ApplicationController
   end
 
 
-  private
-
-    # получаем продукты категории и всех ее детей
-    def get_full_products(category)
-      products = category.products
-      
-    end
-
-
 end

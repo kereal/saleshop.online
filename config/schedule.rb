@@ -17,6 +17,10 @@
 #   runner "AnotherModel.prune_old_records"
 # end
 
-every :day, :at => '03:00am' do
+#every :day, :at => '03:00am' do
+#  rake "app:import_all_goods"
+#end
+
+every 3.hours do
   rake "app:import_all_goods"
 end

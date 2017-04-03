@@ -44,8 +44,6 @@ GEM
     ancestry (2.2.2)
       activerecord (>= 3.0.0)
     arel (7.1.4)
-    autoprefixer-rails (6.7.7.1)
-      execjs
     babosa (1.0.2)
     builder (3.2.3)
     choice (0.2.0)
@@ -272,7 +270,6 @@ PLATFORMS
 DEPENDENCIES
   acts_as_shopping_cart
   ancestry
-  autoprefixer-rails
   babosa
   erd
   friendly_id (~> 5.1.0)

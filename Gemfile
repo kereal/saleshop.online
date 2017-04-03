@@ -22,7 +22,7 @@ gem 'sentry-raven'
 
 
 # build tools
-gem 'autoprefixer-rails'
+#gem 'autoprefixer-rails'
 
 
 group :development do

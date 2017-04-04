@@ -101,7 +101,8 @@ class SubtotalIntegration
         provider_images: product.try(:[], "images").blank? ? nil : product["images"].to_json,
         provider_product_id: provider_product_id,
         provider_updated_at: provider_updated_at,
-        properties: properties.to_json
+        properties: properties.to_json,
+        article: product.try(:[], "article")
         ) then created += 1 end;
     end
     return provider_product_ids

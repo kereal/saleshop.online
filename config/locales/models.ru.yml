@@ -52,6 +52,7 @@ ru:
         gender: Пол
         discount: Скидка
         country: Страна
+        article: Артикул
       image:
         product: Продукт
         image: Изображение

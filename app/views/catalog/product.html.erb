@@ -25,6 +25,7 @@
     
     <div class="col-sm-8">
       <h1><%= @product.title %></h1>
+      <h4 class="article">Артикул: <%= @product.article %></h4>
       <% if @product.brand.try(:image).try(:exists?) %>
         <div class="brand">
           <%= link_to image_tag(@product.brand.image(:medium)), @product.brand %>
@@ -89,9 +90,15 @@
               -ms-transform: translate(-50%,-50%);
                   transform: translate(-50%,-50%);
           }
+  .product .article {
+    font-weight: normal;
+    font-size: 14px;
+    color: #666;
+    margin-top: -.8em;
+    margin-bottom: 1.4em;
+    }
   .product .brand {
     width: 20%;
-    margin-top: -.6em;
     }
     .product .brand img {
       width: 100%;

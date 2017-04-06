@@ -75,10 +75,10 @@ class SubtotalIntegration
         category = Category.select(:id).where(gender: gender).find_by_provider_title(category_title)
         properties.delete_if { |h| h.keys[0]=="Категория товара" }
       end
-      # сформируем массив с объектами картинок, которые скачаются после сохранения (берем первые 2)
+      # сформируем массив с объектами картинок, которые скачаются после сохранения
       images = []
       unless product.try(:[], "images").nil?
-        product["images"].first(2).each do |url|
+        product["images"].each do |url|
           remote = open("https://app.subtotal.ru#{url}")
           if remote && remote.size > 0
             file = Tempfile.new([(url.match(/good[0-9]+/) || "product").to_s, Rack::Mime::MIME_TYPES.invert[remote.content_type] || ".jpg" ])

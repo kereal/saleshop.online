@@ -15,8 +15,17 @@ set :shared_files,      fetch(:shared_files, []).push('config/database.yml', 'co
 set :bundle_options,    lambda { %{--without development:test --path vendor/bundle --deployment} }
 set :rvm_use_path,      '/usr/local/rvm/scripts/rvm'
 
+
+# banana
+set :user,              'kereal'
+set :application_name,  'saleshop'
+set :domain,            '192.168.0.254'
+set :deploy_to,         "/home/#{fetch(:user)}/apps/#{fetch(:application_name)}"
+set :shared_files,      fetch(:shared_files, []).push('config/database.yml', 'config/secrets.yml', 'db/production.sqlite3')
+
+
 task :environment do
-  invoke :'rvm:use', '2.3.3'
+  invoke :'rvm:use', '2.4.0'
 end
 
 task :setup do

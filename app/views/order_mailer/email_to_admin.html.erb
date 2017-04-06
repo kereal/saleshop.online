@@ -1,5 +1,3 @@
-<p><%= link_to "Смотреть заказ в админке", 'http://saleshop.online' + rails_admin.show_path(model_name: 'order', id: @order.id).to_s + '/more' %></p>
-
 <table>
   <tr>
     <td width="20%">Имя</td>
@@ -22,3 +20,40 @@
     <td><%= @order.created_at.strftime("%d.%m.%Y, %H:%M:%S") %></td>
   </tr>
 </table>
+
+<table width="100%" border="1">
+  <tr>
+    <th>Актикул</th>
+    <th>Продукт</th>
+    <th>Кол-во</th>
+    <th>Цена</th>
+    <th>Стоимость</th>
+    <th>Ссылка</th>
+  </tr>
+  <% @order.shopping_cart.shopping_cart_items.each do |item| %>
+    <% product = item.item %>
+    <tr>
+      <td><%= product.try(:article) %></td>
+      <td><%= product.try(:title) %></td>
+      <td><%= item.quantity %></td>
+      <td><%= number_to_currency item.price  %></td>
+      <td><%= number_to_currency(item.price * item.quantity) %></td>
+      <td><% if product %><%= link_to "смотреть в subtotal", 'https://app.subtotal.ru/id11542/goods.php?good_type_id=2#/good/' + product.provider_product_id.to_s, target: "_blank" %><% end %></td>
+    </tr>
+  <% end %>
+  <tr>
+    <td colspan="3"></td>
+    <td><div class="total"><b>Сумма:</b> <%= number_to_currency @order.shopping_cart.subtotal.to_f %></div></td>
+    <td></td>
+  </tr>
+</table>
+
+
+<p>&nbsp;</p>
+<p><%= link_to "Смотреть заказ в админке", 'http://saleshop.online' + rails_admin.show_path(model_name: 'order', id: @order.id).to_s + '/more' %></p>
+
+<style>
+  table th {
+    text-align: left;
+    }
+</style>

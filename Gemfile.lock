@@ -59,7 +59,7 @@ GEM
       execjs
     coffee-script-source (1.12.2)
     concurrent-ruby (1.0.5)
-    domain_name (0.5.20170223)
+    domain_name (0.5.20170404)
       unf (>= 0.0.5, < 1.0.0)
     erd (0.4.0)
       nokogiri
@@ -128,7 +128,7 @@ GEM
     minitest (5.10.1)
     monetize (1.6.0)
       money (~> 6.8)
-    money (6.8.2)
+    money (6.8.3)
       i18n (>= 0.6.4, < 0.9)
       sixarm_ruby_unaccent (>= 1.1.1, < 2)
     money-rails (1.8.0)

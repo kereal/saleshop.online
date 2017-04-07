@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170404110103) do
+ActiveRecord::Schema.define(version: 20170407010918) do
 
   create_table "brands", force: :cascade do |t|
     t.string   "title"
@@ -101,6 +101,15 @@ ActiveRecord::Schema.define(version: 20170404110103) do
   create_table "shopping_carts", force: :cascade do |t|
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+  end
+
+  create_table "subscribers", force: :cascade do |t|
+    t.string   "email"
+    t.string   "token"
+    t.boolean  "confirmed",  default: false
+    t.boolean  "subscribed", default: true
+    t.datetime "created_at",                 null: false
+    t.datetime "updated_at",                 null: false
   end
 
 end

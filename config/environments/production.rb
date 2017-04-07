@@ -47,7 +47,7 @@ Rails.application.configure do
   config.log_level = :info
 
   # Prepend all log lines with the following tags.
-  config.log_tags = [ :request_id ]
+  config.log_tags = [ :request_id, :remote_ip ]
 
   # Use a different cache store in production.
   # config.cache_store = :mem_cache_store
@@ -86,8 +86,8 @@ Rails.application.configure do
 
   # включаем lograge и добавляем время к записям
   config.lograge.enabled = true
-  config.lograge.custom_options = lambda do |event|
-    { :time => event.time }
-  end
+
+  # выключаем логирование paperclip
+  # Paperclip.options[:log] = false
 
 end

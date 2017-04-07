@@ -23,6 +23,9 @@ ru:
       shopping_cart:
         one: Корзина
         other: Корзины
+      subscriber:
+        one: Подписчик
+        other: Подписчики
 
     attributes:
       brand:
@@ -69,5 +72,11 @@ ru:
         comment: Комментарий
         shopping_cart: Корзина
         status: Статус
+        created_at: Создано
+        updated_at: Обновлено
+      subscriber:
+        email: Эл. почта
+        confirmed: Подтвержден
+        subscribed: Подписан
         created_at: Создано
         updated_at: Обновлено

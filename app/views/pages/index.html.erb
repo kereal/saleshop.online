@@ -30,10 +30,11 @@
   <div class="icon"><%= image_tag "icon-percent.png" %></div>
   <div class="h">Подпишитесь на скидки</div>
   <div class="sub">Узнайте о распродажах и акциях раньше других. Без спама</div>
-  <form action="">
-    <input type="email" name="email" placeholder="Ваша эл. почта" required>
-    <button type="submit" title="Подписаться"></button>
-  </form>
+  <%= form_for Subscriber.new, url: subscribers_subscribe_path do |f| %>
+    <%= f.email_field :email, required: true, placeholder: true %>
+    <%= button_tag '', title: "Подписаться" %>
+  <% end %>
+
 </div>
 
 <div class="seotxt">
@@ -48,7 +49,7 @@
   </ul>
 </div>
 
-<p style="text-align:center;">
+<p class="center">
   <%= link_to "Все категории", categories_path %>
 </p>
 

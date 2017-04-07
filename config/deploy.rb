@@ -11,17 +11,15 @@ set :deploy_to,         "/home/#{fetch(:user)}/app"
 set :repository,        'git@bitbucket.org:kereal/saleshop.online.git'
 set :branch,            'master'
 set :shared_dirs,       fetch(:shared_dirs, []).push('log', 'tmp', 'public/system')
-set :shared_files,      fetch(:shared_files, []).push('config/database.yml', 'config/secrets.yml', 'db/development.sqlite3')
+set :shared_files,      fetch(:shared_files, []).push('config/database.yml', 'config/secrets.yml', 'db/production.sqlite3')
 set :bundle_options,    lambda { %{--without development:test --path vendor/bundle --deployment} }
 set :rvm_use_path,      '/usr/local/rvm/scripts/rvm'
 
 
 # banana
 set :user,              'kereal'
-set :application_name,  'saleshop'
 set :domain,            '192.168.0.254'
 set :deploy_to,         "/home/#{fetch(:user)}/apps/#{fetch(:application_name)}"
-set :shared_files,      fetch(:shared_files, []).push('config/database.yml', 'config/secrets.yml', 'db/production.sqlite3')
 
 
 task :environment do

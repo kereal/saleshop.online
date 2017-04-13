@@ -40,12 +40,8 @@ task :deploy do
     invoke :'rails:assets_precompile'
     invoke :'deploy:cleanup'
     on :launch do
-      #in_path(fetch(:current_path)) do
-        command %{mkdir -p tmp/}
-        command %{touch tmp/restart.txt}
-        invoke :'puma_restart'
-        invoke :'whenever:update'
-      #end
+      invoke :'puma_restart'
+      invoke :'whenever:update'
     end
   end
 end
@@ -59,7 +55,6 @@ end
 desc "Start app server"
 task :puma_start => :environment do
   in_path(fetch(:current_path)) do
-    # command %{export RAILS_SERVE_STATIC_FILES=true}
     command %{bundle exec rails s -b 127.0.0.1 -d -e production}
   end
 end

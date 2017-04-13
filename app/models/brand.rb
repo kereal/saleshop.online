@@ -9,7 +9,7 @@ class Brand < ApplicationRecord
   validates :title, :slug, presence: true, length: { minimum: 2 }
 
   has_attached_file :image, styles: { medium: "300x300>", thumb: "100x100>" }, default_url: "http://placehold.it/200x120/fff/777&amp;text=нет+фото"
-  validates_attachment_content_type :image, content_type: /\Aimage\/.*\z/
+  validates_attachment :image, content_type: { content_type: /\Aimage\/.*\z/ }, size: { in: 0..8.megabytes }
 
 
   private

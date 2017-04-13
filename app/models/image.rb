@@ -10,7 +10,7 @@ class Image < ApplicationRecord
       hash_secret: "u8asnAs7sAd0adg6aAah",
       default_url: "http://placehold.it/208x248/f9f9f9/777?text=нет+фото",
       convert_options: { all: "-strip", original: "-quality 82" }
-  validates_attachment :image, content_type: { content_type: /\Aimage/ }
+      validates_attachment :image, content_type: { content_type: /\Aimage\/.*\z/ }, size: { in: 0..8.megabytes }
 
 
   private

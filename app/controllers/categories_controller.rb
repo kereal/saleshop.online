@@ -15,7 +15,7 @@ class CategoriesController < ApplicationController
       select_categories_ids += Category.friendly.find("sumki-zhenskie").subtree_ids
     end
 
-    @products = Product.where(category: select_categories_ids).page(params[:page]).preload(:images, :brand)
+    @products = Product.where(category: select_categories_ids).order(:title).page(params[:page]).preload(:images, :brand)
 
     render "catalog/category-show"
 

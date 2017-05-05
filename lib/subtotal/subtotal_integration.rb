@@ -48,6 +48,7 @@ class SubtotalIntegration
     puts "Found: #{len}"
     puts "Created/updated: #{@created}/#{@updated}"
     puts "Exists: #{Product.count}"
+    @logger.info "Found: #{len}, created: #{@created}, updated: #{@updated}, exists: #{Product.count}"
   end
 
   # возвращаем массив с найденными provider_product_id
@@ -95,7 +96,6 @@ class SubtotalIntegration
             begin
               image = Image.new(image: file)
             rescue Exception => ex
-              # log
               @logger.error "Error saving image (product: #{product.try(:[], 'id').try(:to_i)}): #{ex}"
             end
             images << image if image.valid?

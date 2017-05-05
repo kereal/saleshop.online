@@ -8,6 +8,10 @@ class SubtotalIntegration
   # Rails.application.secrets.some_api_key  # secrets.yml
   # response = RestClient.get('https://app.subtotal.ru/id11542/webapi/goods', { good_type_id: 2 })
 
+  def initialize
+    @logger = Logger.new File.join(Rails.root, "log", "subtotal_integration.log")
+  end
+
   def auth
     response = RestClient.post(URI.join(SERVER, 'webapi/', 'login').to_s, { login: LOGIN, password: PASSWORD }.to_json, { content_type: 'application/json; charset=utf-8' })
     if response.code == 200
@@ -83,7 +87,12 @@ class SubtotalIntegration
           if remote && remote.size > 0
             file = Tempfile.new([(url.match(/good[0-9]+/) || "product").to_s, Rack::Mime::MIME_TYPES.invert[remote.content_type] || ".jpg" ])
             file.binmode.write remote.read
-            image = Image.new(image: file)
+            begin
+              image = Image.new(image: file)
+            rescue Exception => ex
+              # log
+              @logger.error "Error saving image (product: #{product.try(:[], 'id').try(:to_i)}): #{ex}"
+            end
             images << image if image.valid?
           end
         end

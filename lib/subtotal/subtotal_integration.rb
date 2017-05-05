@@ -10,6 +10,7 @@ class SubtotalIntegration
 
   def initialize
     @logger = Logger.new File.join(Rails.root, "log", "subtotal_integration.log")
+    @created, @updated = 0, 0
   end
 
   def auth
@@ -29,7 +30,6 @@ class SubtotalIntegration
   end
 
   def import_all_goods
-    created = 0
     page_size = 100
     provider_product_ids = []
     goods_batch = get_goods(page_size)
@@ -46,13 +46,13 @@ class SubtotalIntegration
       Product.find_by_provider_product_id(provider_product_id).destroy
     end
     puts "Found: #{len}"
-    #puts "Created/updated: #{created}"
+    puts "Created/updated: #{@created}/#{@updated}"
     puts "Exists: #{Product.count}"
   end
 
   # возвращаем массив с найденными provider_product_id
   def import_goods(goods_batch)
-    created = 0
+    
     provider_product_ids = []
     goods_batch.try(:[], "goods").each do |product|
       provider_product_id = product.try(:[], "id").try(:to_i)
@@ -61,7 +61,12 @@ class SubtotalIntegration
       # поищем этот товар у нас у базе
       db_product = Product.find_by_provider_product_id(provider_product_id)
       # если товар есть и дата его обновления меньше, то удаляем и создаем заново, иначе оставляем и пропускаем этот товар
-      if db_product.provider_updated_at < provider_updated_at then db_product.destroy else next end if db_product
+      #if db_product.provider_updated_at < provider_updated_at then db_product.destroy else next end if db_product
+      if db_product and db_product.provider_updated_at < provider_updated_at
+        # db_product.destroy
+      else
+        next
+      end
       # получаем полную информацию о продукте
       product_data = get_good(provider_product_id)
       if product_data.try(:[], "good")
@@ -97,7 +102,7 @@ class SubtotalIntegration
           end
         end
       end
-      if Product.create(
+      product_obj = {
         title: product.try(:[], "name"),
         description: description,
         images: images,
@@ -112,7 +117,14 @@ class SubtotalIntegration
         provider_updated_at: provider_updated_at,
         properties: properties.to_json,
         article: product.try(:[], "article")
-        ) then created += 1 end;
+      }
+      if db_product
+        db_product.update product_obj
+        @updated += 1
+      else
+        Product.create product_obj
+        @created += 1
+      end
     end
     return provider_product_ids
   end

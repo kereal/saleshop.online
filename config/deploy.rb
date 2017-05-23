@@ -55,7 +55,7 @@ end
 desc "Start app server"
 task :puma_start => :environment do
   in_path(fetch(:current_path)) do
-    command %{bundle exec rails s -b 127.0.0.1 -d -e production}
+    command %{bundle exec rails s -b 127.0.0.1 -p 3000 -d -e production}
   end
 end
 

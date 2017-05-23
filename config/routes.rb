@@ -13,6 +13,7 @@ Rails.application.routes.draw do
   get '/category/:slug(/page/:page)', to: 'categories#show', as: :category
 
   get '/product/:slug', to: 'products#show', as: :product
+  get '/product/:slug/one_click_buy', to: 'products#one_click_buy', as: :product_one_click_buy
 
   get '/page/:slug', to: 'pages#show', as: :page
 

@@ -24,6 +24,10 @@
           <em class="discount">&minus;<%= product.discount %>%</em>
         <% end %>
       </div>
+      <div class="actions">
+      <%= link_to "Купить в 1 клик", product_one_click_buy_path(product) %>
+        <%= link_to "Посмотреть", product, class: "show" %>
+      </div>
     </div>
   <% end %>
 
@@ -38,9 +42,7 @@
       width: 18.4%;
       margin-right: 2%;
       margin-bottom: 2%;
-      /*border: 1px dotted #dfdfdf;*/
       border: 1px dotted #fff;
-      /*padding: .75%;*/
       font-size: 0.929em;
       }
     .product:nth-child(5n) {
@@ -48,7 +50,6 @@
       }
       .product > .image {
         margin-bottom: 8px;
-        /*border-bottom: 1px dotted #dfdfdf;*/
         text-align: center;
         height: 248px;
         overflow: hidden;
@@ -91,6 +92,34 @@
           font-style: normal;
           padding: 0 8px;
           }
+      .product > .actions {
+        white-space: nowrap;
+        margin-top: 3px;
+        }
+        .product > .actions > a {
+          display: inline-block !important;
+          padding: 2px 6px;
+          border: 0;
+          /*background: rgb(177,0,0);*/
+          color: #fff;
+          opacity: .8;
+          border-radius: 2px;
+
+          padding: 1px 5px;
+          border: 1px solid rgba(177,0,0, .8);
+          background: transparent;
+          color: rgb(177,0,0);
+          }
+        .product > .actions > a:hover {
+          opacity: 1;
+          }
+        .product > .actions > a.show {
+          /*background: rgb(51,122,183);*/
+          border: 1px solid rgba(51,122,183, .8);
+          background: transparent;
+          color: rgb(51,122,183);
+          }
+        
   .sub-categories {
     margin-bottom: 12px;
     }

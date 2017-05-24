@@ -3,12 +3,14 @@
 
 <h1><%= @brand.title %></h1>
 
-<div class="brand-about">
-  <% if @brand.image.exists? %>
-    <div class="image"><%= image_tag @brand.image(:medium) %></div>
-  <% end %>
-  <%= raw @brand.description %>
-</div>
+<% if @brand.image.exists? or not @brand.description.blank? %>
+  <div class="brand-about clearfix">
+    <% if @brand.image.exists? %>
+      <div class="image"><%= image_tag @brand.image(:medium) %></div>
+    <% end %>
+    <%= raw @brand.description %>
+  </div>
+<% end %>
 
 <%= render "catalog/products-list" %>
 
@@ -20,7 +22,7 @@
     }
     .brand-about .image {
       float: right;
-      margin: 30px 60px 60px;
+      margin: 30px 44px 60px;
       }
       .brand-about .image > img {
         max-width: 240px;

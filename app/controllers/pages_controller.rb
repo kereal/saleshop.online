@@ -12,7 +12,8 @@ class PagesController < ApplicationController
 
   # GET /sale
   def sale
-    @products = Product.where("discount is not null and discount > 0").order(:title).preload(:brand, :images).page(params[:page])
+    # @products = Product.where("discount is not null and discount > 0").order(:title).preload(:brand, :images).page(params[:page])
+    @products = Product.where("price < ?", 1000).order(:title).preload(:brand, :images).page(params[:page])
     @title = "Распродажа"
     render "catalog/products-show"
   end

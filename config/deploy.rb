@@ -3,31 +3,34 @@ require 'mina/git'
 require 'mina/bundler'
 require 'mina/rails'
 require 'mina/whenever'
+require 'mina/puma'
 
 set :user,              'saleshop'
-set :application_name,  'saleshop'
-set :domain,            '212.8.244.73'
-set :deploy_to,         "/home/#{fetch(:user)}/app"
+set :application_name,  'saleshop.online'
+set :domain,            '185.195.24.66'
+set :deploy_to,         "/home/#{fetch(:user)}/#{fetch(:application_name)}"
 set :repository,        'git@bitbucket.org:kereal/saleshop.online.git'
 set :branch,            'master'
+set :keep_releases,     2
 set :shared_dirs,       fetch(:shared_dirs, []).push('log', 'tmp', 'public/system')
-set :shared_files,      fetch(:shared_files, []).push('config/database.yml', 'config/secrets.yml', 'db/production.sqlite3')
+set :shared_files,      fetch(:shared_files, []).push('config/database.yml', 'config/secrets.yml')
 set :bundle_options,    lambda { %{--without development:test --path vendor/bundle --deployment} }
 set :rvm_use_path,      '/usr/local/rvm/scripts/rvm'
 
 
 # banana
-set :user,              'kereal'
-set :domain,            '192.168.0.254'
-set :deploy_to,         "/home/#{fetch(:user)}/apps/#{fetch(:application_name)}"
+#set :user,              'kereal'
+#set :domain,            '192.168.0.254'
+#set :deploy_to,         "/home/#{fetch(:user)}/apps/#{fetch(:application_name)}"
 
 
 task :environment do
-  invoke :'rvm:use', '2.4.0'
+  invoke :'rvm:use', '2.4.1'
 end
 
 task :setup do
-  # command %{rbenv install 2.3.0}
+  command %(mkdir -p "#{fetch(:shared_path)}/tmp/sockets")
+  command %(mkdir -p "#{fetch(:shared_path)}/tmp/pids")
 end
 
 desc "Deploys the current version to the server."
@@ -40,7 +43,7 @@ task :deploy do
     invoke :'rails:assets_precompile'
     invoke :'deploy:cleanup'
     on :launch do
-      invoke :'puma_restart'
+      invoke :'puma:restart'
       invoke :'whenever:update'
     end
   end

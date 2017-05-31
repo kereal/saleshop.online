@@ -33,6 +33,7 @@ group :development do
   gem 'spring-watcher-listen', '~> 2.0.0'
   gem 'mina', require: false
   gem 'mina-whenever', require: false
+  gem 'mina-puma', require: false
   gem 'erd', require: false
   gem 'rails_real_favicon'
 end

@@ -41,8 +41,8 @@
         </ul>
 
         <div class="right clearfix">
-          <form action="" id="search-main">
-            <input type="text" name="query" placeholder="Поиск">
+          <form action="/search/" id="search-main">
+            <input type="text" name="query" placeholder="Поиск" required value="<%= params[:query] || nil %>">
             <button type="submit"></button>
           </form>
           <%= link_to cart_path, class: "cart" do %>

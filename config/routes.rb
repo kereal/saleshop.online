@@ -6,6 +6,8 @@ Rails.application.routes.draw do
 
   get '/sale(/page/:page)', to: 'pages#sale', as: :sale
 
+  get '/search/:query', to: 'search#products', as: :search
+
   get '/brands', to: 'brands#index'
   get '/brand/:slug(/page/:page)', to: 'brands#show', as: :brand
 

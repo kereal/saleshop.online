@@ -36,6 +36,10 @@ $(document).on("turbolinks:load", function() {
     cursor: "pointer"
   });
 
-  
+  // форма поиска в шапке
+  $("#search-main").on("submit", function(e) {
+    e.preventDefault();
+    window.location.href = $(this).attr("action") + $(this).find("input[name=query]").val();
+  });  
 
 });

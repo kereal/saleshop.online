@@ -18,11 +18,6 @@ set :bundle_options,    lambda { %{--without development:test --path vendor/bund
 set :rvm_use_path,      '/usr/local/rvm/scripts/rvm'
 
 
-# banana
-#set :user,              'kereal'
-#set :domain,            '192.168.0.254'
-#set :deploy_to,         "/home/#{fetch(:user)}/apps/#{fetch(:application_name)}"
-
 
 task :environment do
   invoke :'rvm:use', '2.4.1'
@@ -46,25 +41,5 @@ task :deploy do
       invoke :'puma:restart'
       invoke :'whenever:update'
     end
-  end
-end
-
-desc "Restart app server"
-task :puma_restart => :environment do
-  invoke :'puma_stop'
-  invoke :'puma_start'
-end
-
-desc "Start app server"
-task :puma_start => :environment do
-  in_path(fetch(:current_path)) do
-    command %{bundle exec rails s -b 127.0.0.1 -p 3000 -d -e production}
-  end
-end
-
-desc "Stop app server"
-task :puma_stop => :environment do
-  in_path(fetch(:current_path)) do
-    command %{[ -f tmp/pids/server.pid ] && bundle exec pumactl -P tmp/pids/server.pid stop || true}
   end
 end

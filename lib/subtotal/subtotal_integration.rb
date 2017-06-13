@@ -72,7 +72,7 @@ class SubtotalIntegration
         discount = product_data["good"]["discounts"].try(:[], 0)["discounts"][0]["value"]
         description = product_data["good"]["description"].blank? ? nil : product_data["good"]["description"]
         # ищем или создаем бренд
-        brand = Brand.select(:id).where("title LIKE ?", product_data["good"]["tags"].try(:[], 0)).take || Brand.new(title: product_data["good"]["tags"].try(:[], 0))
+        brand = Brand.select(:id).where("title ILIKE ?", product_data["good"]["tags"].try(:[], 0)).take || Brand.new(title: product_data["good"]["tags"].try(:[], 0))
         properties = product_data["good"]["properties"].map{ |p| {p.try(:[], "name") => p.try(:[], "values").try(:[], 0).try(:[], "value")} if p.try(:[], "name") }
         # ищем пол среди свойств
         gender_title = properties.find{|h| h.keys[0]=="Пол"}.try(:values).try(:[], 0)

@@ -63,9 +63,7 @@ class SubtotalIntegration
       db_product = Product.find_by_provider_product_id(provider_product_id)
       # если товар есть и дата его обновления меньше, то удаляем и создаем заново, иначе оставляем и пропускаем этот товар
       #if db_product.provider_updated_at < provider_updated_at then db_product.destroy else next end if db_product
-      if db_product and db_product.provider_updated_at < provider_updated_at
-        # db_product.destroy
-      else
+      if db_product and db_product.provider_updated_at >= provider_updated_at
         next
       end
       # получаем полную информацию о продукте

@@ -1,7 +1,6 @@
 source 'https://rubygems.org'
 
 gem 'rails', '~> 5.0.1'
-gem 'sqlite3'
 gem 'pg'
 gem 'yaml_db'
 gem 'puma', '~> 3.0'

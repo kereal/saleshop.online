@@ -36,7 +36,7 @@ class Product < ApplicationRecord
       measure: measure == '-' ? nil : measure,   # size зарезервировано
       color: color == '-' ? nil : color,
       sale: discount.present?,
-      image: image,
+      image: image(:medium),
       updated_at: updated_at
     }
   end

@@ -8,7 +8,9 @@ class BrandsController < ApplicationController
   # GET /brand/:slug
   def show
     @brand = Brand.friendly.find(params[:slug])
-    @products = @brand.products.order(:title).preload(:brand, :images)
+    @products = Product.search where: { brand_slug: params[:slug] },
+                             page: params[:page], per_page: Kaminari.config.default_per_page,
+                             load: false
     render "catalog/brand-show"
   end
 

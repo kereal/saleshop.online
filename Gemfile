@@ -21,6 +21,7 @@ gem 'rails_admin', '~> 1.0'
 gem 'rails_admin_nestable', '~> 0.3.2'
 gem 'sentry-raven'
 gem 'lograge'
+gem 'searchkick'
 
 
 # build tools

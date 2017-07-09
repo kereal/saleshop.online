@@ -13,6 +13,34 @@ class Product < ApplicationRecord
   validates :title, :slug, presence: true, length: { minimum: 2 }
   validates :price, presence: true
 
+  searchkick language: "russian", settings: { number_of_shards: 1 }, batch_size: 200
+  scope :search_import, -> { includes(:brand, :category, :images) }
+  def search_data
+    measure = JSON.parse(properties).find{ |p| p['Размер'] }.try(:[], 'Размер')
+    color = JSON.parse(properties).find{ |p| p['Цвет'] }.try(:[], 'Цвет').try(:mb_chars).try(:downcase)
+    {
+      id: id,
+      title: title,
+      brand: "#{brand.try(:title)}|#{brand.try(:slug)}",
+      brand_slug: brand.try(:slug),
+      category: category.try(:title),
+      category_id: category.try(:id),
+      description: description,
+      price: price,
+      discount_price: discount_price,
+      gender: gender,
+      discount: discount,
+      country: country,
+      article: article,
+      slug: slug,
+      measure: measure == '-' ? nil : measure,   # size зарезервировано
+      color: color == '-' ? nil : color,
+      sale: discount.present?,
+      image: image,
+      updated_at: updated_at
+    }
+  end
+
   # возвращаем Image || nil
   def image(args = {})
     self.images.first.try(:image, args) || nil

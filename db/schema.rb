@@ -12,6 +12,9 @@
 
 ActiveRecord::Schema.define(version: 20170407010918) do
 
+  # These are extensions that must be enabled in order to support this database
+  enable_extension "plpgsql"
+
   create_table "brands", force: :cascade do |t|
     t.string   "title"
     t.text     "description"
@@ -22,7 +25,7 @@ ActiveRecord::Schema.define(version: 20170407010918) do
     t.datetime "created_at",         null: false
     t.datetime "updated_at",         null: false
     t.string   "slug"
-    t.index ["slug"], name: "index_brands_on_slug", unique: true
+    t.index ["slug"], name: "index_brands_on_slug", unique: true, using: :btree
   end
 
   create_table "categories", force: :cascade do |t|
@@ -43,7 +46,7 @@ ActiveRecord::Schema.define(version: 20170407010918) do
     t.datetime "image_updated_at"
     t.datetime "created_at",         null: false
     t.datetime "updated_at",         null: false
-    t.index ["product_id"], name: "index_images_on_product_id"
+    t.index ["product_id"], name: "index_images_on_product_id", using: :btree
   end
 
   create_table "orders", force: :cascade do |t|
@@ -55,7 +58,7 @@ ActiveRecord::Schema.define(version: 20170407010918) do
     t.integer  "status"
     t.datetime "created_at",       null: false
     t.datetime "updated_at",       null: false
-    t.index ["shopping_cart_id"], name: "index_orders_on_shopping_cart_id"
+    t.index ["shopping_cart_id"], name: "index_orders_on_shopping_cart_id", using: :btree
   end
 
   create_table "pages", force: :cascade do |t|
@@ -64,7 +67,7 @@ ActiveRecord::Schema.define(version: 20170407010918) do
     t.text     "content"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index ["slug"], name: "index_pages_on_slug"
+    t.index ["slug"], name: "index_pages_on_slug", using: :btree
   end
 
   create_table "products", force: :cascade do |t|
@@ -84,8 +87,8 @@ ActiveRecord::Schema.define(version: 20170407010918) do
     t.datetime "provider_updated_at"
     t.text     "properties"
     t.string   "article"
-    t.index ["brand_id"], name: "index_products_on_brand_id"
-    t.index ["category_id"], name: "index_products_on_category_id"
+    t.index ["brand_id"], name: "index_products_on_brand_id", using: :btree
+    t.index ["category_id"], name: "index_products_on_category_id", using: :btree
   end
 
   create_table "shopping_cart_items", force: :cascade do |t|
@@ -112,4 +115,8 @@ ActiveRecord::Schema.define(version: 20170407010918) do
     t.datetime "updated_at",                 null: false
   end
 
+  add_foreign_key "images", "products"
+  add_foreign_key "orders", "shopping_carts"
+  add_foreign_key "products", "brands"
+  add_foreign_key "products", "categories"
 end

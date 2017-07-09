@@ -13,6 +13,120 @@
   </nav>
 <% end %>
 
+<div class="aggs">
+  <div class="item">
+    <div class="root">бренд <span>&#9660;</span></div>
+    <div class="agg">
+      <% @products.aggs['brand']['buckets'].each do |brand| %>
+        <% if brand['key'].length > 2 %>
+          <%= link_to brand['key'].split('|').first, { brand: brand['key'].split('|').last } %>
+        <% end %>
+      <% end %>
+    </div>
+  </div>
+  <div class="item">
+    <div class="root">размер <span>&#9660;</span></div>
+    <div class="agg">
+      <% @products.aggs['measure']['buckets'].each do |measure| %>
+        <%= link_to measure['key'], { measure: measure['key'] } %>
+      <% end %>
+    </div>
+  </div>
+  <div class="item">
+    <div class="root">цвет <span>&#9660;</span></div>
+    <div class="agg">
+      <% @products.aggs['color']['buckets'].each do |color| %>
+        <%= link_to color['key'], { color: color['key'] } %>
+      <% end %>
+    </div>
+  </div>
+  <!-- <div class="item">
+    <div class="root">цена &#9660;</div>
+  </div> -->
+  <div class="item">
+    <div class="root">скидка <span>&#9660;</span></div>
+    <div class="agg">
+      <%= link_to "Да", { sale: true } %>
+      <%= link_to "Нет", { sale: false } %>
+    </div>
+  </div>
+</div>
+
+<div class="aggs-selected">
+  <% if not params[:brand].blank? %>
+    <div class="item">Бренд: <%= Brand.friendly.find(params[:brand]).title %></div>
+    <%= link_to "сбросить", @category, class: "reset" %>
+  <% end %>
+  <% if not params[:measure].blank? %>
+    <div class="item">Размер: <%= params[:measure] %></div>
+    <%= link_to "сбросить", @category, class: "reset" %>
+  <% end %>
+  <% if not params[:color].blank? %>
+    <div class="item">Цвет: <%= params[:color] %></div>
+    <%= link_to "сбросить", @category, class: "reset" %>
+  <% end %>
+  <% if not params[:sale].blank? %>
+    <div class="item">Скидка: <%= params[:sale] == 'true' ? "со скидкой" : "без скидки" %></div>
+    <%= link_to "сбросить", @category, class: "reset" %>
+  <% end %>
+</div>
+
+
 <%= render "catalog/products-list" %>
 
 <%= paginate @products %>
+
+
+<style>
+  .aggs {
+    margin-bottom: 1em;
+    }
+    .aggs > .item {
+      position: relative;
+      display: inline-block;
+      }
+      .aggs > .item > .root {
+        cursor: pointer;
+        margin-right: 7px;
+        }
+        .aggs > .item > .root > span {
+          font-size: .8em;
+          }
+      .aggs > .item > .agg {
+        position: absolute;
+        display: none;
+        background: #fff;
+        border: 1px solid #666;
+        padding: 10px 14px;
+        min-width: 240px;
+        width: auto;
+        height: auto;
+        z-index: 900;
+        max-height: 354px;
+        overflow-y: scroll;
+        }
+        .aggs > .item > .agg > a {
+          display: block;
+          }
+  .aggs-selected {
+    margin-bottom: 1em;
+    }
+    .aggs-selected > .item {
+      display: inline-block;
+      padding: 3px 7px 2px;
+      border: 1px solid #ccc;
+      border-radius: 2px;
+      }
+    .aggs-selected > .reset {
+      margin-left: 5px;
+      }
+</style>
+
+<script>
+  $(function() {
+    $(".aggs > .item > .root").on("click", function() {
+      $(".aggs .agg").not($(this).siblings(".agg")).hide();
+      $(this).siblings(".agg").toggle();
+    });
+  });
+</script>

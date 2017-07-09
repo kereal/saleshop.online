@@ -4,14 +4,14 @@
     <div class="product">
       <div class="image">
         <% if product.image %>
-          <%= link_to image_tag(product.image(:medium), alt: product.title), product, title: product.title %>
+          <%= link_to image_tag(product.image(:medium), alt: product.title), product_path(product.slug), title: product.title %>
         <% else %>
-          <%= link_to image_tag("http://placehold.it/208x248/f9f9f9/777?text=нет+фото", alt: nil), product %>
+          <%= link_to image_tag("http://placehold.it/208x248/f9f9f9/777?text=нет+фото", alt: nil), product_path(product.slug) %>
         <% end %>
       </div>
       <div class="brand">
-        <% if product.brand %>
-          <%= link_to product.brand.title, product.brand %>
+        <% if product.brand.length > 2 %>
+          <%= link_to product.brand.split('|').try(:first), brand_path(product.brand.split('|').try(:last)) %>
         <% else %>
           &nbsp;
         <% end %>
@@ -25,8 +25,8 @@
         <% end %>
       </div>
       <div class="actions">
-      <%= link_to "В корзину", product_one_click_buy_path(product) %>
-        <%= link_to "Посмотреть", product, class: "show" %>
+      <%= link_to "В корзину", product_one_click_buy_path(product.slug) %>
+        <%= link_to "Посмотреть", product_path(product.slug), class: "show" %>
       </div>
     </div>
   <% end %>

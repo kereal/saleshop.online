@@ -12,8 +12,9 @@ class PagesController < ApplicationController
 
   # GET /sale
   def sale
-    # @products = Product.where("discount is not null and discount > 0").order(:title).preload(:brand, :images).page(params[:page])
-    @products = Product.where("price < ?", 1001).order(:title).preload(:brand, :images).page(params[:page])
+    @products = Product.search where: { price: 0..1000 },
+                              page: params[:page], per_page: Kaminari.config.default_per_page,
+                              load: false
     @title = "Распродажа"
     render "catalog/products-show"
   end

@@ -1,3 +1,2 @@
 User-agent: *
 Disallow: /cart
-Disallow: /one_click_buy

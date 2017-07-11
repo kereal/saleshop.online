@@ -6,11 +6,4 @@ class ProductsController < ApplicationController
     render "catalog/product"
   end
 
-  # GET /product/:slug/one_click_buy
-  def one_click_buy
-    @product = Product.friendly.find(params[:slug])
-    @shopping_cart.add(@product, @product.discount_price) 
-    redirect_to cart_checkout_path
-  end
-
 end

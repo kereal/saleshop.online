@@ -25,7 +25,7 @@
         <% end %>
       </div>
       <div class="actions">
-      <%= link_to "В корзину", product_one_click_buy_path(product.slug) %>
+      <%= link_to "В корзину", cart_add_path(product.id) %>
         <%= link_to "Посмотреть", product_path(product.slug), class: "show" %>
       </div>
     </div>

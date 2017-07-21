@@ -35,14 +35,14 @@
         
         <div class="col-sm-6">
           <% if @product.properties %>
-            <table class="properties">
+            <div class="props">
               <% JSON.parse(@product.properties).each do |prop| %>
-                <tr>
-                  <td><span class="name"><%= prop.keys[0] %>:</span></td>
-                  <td><span class="value"><%= prop.values[0] %></span></td>
-                </tr>
+                <div class="prop clearfix">
+                  <div class="name"><%= prop.keys[0] %>:</div>
+                  <div class="value"><%= prop.values[0] %></div>
+                </div>
               <% end %>
-            </table>
+            </div>
           <% end %>
           <p class="choose"><a href="#" class="sizes-table-show">Как выбрать размер</a></p>
           <div class="price">
@@ -315,7 +315,30 @@
     background: #333;
     color: #fff;
     }
-
+  .props {
+    margin-bottom: 22px;
+    }
+    .props > .prop {
+      display: flex;
+      margin-bottom: 10px;
+      }
+      .props > .prop > .name {
+        float: left;
+        width: 34%;
+        padding: 4px 8px 2px;
+        background: #0c9494;
+        color: #fff;
+        font-size: 15px;
+        align-items: stretch;
+        flex: 1;
+        }
+      .props > .prop > .value {
+        float: left;
+        width: 66%;
+        padding: 4px 8px 2px;
+        border: 1px solid #ddd;
+        border-left: none;
+        }
   .product .images {
     margin-top: 12px;
     }
@@ -381,29 +404,6 @@
       font-size: 16px;
       color: #666;
       }
-    .product table.properties {
-      width: 100%;
-      margin-bottom: 16px;
-      }
-      .product table.properties tr > td:first-child {
-        width: 122px;
-        }
-      .product table.properties .name {
-        display: block;
-        background: #0c9494;
-        color: #fff;
-        padding: 4px 8px 3px;
-        margin-bottom: 12px;
-        font-size: 15px;
-        }
-      .product table.properties .value {
-        display: block;
-        padding: 4px 8px 2px;
-        margin-top: -12px;
-        border: 1px solid #ddd;
-        border-left: 0;
-        font-size: 14px;
-        }
   .product .choose {
     text-align: center;
     font-size: 15px;

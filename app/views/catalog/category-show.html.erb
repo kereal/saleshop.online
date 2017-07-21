@@ -101,7 +101,7 @@
         min-width: 240px;
         width: auto;
         height: auto;
-        z-index: 900;
+        z-index: 180;
         max-height: 354px;
         overflow-y: scroll;
         }
@@ -124,9 +124,14 @@
 
 <script>
   $(function() {
+    // клик по фильтру: покажем список
     $(".aggs > .item > .root").on("click", function() {
       $(".aggs .agg").not($(this).siblings(".agg")).hide();
       $(this).siblings(".agg").toggle();
+    });
+    // клик по элементу в списке (скроем этот открытый список, чтобы не было глюков)
+    $(".aggs > .item > .agg > a").on("click", function() {
+      $(this).parent(".agg").hide();
     });
   });
 </script>

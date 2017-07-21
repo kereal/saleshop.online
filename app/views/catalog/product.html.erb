@@ -5,6 +5,7 @@
 
 <div class="product">
 
+
   <div class="row">
     
     <div class="col-sm-4">
@@ -28,39 +29,62 @@
     
     <div class="col-sm-8">
       <h1><%= @product.title %></h1>
-      <h4 class="article">Артикул: <%= @product.article %></h4>
-      <% if @product.brand.try(:image).try(:exists?) %>
-        <div class="brand">
-          <%= link_to image_tag(@product.brand.image(:medium)), @product.brand %>
-        </div>
-      <% end %>
-      <div class="price">
-        <%= number_to_currency @product.discount_price %>
-        <% if @product.discount %><s><%= number_to_currency @product.price %></s><% end %>
-      </div>
-      <% if @product.properties %>
-        <div class="properties">
-          <% JSON.parse(@product.properties).each do |prop| %>
-            <div class="property"><%= "#{prop.keys[0]}: #{prop.values[0]}" %></div>
-          <% end %>
-        </div>
-      <% end %>
+      <h4 class="article">Артикул: <strong><%= @product.article %></strong></h4>
 
-      <p><a href="#" class="sizes-table-show">Как выбрать размер</a></p>
+      <div class="row">
+        
+        <div class="col-sm-6">
+          <% if @product.properties %>
+            <table class="properties">
+              <% JSON.parse(@product.properties).each do |prop| %>
+                <tr>
+                  <td><span class="name"><%= prop.keys[0] %>:</span></td>
+                  <td><span class="value"><%= prop.values[0] %></span></td>
+                </tr>
+              <% end %>
+            </table>
+          <% end %>
+          <p class="choose"><a href="#" class="sizes-table-show">Как выбрать размер</a></p>
+          <div class="price">
+            <%= number_to_currency @product.discount_price %>
+            <% if @product.discount %><s><%= number_to_currency @product.price %></s><% end %>
+          </div>
+          <div class="tocart">
+            <%= link_to cart_add_path(@product.id) do %>
+              <button>Добавить в корзину</button>
+            <% end %>
+          </div>
+        </div>
+        
+        <div class="col-sm-6">
+          <% if @product.brand.try(:image).try(:exists?) %>
+            <div class="brand">
+              <%= link_to image_tag(@product.brand.image(:medium)), @product.brand %>
+              <p class="more"><%= link_to "Все товары бренда", @product.brand %></p>
+            </div>
+          <% end %>
+          <div class="delivery">
+            <h4>Условия доставки</h4>
+            <p>Ваш населенный пункт:<br><span class="teal">Москва</span></p>
+            <p>Способ доставки:<br><span class="teal">самовывоз, курьер</span></p>
+            <p>Ближайшая дата доставки:<br><span class="teal"><%= l(Date.current + 1.day) %></span></p>
+            <p>Стоимость доставки:<br><span class="teal">БЕСПЛАТНО</span></p>
+          </div>
+        </div>
       
-      <div class="tocart">
-        <%= link_to cart_add_path(@product.id) do %>
-          <button>В корзину</button>
-        <% end %>
       </div>
+      
       <div class="description">
         <%= raw @product.description %>
       </div>
+    
     </div>
   
   </div>
 
+
 </div>
+
 
 <div class="stwr">
   <h2>Одежда</h2>
@@ -159,7 +183,7 @@
     </tr>
     <tr>
       <td><span>US</span></td>
-      <td><span>-</span></td>
+      <td><span>—</span></td>
       <td><span>0 0</span></td>
       <td><span>0</span></td>
       <td><span>2</span></td>
@@ -235,7 +259,11 @@
     });
   });
 </script>
+
 <style>
+  .teal {
+    color: #0c9494;
+    }
   .stwr {
     display: none;
     background: #fff;
@@ -287,16 +315,12 @@
     background: #333;
     color: #fff;
     }
-</style>
-
-
-<style>
 
   .product .images {
     margin-top: 12px;
     }
     .product .images img {
-      width: 100%
+      width: 100%;
       }
     .product .images > .thumbs {
       margin-top: 12px;
@@ -311,7 +335,7 @@
         overflow: hidden;
         }
       .product .images > .thumbs > a.zoomGalleryActive {
-        border-color: #ad1d22;
+        border-color: #0c9494;
         }
         .product .images > .thumbs > a > img {
           position: absolute;
@@ -328,39 +352,81 @@
     font-size: 14px;
     color: #666;
     margin-top: -.8em;
-    margin-bottom: 1.4em;
+    margin-bottom: 1.8em;
     }
   .product .brand {
-    width: 20%;
+    width: 55%;
+    margin-top: -7%;
+    margin-bottom: 24px;
     }
     .product .brand img {
       width: 100%;
       }
+    .product .brand > .more {
+      font-size: 15px;
+      margin: 2px 0 0 30px;
+      }
+      .product .brand > .more > a {
+        color: #333;
+        text-decoration: underline;
+        }
   .product .price {
-    font-size: 24px;
-    margin: 10px 0;
+    font-size: 26px;
+    margin: 10px 0 12px;
     font-weight: bold;
-    color: #ad1d22;
+    text-align: center;
     }
     .product .price > s {
       font-weight: normal;
       font-size: 16px;
       color: #666;
       }
-  .product .properties {
+    .product table.properties {
+      width: 100%;
+      margin-bottom: 16px;
+      }
+      .product table.properties tr > td:first-child {
+        width: 122px;
+        }
+      .product table.properties .name {
+        display: block;
+        background: #0c9494;
+        color: #fff;
+        padding: 4px 8px 3px;
+        margin-bottom: 12px;
+        font-size: 15px;
+        }
+      .product table.properties .value {
+        display: block;
+        padding: 4px 8px 2px;
+        margin-top: -12px;
+        border: 1px solid #ddd;
+        border-left: 0;
+        font-size: 14px;
+        }
+  .product .choose {
+    text-align: center;
     font-size: 15px;
-    margin-bottom: 16px;
     }
-    .product .properties > .property {
+    .product .choose > a {
+      font-size: 16px;
+      color: #333;
+      text-decoration: underline;
       }
   .product .tocart {
-    margin-bottom: 22px;
+    text-align: center;
+    margin-bottom: 32px;
     }
     .product .tocart button {
-      background: #b10000;
+      background: #cf3273;
       color: #fff;
       border: 0;
       padding: 12px 29px;
       outline: none;
       }
+  .product .description {
+    padding: 10px 12px;
+    font-size: 13px;
+    border: 1px solid #0c9494;
+    }
 </style>

@@ -21,6 +21,7 @@ class CategoriesController < ApplicationController
     where_case.merge!({measure: params[:measure]}) unless params[:measure].blank?
     where_case.merge!({color: params[:color]}) unless params[:color].blank?
     where_case.merge!({sale: params[:sale]}) unless params[:sale].blank?
+    where_case.merge!({new: params[:new]}) unless params[:new].blank?
 
 
     @products = Product.search where: where_case,

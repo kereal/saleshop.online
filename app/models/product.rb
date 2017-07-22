@@ -17,6 +17,7 @@ class Product < ApplicationRecord
   scope :search_import, -> { includes(:brand, :category, :images) }
   def search_data
     measure = JSON.parse(properties).find{ |p| p['Размер'] }.try(:[], 'Размер')
+    new_item = JSON.parse(properties).find{ |p| p['Новинка'] }.try(:[], 'Новинка')
     color = JSON.parse(properties).find{ |p| p['Цвет'] }.try(:[], 'Цвет').try(:mb_chars).try(:downcase)
     {
       id: id,
@@ -36,6 +37,7 @@ class Product < ApplicationRecord
       measure: measure == '-' ? nil : measure,   # size зарезервировано
       color: color == '-' ? nil : color,
       sale: discount.present?,
+      new: new_item.blank? ? false : true,
       image: image(:medium),
       updated_at: updated_at
     }

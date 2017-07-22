@@ -74,9 +74,11 @@
       
       </div>
       
+      <% unless @product.description.blank? %>
       <div class="description">
         <%= raw @product.description %>
       </div>
+      <% end %>
     
     </div>
   

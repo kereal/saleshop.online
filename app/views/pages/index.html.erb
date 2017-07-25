@@ -9,10 +9,16 @@
 
 <div class="latest-arrivals clearfix">
   <div class="h">Последние поступления</div>
-  <div class="item"><%= link_to image_tag("arr-bnr-1.jpg"), category_path("zhenskaya-odezhda", {new: true}) %></div>
-  <div class="item"><%= link_to image_tag("arr-bnr-2.jpg"), category_path("muzhskaya-odezhda", {new: true}) %></div>
-  <div class="item"><%= link_to image_tag("arr-bnr-3.jpg"), category_path("sumki", {new: true}) %></div>
-  <div class="item"><%= link_to image_tag("arr-bnr-4.jpg"), category_path("aksessuary", {new: true}) %></div>
+  <div class="item"><%= link_to image_tag("arr-bnr-1.jpg"), category_path("zhenskaya-odezhda", { new: true }) %></div>
+  <div class="item"><%= link_to image_tag("arr-bnr-2.jpg"), category_path("muzhskaya-odezhda", { new: true }) %></div>
+  <div class="item"><%= link_to image_tag("arr-bnr-3.jpg"), category_path("sumki", { new: true }) %></div>
+  <div class="item"><%= link_to image_tag("arr-bnr-4.jpg"), category_path("aksessuary", { new: true }) %></div>
+</div>
+
+<div class="seasons clearfix">
+  <div class="item"><%= link_to image_tag("season-bnr-1.jpg", alt: "Летняя одежда"), season_path("летняя") %></div>
+  <div class="item"><%= link_to image_tag("season-bnr-2.jpg", alt: "Зимняя одежда"), season_path("зимняя") %></div>
+  <div class="item"><%= link_to image_tag("season-bnr-3.jpg", alt: "Демисезонная одежда"), season_path("демисезонная") %></div>
 </div>
 
 <div class="best-brands clearfix">
@@ -72,7 +78,9 @@
   .big-sale img {
     width: 100%;
     }
-  .latest-arrivals {}
+  .latest-arrivals {
+    margin-bottom: 3%;
+    }
     .latest-arrivals > .h {
       font-size: 24px;
       text-transform: uppercase;
@@ -111,7 +119,39 @@
         transform: scale(1.015);
         }
       .latest-arrivals > .item > a:hover:before {
-        opacity: .125;
+        opacity: .15;
+        }
+  .seasons {}
+    .seasons > .item {
+      float: left;
+      width: 32.666%;
+      margin-right: 1%;
+      overflow: hidden;
+      position: relative;
+      }
+    .seasons > .item:last-child {
+      margin-right: 0;
+      }
+      .seasons > .item > a {
+        display: block;
+        transition: transform .5s linear;
+        }
+      .seasons > .item > a:before {
+        content: "";
+        position: absolute;
+        left: 0;
+        background: #000;
+        opacity: 0;
+        width: 100%;
+        height: 100%;
+        z-index: 1;
+        transition: opacity .5s linear;
+        }
+      .seasons > .item > a:hover {
+        transform: scale(1.015);
+        }
+      .seasons > .item > a:hover:before {
+        opacity: .15;
         }
   .best-brands {
     margin-bottom: 43px;

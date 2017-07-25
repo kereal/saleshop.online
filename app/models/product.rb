@@ -16,9 +16,11 @@ class Product < ApplicationRecord
   searchkick language: "russian", settings: { number_of_shards: 1 }, batch_size: 200
   scope :search_import, -> { includes(:brand, :category, :images) }
   def search_data
-    measure = JSON.parse(properties).find{ |p| p['Размер'] }.try(:[], 'Размер')
-    new_item = JSON.parse(properties).find{ |p| p['Новинка'] }.try(:[], 'Новинка')
-    color = JSON.parse(properties).find{ |p| p['Цвет'] }.try(:[], 'Цвет').try(:mb_chars).try(:downcase)
+    props = JSON.parse(properties)
+    measure = props.find{ |p| p['Размер'] }.try(:[], 'Размер')
+    new_item = props.find{ |p| p['Новинка'] }.try(:[], 'Новинка')
+    color = props.find{ |p| p['Цвет'] }.try(:[], 'Цвет').try(:mb_chars).try(:downcase)
+    season = props.find{ |p| p['Сезон'] }.try(:[], 'Сезон').try(:mb_chars).try(:downcase).try(:split, ',').try(:map, &:strip)
     {
       id: id,
       title: title,
@@ -36,6 +38,7 @@ class Product < ApplicationRecord
       slug: slug,
       measure: measure == '-' ? nil : measure,   # size зарезервировано
       color: color == '-' ? nil : color,
+      season: season,
       sale: discount.present?,
       new: new_item.blank? ? false : true,
       image: image(:medium),

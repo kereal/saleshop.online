@@ -4,7 +4,9 @@ Rails.application.routes.draw do
 
   root 'pages#index'
 
-  get '/sale(/page/:page)', to: 'pages#sale', as: :sale
+  # всякие кастомные выборки товаров
+  get '/sale(/page/:page)', to: 'catalog#sale', as: :sale
+  get '/season/:season_slug(/page/:page)', to: 'catalog#season', as: :season
 
   get '/search/:query', to: 'search#products', as: :search
 

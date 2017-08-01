@@ -8,7 +8,7 @@ class Product < ApplicationRecord
 
   belongs_to :category
   belongs_to :brand
-  has_many :images, dependent: :destroy
+  has_many :images, -> { order(:id) }, dependent: :destroy
 
   validates :title, :slug, presence: true, length: { minimum: 2 }
   validates :price, presence: true

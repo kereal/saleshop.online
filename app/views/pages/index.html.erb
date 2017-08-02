@@ -4,7 +4,7 @@
 </div>
 
 <div class="big-sale">
-  <%= link_to image_tag("sale-1000.jpg"), sale_path %>
+  <%= link_to image_tag("sale-1000.png"), sale_path %>
 </div>
 
 <div class="latest-arrivals clearfix">
@@ -68,16 +68,60 @@
     .welcome2ways > a {
       float: left;
       width: 49.75%;
+      max-width: 49.75%;
+      position: relative;
+      overflow: hidden;
+      }
+    .welcome2ways > a:before {
+      content: "";
+      position: absolute;
+      left: 0;
+      background: #000;
+      opacity: 0;
+      width: 100%;
+      height: 100%;
+      z-index: 1;
+      transition: opacity .5s linear;
+      }
+    .welcome2ways > a:hover > img {
+      transform: scale(1.015);
+      }
+    .welcome2ways > a:hover:before {
+      opacity: .15;
       }
     .welcome2ways > a:first-child {
       margin-right: .5%;
       }
     .welcome2ways > a > img {
       width: 100%;
+      transition: transform .5s linear;
       }
-  .big-sale img {
-    width: 100%;
+  .big-sale > a {
+    display: block;
+    position: relative;
+    overflow: hidden;
     }
+  .big-sale > a:before {
+    content: "";
+    position: absolute;
+    left: 0;
+    background: #000;
+    opacity: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 1;
+    transition: opacity .5s linear;
+    }
+  .big-sale > a:hover:before {
+    opacity: .15;
+    }
+    .big-sale > a:hover > img {
+      transform: scale(1.015);
+      }
+    .big-sale > a > img {
+      width: 100%;
+      transition: transform .5s linear;
+      }
   .latest-arrivals {
     margin-bottom: 3%;
     }

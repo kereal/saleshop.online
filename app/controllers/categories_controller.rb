@@ -5,6 +5,13 @@ class CategoriesController < ApplicationController
   def show
 
     @category = Category.friendly.find(params[:slug])
+
+    # у некоторых корневых категорий не будем отображать товары, а отобразим подкатегории баннерами и все
+    if params[:slug] == 'zhenskaya-odezhda' or params[:slug] == 'muzhskaya-odezhda'
+      render "catalog/subcategories-banners"
+      return
+    end
+
     select_categories_ids = @category.subtree_ids
 
     # доберем через жопу
@@ -14,7 +21,6 @@ class CategoriesController < ApplicationController
     if params[:slug] == 'sumki'
       select_categories_ids += Category.friendly.find("sumki-zhenskie").subtree_ids
     end
-
 
     where_case = { category_id: select_categories_ids }
     where_case.merge!({brand_slug: params[:brand]}) unless params[:brand].blank?

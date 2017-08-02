@@ -41,6 +41,7 @@ ru:
         provider_title: Название у провайдера данных
         gender: Пол
         products: Продукты
+        image: Изображение
         created_at: Создано
         updated_at: Обновлено
       product:

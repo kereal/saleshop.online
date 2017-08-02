@@ -11,6 +11,16 @@ class Category < ApplicationRecord
 
   validates :title, :slug, presence: true, length: { minimum: 2 }
 
+  has_attached_file :image,
+    styles: { original: "1024>", medium: "274>" },
+    url: "/system/:class/:id_partition/:hash.:extension",
+    hash_secret: "u8asnAs7sAd0adg6aAaha44",
+    default_url: "http://placehold.it/274x207/f9f9f9/777?text=нет+фото",
+    convert_options: { all: "-strip -quality 95" }
+  validates_attachment :image, content_type: { content_type: /\Aimage\/.*\z/ }, size: { in: 0..8.megabytes }
+  attr_accessor :delete_image
+  before_validation { self.image.clear if self.delete_image == '1' }
+
 
   def parent_enum
     Category.where.not(id: id).map { |c| [ c.title, c.id ] }
@@ -35,7 +45,7 @@ class Category < ApplicationRecord
         end
       end
       list do
-        exclude_fields :products, :ancestry, :parent_id
+        exclude_fields :products, :ancestry, :parent_id, :image
       end
       create do
         exclude_fields :products, :slug, :ancestry

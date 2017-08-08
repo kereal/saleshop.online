@@ -262,7 +262,7 @@ GEM
       activemodel (>= 4.1)
       elasticsearch (>= 1)
       hashie
-    sentry-raven (2.6.2)
+    sentry-raven (2.6.3)
       faraday (>= 0.7.6, < 1.0)
     sexp_processor (4.10.0)
     spring (2.0.2)

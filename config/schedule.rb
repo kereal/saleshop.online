@@ -21,6 +21,10 @@
 #  rake "app:import_all_goods"
 #end
 
+every :reboot do
+  command 'RAILS_ENV="production" bundle exec puma -q -d -e production -b "unix:///home/saleshop/saleshop.online/shared/tmp/sockets/puma.sock" -S "/home/saleshop/saleshop.online/shared/tmp/sockets/puma.state --pidfile /home/saleshop/saleshop.online/shared/tmp/pids/puma.pid" --control "unix:///home/saleshop/saleshop.online/shared/tmp/sockets/pumactl.sock"'
+end
+
 every 3.hours do
   rake "app:import_all_goods"
 end

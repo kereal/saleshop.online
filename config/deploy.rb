@@ -7,7 +7,8 @@ require 'mina/puma'
 
 set :user,              'saleshop'
 set :application_name,  'saleshop.online'
-set :domain,            '185.195.24.66'
+#set :domain,            '185.195.24.66' # firstbyte
+set :domain,            '194.135.83.116' # hostens
 set :deploy_to,         "/home/#{fetch(:user)}/#{fetch(:application_name)}"
 set :repository,        'git@bitbucket.org:kereal/saleshop.online.git'
 set :branch,            'master'

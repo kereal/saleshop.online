@@ -1,0 +1,438 @@
+<style>
+  .zoomContainer {
+    z-index: 99995;
+    }
+</style>
+
+<div class="product container" style="padding-top: 10px;">
+
+
+  <div class="row">
+    
+    <div class="col-sm-4">
+      <div class="images">
+
+        <% unless @product.images.blank? %>
+          <div class="big">
+            <%= image_tag(@product.image(:original), alt: @product.title, data: { zoom_image: @product.image(:original) }) %>
+          </div>
+          <div class="thumbs" id="product-gallery-fast">
+            <% @product.images.each_with_index do |image, index| %>
+              <%= link_to image_tag(image.image(:thumb), alt: nil), image.image(:original), data: { image: image.image(:original), zoom_image: image.image(:original) }, class: ("zoomGalleryActive" if index==0) %>
+            <% end %>
+          </div>
+        <% else %>
+          <%= image_tag "http://placehold.it/400x508/fff/777?text=нет+фото", alt: nil, style: "border: 1px solid #eee;" %>
+        <% end %>
+
+      </div>
+    </div>
+    
+    <div class="col-sm-8">
+      <h1><%= @product.title %></h1>
+      <h4 class="article">Артикул: <strong><%= @product.article %></strong></h4>
+
+      <div class="row">
+        
+        <div class="col-sm-12">
+          <% if @product.properties %>
+            <div class="props clearfix">
+              <% JSON.parse(@product.properties).each do |prop| %>
+                <div class="prop clearfix">
+                  <div class="name"><%= prop.keys[0] %>:</div>
+                  <div class="value"><%= prop.values[0] %></div>
+                </div>
+              <% end %>
+            </div>
+          <% end %>
+        </div>
+        
+        <div class="col-sm-6">
+          <p class="choose"><a href="#" class="sizes-table-show">Как выбрать размер</a></p>
+          <div class="price">
+            <%= number_to_currency @product.discount_price %>
+            <% if @product.discount %><s><%= number_to_currency @product.price %></s><% end %>
+          </div>
+          <div class="tocart">
+            <%= link_to cart_add_path(@product.id) do %>
+              <button>Добавить в корзину</button>
+            <% end %>
+          </div>
+        </div>
+
+        <div class="col-sm-6">
+          <% if @product.brand.try(:image).try(:exists?) %>
+            <div class="brand">
+              <%= link_to image_tag(@product.brand.image(:medium)), @product.brand %>
+              <p class="more"><%= link_to "Все товары бренда", @product.brand %></p>
+            </div>
+          <% end %>
+          <div class="delivery">
+            <h4>Условия доставки</h4>
+            <p>Ваш населенный пункт:<br><span class="teal">Москва</span></p>
+            <p>Способ доставки:<br><span class="teal">самовывоз, курьер</span></p>
+            <p>Ближайшая дата доставки:<br><span class="teal"><%= l(Date.current + 1.day) %></span></p>
+            <p>Стоимость доставки:<br><span class="teal">БЕСПЛАТНО</span></p>
+          </div>
+        </div>
+      
+      </div>
+      
+    </div>
+  
+  </div>
+
+
+</div>
+
+
+<div class="stwr" id="sizes-table">
+  <h2>Одежда</h2>
+  <table class="sizes-table">
+    <tr>
+      <td><span>UNI</span></td>
+      <td><span>3XS</span></td>
+      <td><span>XXS</span></td>
+      <td><span>XS</span></td>
+      <td><span>S</span></td>
+      <td><span>M</span></td>
+      <td><span>L</span></td>
+      <td><span>XL</span></td>
+      <td><span>XXL</span></td>
+      <td><span>3XL</span></td>
+      <td><span>4XL</span></td>
+    </tr>
+    <tr>
+      <td><span>RU</span></td>
+      <td><span>36</span></td>
+      <td><span>38</span></td>
+      <td><span>40</span></td>
+      <td><span>42</span></td>
+      <td><span>44</span></td>
+      <td><span>46</span></td>
+      <td><span>48</span></td>
+      <td><span>50</span></td>
+      <td><span>52</span></td>
+      <td><span>54</span></td>
+    </tr>
+    <tr>
+      <td><span>IT</span></td>
+      <td><span>34</span></td>
+      <td><span>36</span></td>
+      <td><span>38</span></td>
+      <td><span>40</span></td>
+      <td><span>42</span></td>
+      <td><span>44</span></td>
+      <td><span>46</span></td>
+      <td><span>48</span></td>
+      <td><span>50</span></td>
+      <td><span>52</span></td>
+    </tr>
+    <tr>
+      <td><span>EU</span></td>
+      <td><span>32</span></td>
+      <td><span>34</span></td>
+      <td><span>36</span></td>
+      <td><span>38</span></td>
+      <td><span>40</span></td>
+      <td><span>42</span></td>
+      <td><span>44</span></td>
+      <td><span>46</span></td>
+      <td><span>48</span></td>
+      <td><span>50</span></td>
+    </tr>
+    <tr>
+      <td><span>FR</span></td>
+      <td><span>30</span></td>
+      <td><span>32</span></td>
+      <td><span>34</span></td>
+      <td><span>36</span></td>
+      <td><span>38</span></td>
+      <td><span>40</span></td>
+      <td><span>42</span></td>
+      <td><span>44</span></td>
+      <td><span>46</span></td>
+      <td><span>48</span></td>
+    </tr>
+    <tr>
+      <td><span>DE</span></td>
+      <td><span>28</span></td>
+      <td><span>30</span></td>
+      <td><span>32</span></td>
+      <td><span>34</span></td>
+      <td><span>36</span></td>
+      <td><span>38</span></td>
+      <td><span>40</span></td>
+      <td><span>42</span></td>
+      <td><span>44</span></td>
+      <td><span>46</span></td>
+    </tr>
+    <tr>
+      <td><span>UK</span></td>
+      <td><span>2</span></td>
+      <td><span>4</span></td>
+      <td><span>6</span></td>
+      <td><span>8</span></td>
+      <td><span>10</span></td>
+      <td><span>12</span></td>
+      <td><span>14</span></td>
+      <td><span>16</span></td>
+      <td><span>18</span></td>
+      <td><span>20</span></td>
+    </tr>
+    <tr>
+      <td><span>US</span></td>
+      <td><span>—</span></td>
+      <td><span>0 0</span></td>
+      <td><span>0</span></td>
+      <td><span>2</span></td>
+      <td><span>4</span></td>
+      <td><span>6</span></td>
+      <td><span>8</span></td>
+      <td><span>10</span></td>
+      <td><span>12</span></td>
+      <td><span>14</span></td>
+    </tr>
+    <tr>
+      <td><span>Обхват груди (см)</span></td>
+      <td><span>70-75</span></td>
+      <td><span>76-80</span></td>
+      <td><span>81-85</span></td>
+      <td><span>86-90</span></td>
+      <td><span>91-95</span></td>
+      <td><span>96-100</span></td>
+      <td><span>101-105</span></td>
+      <td><span>106-110</span></td>
+      <td><span>111-116</span></td>
+      <td><span>117-122</span></td>
+    </tr>
+    <tr>
+      <td><span>Обхват пояса (см)</span></td>
+      <td><span>53-57</span></td>
+      <td><span>58-62</span></td>
+      <td><span>63-67</span></td>
+      <td><span>68-72</span></td>
+      <td><span>73-77</span></td>
+      <td><span>78-82</span></td>
+      <td><span>83-87</span></td>
+      <td><span>88-92</span></td>
+      <td><span>93-97</span></td>
+      <td><span>98-102</span></td>
+    </tr>
+    <tr>
+      <td><span>Обхват бедер (см)</span></td>
+      <td><span>81-85</span></td>
+      <td><span>86-90</span></td>
+      <td><span>91-95</span></td>
+      <td><span>96-100</span></td>
+      <td><span>101-105</span></td>
+      <td><span>106-110</span></td>
+      <td><span>111-115</span></td>
+      <td><span>116-120</span></td>
+      <td><span>121-125</span></td>
+      <td><span>126-130</span></td>
+    </tr>
+  </table>
+</div>
+
+
+<script>
+  $(function() {
+    // наведение на ячейки таблицы размеров
+    $(".sizes-table td").hover(
+      function() {
+        $(this).find("span").addClass("active cross").parent("td").siblings("td").find("span").addClass("active");
+        index = $(this).index() + 1;
+        $(this).closest("tbody").find("tr > td:nth-child("+index+") > span").addClass("active")
+      },
+      function() {
+        $(this).closest("tbody").find("td > span").removeClass("active").removeClass("cross");
+      }
+    );
+    // отображение таблицы размеров
+    $(".sizes-table-show").on("click", function(e) {
+      e.preventDefault();
+      var zczi = $(".zoomContainer").css("z-index");
+      $.fancybox.open({
+        src: "#sizes-table",
+        type: "inline",
+        opts: {
+          autoFocus: false,
+          backFocus : false,
+          afterShow: function(instance, current) {
+            $(".zoomContainer").css("z-index", 0);
+          },
+          afterClose: function() {
+            $(".zoomContainer").css("z-index", zczi);
+          }
+        }
+      });
+    });
+  });
+</script>
+
+<style>
+  .teal {
+    color: #0c9494;
+    }
+  .stwr {
+    display: none;
+    background: #fff;
+    position: fixed;
+    left: 0;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    z-index: 99997;
+    }
+  .stwr > h2 {
+    text-align: center;
+    margin-top: 1em;
+    }
+  .sizes-table {
+    margin: 2em auto;
+    font-size: 14px !important;
+    }
+    .sizes-table td > span {
+      display: table-cell;
+      width: 72px;
+      min-width: 72px;
+      padding: 12px 8px;
+      text-align: center;
+      vertical-align: middle;
+      }
+    .sizes-table td:first-child > span {
+      min-width: 146px;
+      background: #fff !important;
+      color: #333 !important;
+      }
+    .sizes-table tr:first-child > td > span {
+      background: #fff !important;
+      color: #333 !important;
+      }
+  .sizes-table td > span.active {
+    background: #666;
+    color: #fff;
+    }
+  .sizes-table td > span.active.cross {
+    background: #333;
+    color: #fff;
+    }
+  .props {
+    margin-bottom: 22px;
+    }
+    .props > .prop {
+      display: flex;
+      float: left;
+      width: 49%;
+      margin-right: 1%;
+      margin-bottom: 10px;
+      }
+      .props > .prop > .name {
+        float: left;
+        width: 34%;
+        padding: 4px 8px 2px;
+        background: #0c9494;
+        color: #fff;
+        font-size: 15px;
+        align-items: stretch;
+        flex: 1;
+        }
+      .props > .prop > .value {
+        float: left;
+        width: 66%;
+        padding: 4px 8px 2px;
+        border: 1px solid #ddd;
+        border-left: none;
+        }
+  .product .images {
+    margin-top: 12px;
+    }
+    .product .images img {
+      width: 100%;
+      }
+    .product .images > .thumbs {
+      margin-top: 12px;
+      }
+      .product .images > .thumbs > a {
+        display: inline-block;
+        border: 2px solid #ccc;
+        position: relative;
+        width: 70px;
+        height: 70px;
+        margin-right: 10px;
+        overflow: hidden;
+        }
+      .product .images > .thumbs > a.zoomGalleryActive {
+        border-color: #0c9494;
+        }
+        .product .images > .thumbs > a > img {
+          position: absolute;
+          left: 50%;
+          top: 50%;
+          height: 100%;
+          width: auto;
+          -webkit-transform: translate(-50%,-50%);
+              -ms-transform: translate(-50%,-50%);
+                  transform: translate(-50%,-50%);
+          }
+  .product .article {
+    font-weight: normal;
+    font-size: 14px;
+    color: #666;
+    margin-top: -.8em;
+    margin-bottom: 1.8em;
+    }
+  .product .brand {
+    width: 55%;
+    margin-top: -7%;
+    margin-bottom: 24px;
+    }
+    .product .brand img {
+      width: 100%;
+      }
+    .product .brand > .more {
+      font-size: 15px;
+      margin: 2px 0 0 30px;
+      }
+      .product .brand > .more > a {
+        color: #333;
+        text-decoration: underline;
+        }
+  .product .price {
+    font-size: 26px;
+    margin: 10px 0 12px;
+    font-weight: bold;
+    text-align: center;
+    }
+    .product .price > s {
+      font-weight: normal;
+      font-size: 16px;
+      color: #666;
+      }
+  .product .choose {
+    text-align: center;
+    font-size: 15px;
+    }
+    .product .choose > a {
+      font-size: 16px;
+      color: #333;
+      text-decoration: underline;
+      }
+  .product .tocart {
+    text-align: center;
+    margin-bottom: 32px;
+    }
+    .product .tocart button {
+      background: #cf3273;
+      color: #fff;
+      border: 0;
+      padding: 12px 29px;
+      outline: none;
+      }
+  .product .description {
+    padding: 10px 12px;
+    font-size: 13px;
+    border: 1px solid #0c9494;
+    }
+</style>

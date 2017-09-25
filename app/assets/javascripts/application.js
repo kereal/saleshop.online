@@ -14,6 +14,7 @@
 //= require jquery_ujs
 //= require turbolinks
 //= require jquery.elevatezoom
+//= require jquery.fancybox
 //= require_tree .
 
 
@@ -40,6 +41,21 @@ $(document).on("turbolinks:load", function() {
   $("#search-main").on("submit", function(e) {
     e.preventDefault();
     window.location.href = $(this).attr("action") + $(this).find("input[name=query]").val();
-  });  
+  });
+
+  // дефолтовые значения для fancybox
+  $.fancybox.defaults.lang = 'ru';
+  $.fancybox.defaults.i18n = {
+    'ru' : {
+      CLOSE : 'Закрыть',
+      NEXT        : 'Вперед',
+      PREV        : 'Назад',
+      ERROR       : 'The requested content cannot be loaded. <br/> Please try again later.',
+      PLAY_START  : 'Запустить слайдшоу',
+      PLAY_STOP   : 'Остановить слайдшоу',
+      FULL_SCREEN : 'На весь экран',
+      THUMBS      : 'Миниатюры'
+    }
+  };
 
 });

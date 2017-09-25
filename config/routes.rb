@@ -17,6 +17,7 @@ Rails.application.routes.draw do
   get '/category/:slug(/page/:page)', to: 'categories#show', as: :category
 
   get '/product/:slug', to: 'products#show', as: :product
+  get '/product/:slug/fast_view', to: 'products#fast_view', as: :product_fast_view
 
   get '/page/:slug', to: 'pages#show', as: :page
 

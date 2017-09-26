@@ -1,0 +1,23 @@
+/* список всех брендов  */
+.brands {
+  display: flex;
+  flex-wrap: wrap;
+  }
+  .brands > .brand {
+    float: left;
+    width: 20%;
+    min-height: 120px;
+    padding: 2%;
+    text-align: center;
+    font-size: 1.2em;
+    font-weight: 700;
+    }
+    .brands > .brand > a {
+      color: #333;
+      }
+    .brands > .brand img {
+      position: relative;
+      width: 100%;
+      transform: translateY(-50%);
+      top: 50%;
+      }

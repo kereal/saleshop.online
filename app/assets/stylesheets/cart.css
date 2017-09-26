@@ -1,0 +1,30 @@
+/* таблички: корзина и избранное */
+
+.cart-items {
+  }
+  .cart-items > .item {
+    margin-bottom: 6px;
+    padding-bottom: 6px;
+    border-bottom: 1px dotted #dfdfdf;
+    }
+    .cart-items > .item > .title {
+      float: left;
+      width: 40%;
+      }
+    .cart-items > .item > .quantity {
+      float: left;
+      width: 8%;
+      }
+    .cart-items > .item > .price {
+      float: left;
+      width: 11%;
+      }
+    .cart-items > .item > .item-total {
+      float: left;
+      }
+    .cart-items > .item > .item-actions {
+      float: right;
+      }
+.cart-actions {
+  padding: 19px 0 0;
+  }

@@ -51,6 +51,12 @@
             <% end %>
             Корзина
           <% end %>
+          <%= link_to wishlist_path, class: "wishlist" do %>
+            <% unless cookies.signed[:wlids].nil? %>
+              <span class="count"><%= cookies.signed[:wlids].count %></span>
+            <% end %>
+            Избранное
+          <% end %>
         </div>
 
       </header>

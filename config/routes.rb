@@ -31,6 +31,13 @@ Rails.application.routes.draw do
     get :thanks, as: :cart_thanks
   end
 
+  scope :wishlist, controller: 'wishlists' do
+    get '/', action: :show, as: :wishlist
+    get 'add/:product_id', action: :add, as: :wishlist_add
+    get 'remove/:product_id', action: :remove, as: :wishlist_remove
+    get :clear, as: :wishlist_clear
+  end
+
   scope :subscribers, controller: 'subscribers' do
     post :subscribe, as: :subscribers_subscribe
     get 'confirm/:token', action: :confirm, as: :subscribers_confirm

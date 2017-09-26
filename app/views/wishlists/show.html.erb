@@ -1,0 +1,29 @@
+<h1>Избранное</h1>
+
+
+<% unless @wishlist.blank? %>
+
+  <div class="cart-items">
+
+    <% @wishlist.each do |product| %>
+      <div class="item clearfix">
+        <div class="title" style="width: 79%;">
+          <%= link_to product.title, product %>
+        </div>
+        <div class="price"><%= number_to_currency product.price %></div>
+        <div class="quantity"><%= link_to "В корзину", cart_add_path(product.id) %></div>
+        <div class="item-actions">
+          <%= link_to "✕", wishlist_remove_path(product.id), title: "Убрать из списка" %>
+        </div>
+      </div>
+    <% end %>
+
+  </div>
+
+  <div class="cart-actions">
+    <%= link_to wishlist_clear_path, data: {confirm: "Вы уверены, что хотите очистить список избранного?"} do %><button class="btn btn-default">Очистить список</button><% end %>
+  </div>
+
+<% else %>
+  <p>Ваша список избранного пуст.</p>
+<% end %>

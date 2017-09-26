@@ -2,9 +2,12 @@
   .zoomContainer {
     z-index: 99995;
     }
+  .product.fast-view {
+    padding-top: 10px;
+    }
 </style>
 
-<div class="product container" style="padding-top: 10px;">
+<div class="product fast-view container">
 
 
   <div class="row">
@@ -18,7 +21,7 @@
           </div>
           <div class="thumbs" id="product-gallery-fast">
             <% @product.images.each_with_index do |image, index| %>
-              <%= link_to image_tag(image.image(:thumb), alt: nil), image.image(:original), data: { image: image.image(:original), zoom_image: image.image(:original) }, class: ("zoomGalleryActive" if index==0) %>
+              <%= link_to image_tag(image.image(:thumb), alt: nil), image.image(:original), data: { image: image.image(:original), zoom_image: image.image(:original), js: '' }, class: ("zoomGalleryActive" if index==0) %>
             <% end %>
           </div>
         <% else %>
@@ -48,7 +51,7 @@
         </div>
         
         <div class="col-sm-6">
-          <p class="choose"><a href="#" class="sizes-table-show">Как выбрать размер</a></p>
+          <p class="choose"><a href="#" class="sizes-table-show" data-js>Как выбрать размер</a></p>
           <div class="price">
             <%= number_to_currency @product.discount_price %>
             <% if @product.discount %><s><%= number_to_currency @product.price %></s><% end %>

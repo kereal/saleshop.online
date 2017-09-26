@@ -55,7 +55,7 @@ h1 {
   #header .features {
     float: left;
     width: 38%;
-    margin: 0 14% 0 0;
+    margin: 0 8% 0 0;
     padding: 0;
     list-style: none;
     position: relative;
@@ -98,38 +98,40 @@ h1 {
         }
   #header .right {
     float: left;
-    width: 26%;
+    width: 32%;
     }
     #search-main {
       float: left;
       position: relative;
-      width: 75%;
+      width: 56%;
       top: 13px;
       }
-      #search-main input {
+      #search-main > input {
         width: 100%;
-        border: 1px solid #ccc;
-        padding: 2px 5px;
+        padding: 4px 22px 2px 8px;
+        border: 1px solid #ddd;
+        border-radius: 2px;
         outline: none;
         }
-      #search-main button {
+      #search-main > button {
         width: 13px;
         height: 13px;
         position: absolute;
-        top: 6px;
-        right: 6px;
+        top: 7px;
+        right: 7px;
         border: 0;
         outline: none;
         background: url(<%= asset_path "icons.png" %>) 0 -98px no-repeat;
         }
-    #header .right > .cart {
+    #header .right > .cart,
+    #header .right > .wishlist {
       float: right;
       position: relative;
       color: #222;
       bottom: -29px;
       font-size: 13px;
       }
-    #header .right > .cart::before {
+    #header .right > .cart:before {
       content: "";
       position: absolute;
       width: 23px;
@@ -138,7 +140,8 @@ h1 {
       top: -24px;
       background: url(<%= asset_path "icons.png" %>) 0 -59px no-repeat;
       }
-      #header .right > .cart > .count {
+      #header .right > .cart > .count,
+      #header .right > .wishlist > .count {
         position: absolute;
         top: -26px;
         right: 0;
@@ -151,6 +154,21 @@ h1 {
         text-align: center;
         line-height: 20px;
         letter-spacing: -.1px;
+        }
+    #header .right > .wishlist {
+      margin-right: 10px;
+      }
+    #header .right > .wishlist:before {
+      content: "";
+      position: absolute;
+      width: 24px;
+      height: 24px;
+      left: 21px;
+      top: -24px;
+      background: url(<%= asset_path "icons.png" %>) 0 -111px no-repeat;
+      }
+      #header .right > .wishlist > .count {
+        right: 8px;
         }
 
 

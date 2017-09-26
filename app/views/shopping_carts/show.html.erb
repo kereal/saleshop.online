@@ -15,10 +15,10 @@
           <% end %>
         </div>
         <div class="price"><%= number_to_currency item.price.to_f %></div>
-        <div class="quantity">✕ <%= item.quantity %></div>
+        <div class="quantity">× <%= item.quantity %></div>
         <div class="item-total">= <%= number_to_currency(item.price.to_f * item.quantity) %></div>
         <div class="item-actions">
-          <%= link_to raw("&cross;"), cart_remove_path(item.item_id), title: "Убрать из корзины" %>
+          <%= link_to "✕", cart_remove_path(item.item_id), title: "Убрать из корзины" %>
         </div>
       </div>
     <% end %>
@@ -36,36 +36,3 @@
 <% else %>
   <p>Ваша корзина пуста.</p>
 <% end %>
-
-
-<style>
-  
-  .cart-items {
-    }
-    .cart-items > .item {
-      margin-bottom: 6px;
-      padding-bottom: 6px;
-      border-bottom: 1px dotted #dfdfdf;
-      }
-      .cart-items > .item > .title {
-        float: left;
-        width: 40%;
-        }
-      .cart-items > .item > .quantity {
-        float: left;
-        width: 8%;
-        }
-      .cart-items > .item > .price {
-        float: left;
-        width: 11%;
-        }
-      .cart-items > .item > .item-total {
-        float: left;
-        }
-      .cart-items > .item > .item-actions {
-        float: right;
-        }
-  .cart-actions {
-    padding: 19px 0 0;
-    }
-</style>

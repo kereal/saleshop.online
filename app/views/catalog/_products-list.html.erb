@@ -28,12 +28,8 @@
         <% end %>
       </div>
       <div class="actions">
-        <!--
-        <%= link_to "В корзину", cart_add_path(product.id) %>
-        <%= link_to "Посмотреть", product_path(product.slug), class: "show" %>
-        -->
-        <%= link_to "", cart_add_path(product.id), title: "В корзину", class: "add-to-cart" %>
-        <%= link_to "", nil, title: "Отложить на потом", class: "add-to-wishlist" %>
+        <%= link_to '', cart_add_path(product.id), title: "В корзину", class: "add-to-cart" %>
+        <%= link_to '', wishlist_add_path(product.id), title: "В избранное", class: "add-to-wishlist" %>
       </div>
     </div>
   <% end %>
@@ -197,6 +193,9 @@
             scrollZoom: false,
             responsive: true,
             cursor: "pointer"
+          });
+          $(".product.fast-view a:not([data-js])").one("click", function() {
+            $.fancybox.close();
           });
         },
         afterClose: function() {

@@ -1,6 +1,8 @@
 class ProductsController < ApplicationController
 
+  skip_before_action :extract_shopping_cart, only: [:fast_view]
   
+
   # GET /product/:slug
   def show
   
@@ -12,17 +14,13 @@ class ProductsController < ApplicationController
   
   # GET /product/:slug/fast_view
   def fast_view
-  
-    @product = Product.friendly.find(params[:slug])
-    render "catalog/product_fast_view", layout: false
 
-    # respond_to do |format|
-    #   format.js {
-    #     @product = Product.friendly.find(params[:slug])
-    #     render "catalog/product", layout: false
-    #   }
-    #   format.all { head :not_found }
-    # end
+    if request.xhr?
+      @product = Product.friendly.find(params[:slug])
+      render "catalog/product_fast_view", layout: false
+    else
+      head :not_found
+    end
 
   end
 

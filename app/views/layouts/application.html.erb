@@ -16,7 +16,10 @@
       <header id="header" class="clearfix">
 
         <div class="logo">
-          <%= link_to image_tag("logo.png", alt: "saleshop.online"), "/" %>
+          <%= link_to root_path do %>
+            <%= image_tag("logo.png", alt: "saleshop.online") %>
+            <div class="outlet">outlet</div>
+          <% end %>
         </div>
 
         <ul class="features">

@@ -28,3 +28,7 @@ end
 every 3.hours do
   rake "app:import_all_goods"
 end
+
+every :day, at: '03:00am' do
+  rake "searchkick:reindex:all"
+end

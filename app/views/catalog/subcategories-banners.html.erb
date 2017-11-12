@@ -1,6 +1,6 @@
 <% title "Купить #{@category.title.downcase} не дорого в Москве" %>
 
-<h1><%= @category.title %></h1>
+<h1 class="big"><%= @category.title %></h1>
 
 <div class="root-subs">
   <% @category.children.each do |children| %>
@@ -45,5 +45,4 @@
         .root-subs > .item > a > img {
           max-width: 100%;
           }
-      }
 </style>

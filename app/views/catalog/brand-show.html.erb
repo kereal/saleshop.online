@@ -1,7 +1,7 @@
 <% title "Купить одежду #{@brand.title} не дорого в Москве" %>
 
 
-<h1><%= @brand.title %></h1>
+<h1 class="big"><%= @brand.title %></h1>
 
 <% if @brand.image.exists? or not @brand.description.blank? %>
   <div class="brand-about clearfix">

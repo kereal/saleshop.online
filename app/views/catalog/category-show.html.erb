@@ -3,7 +3,7 @@
 
 <%= render "catalog/breadcrumbs", to: @category %>
 
-<h1><%= @category.title %></h1>
+<h1 class="big"><%= @category.title %></h1>
 
 <% if @category.children.exists? %>
   <nav class="sub-categories">

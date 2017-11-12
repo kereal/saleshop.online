@@ -6,7 +6,8 @@ Rails.application.routes.draw do
 
   # всякие кастомные выборки товаров
   get '/sale(/page/:page)', to: 'catalog#sale', as: :sale
-  get '/season/:season_slug(/page/:page)', to: 'catalog#season', as: :season
+  #get '/season/:season_slug(/page/:page)', to: 'catalog#season', as: :season
+  get '/season/:season_slug(/:gender_slug(/page/:page))', to: 'catalog#season', as: :season, constraints: lambda { |req| %w(летняя зимняя демисезонная).include? req.params[:season_slug] }
 
   get '/search/:query', to: 'search#products', as: :search
 

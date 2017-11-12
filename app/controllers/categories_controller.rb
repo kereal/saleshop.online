@@ -7,7 +7,7 @@ class CategoriesController < ApplicationController
     @category = Category.friendly.find(params[:slug])
 
     # у некоторых корневых категорий не будем отображать товары, а отобразим подкатегории баннерами и все
-    if params[:new].blank? and (params[:slug] == 'zhenskaya-odezhda' or params[:slug] == 'muzhskaya-odezhda')
+    if params[:slug] == 'zhenskaya-odezhda' or params[:slug] == 'muzhskaya-odezhda'
       render "catalog/subcategories-banners"
       return
     end

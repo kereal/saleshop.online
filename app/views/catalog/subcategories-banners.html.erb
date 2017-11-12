@@ -4,7 +4,7 @@
 
 <div class="root-subs">
   <% @category.children.each do |children| %>
-    <div class="item"><%= link_to image_tag(children.image(:medium), alt: children.title), children %></div>
+    <div class="item"><%= link_to image_tag(children.image(:medium), alt: children.title), category_path(children, params.permit(:new)) %></div>
   <% end %>
 </div>
 

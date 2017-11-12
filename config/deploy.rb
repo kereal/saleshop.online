@@ -20,7 +20,7 @@ set :rvm_use_path,      '/usr/local/rvm/scripts/rvm'
 
 
 task :remote_environment do
-  invoke :'rvm:use', '2.4.1'
+  invoke :'rvm:use', '2.4.2'
 end
 
 task :setup do

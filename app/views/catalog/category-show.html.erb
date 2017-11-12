@@ -15,10 +15,11 @@
 
 
 <div class="aggs">
+  Сортировать по: 
   <div class="item">
-    <div class="root">бренд</div>
+    <div class="root">бренду</div>
     <div class="agg">
-      <% @products.aggs['brand']['buckets'].each do |brand| %>
+      <% @products.aggs['brand']['buckets'].sort_by{|a,b|a['key']}.each do |brand| %>
         <% if brand['key'].length > 2 %>
           <%= link_to brand['key'].split('|').first, { brand: brand['key'].split('|').last } %>
         <% end %>
@@ -26,26 +27,23 @@
     </div>
   </div>
   <div class="item">
-    <div class="root">размер</div>
+    <div class="root">размеру</div>
     <div class="agg">
-      <% @products.aggs['measure']['buckets'].each do |measure| %>
+      <% @products.aggs['measure']['buckets'].sort_by{|a,b|a['key']}.each do |measure| %>
         <%= link_to measure['key'], { measure: measure['key'] } %>
       <% end %>
     </div>
   </div>
   <div class="item">
-    <div class="root">цвет</div>
+    <div class="root">цвету</div>
     <div class="agg">
-      <% @products.aggs['color']['buckets'].each do |color| %>
+      <% @products.aggs['color']['buckets'].sort_by{|a,b|a['key']}.each do |color| %>
         <%= link_to color['key'], { color: color['key'] } %>
       <% end %>
     </div>
   </div>
-  <!-- <div class="item">
-    <div class="root">цена &#9660;</div>
-  </div> -->
   <div class="item">
-    <div class="root">скидка</div>
+    <div class="root">скидке</div>
     <div class="agg">
       <%= link_to "Да", { sale: true } %>
       <%= link_to "Нет", { sale: false } %>
@@ -81,26 +79,23 @@
 <style>
   .aggs {
     margin-bottom: 1em;
+    margin-top: -.6em;
     }
     .aggs > .item {
       position: relative;
       display: inline-block;
       }
       .aggs > .item > .root {
-        position: relative;
-        margin-right: 7px;
-        padding-right: 20px;
+        font-weight: 700;
+        color: #fff;
+        background-color: rgba(58, 148, 148, .75);
+        text-transform: uppercase;
+        padding: 2px 6px 0;
+        margin-left: 5px;
         cursor: pointer;
         }
-      .aggs > .item > .root:after {
-        content: "";
-        position: absolute;
-        top: 4px;
-        right: 0;
-        background: url(<%= asset_path 'arrow-down.svg' %>) no-repeat;
-        background-size: cover;
-        width: 12px;
-        height: 9px;
+      .aggs > .item > .root:hover {
+        background-color: rgb(58, 148, 148);
         }
       .aggs > .item > .agg {
         position: absolute;

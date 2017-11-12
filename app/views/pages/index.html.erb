@@ -1,6 +1,6 @@
 <div class="welcome2ways clearfix">
-  <%= link_to image_tag("index4woman.jpg"), category_path("zhenskaya-odezhda") %>
-  <%= link_to image_tag("index4men.jpg"), category_path("muzhskaya-odezhda") %>
+  <%= link_to image_tag("index4woman.jpg"), category_path("zhenskaya-odezhda"), class: "for-her" %>
+  <%= link_to image_tag("index4men.jpg"), category_path("muzhskaya-odezhda"), class: "for-him" %>
 </div>
 
 <div class="big-sale">
@@ -95,6 +95,28 @@
     .welcome2ways > a > img {
       width: 100%;
       transition: transform .5s linear;
+      }
+    .welcome2ways > a:after {
+      content: "";
+      position: absolute;
+      width: 180px;
+      height: 88px;
+      top: 50%;
+      left: 50%;
+      margin-left: -90px;
+      margin-top: -44px;
+      background-size: cover;
+      background-color: rgba(0,0,0,.8);
+      opacity: .9;
+      z-index: 2;
+      transition: all .5s linear;
+      }
+    .welcome2ways > a.for-her:after { background-image: url(<%= image_path("for-her.png") %>); }
+    .welcome2ways > a.for-him:after { background-image: url(<%= image_path("for-him.png") %>); }
+    .welcome2ways > a:hover:after {
+      opacity: 1;
+      background-color: transparent;
+      transition: all .5s linear;
       }
   .big-sale > a {
     display: block;

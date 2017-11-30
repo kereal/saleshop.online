@@ -8,9 +8,11 @@
         <% else %>
           <%= link_to image_tag("http://placehold.it/208x310/f9f9f9/777?text=нет+фото", alt: nil), product_path(product.slug) %>
         <% end %>
+        <!--
         <%= link_to product_fast_view_path(product.slug), class: "fast-view", remote: true do %>
           <span>Быстрый просмотр</span>
         <% end %>
+        -->
       </div>
       <div class="brand">
         <% if product.brand.length > 2 %>
@@ -171,7 +173,7 @@
 
 
 <script>
-
+/*
   $(function() {
 
     // отображение кнопки быстрого просмотра при наведении на товар
@@ -206,5 +208,5 @@
     });
 
   });
-
+*/
 </script>

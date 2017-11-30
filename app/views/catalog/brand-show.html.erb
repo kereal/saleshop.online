@@ -3,7 +3,7 @@
 
 <h1 class="big"><%= @brand.title %></h1>
 
-<% if @brand.image.exists? or not @brand.description.blank? %>
+<% if not params[:page] and (@brand.image.exists? or not @brand.description.blank?) %>
   <div class="brand-about clearfix">
     <% if @brand.image.exists? %>
       <div class="image"><%= image_tag @brand.image(:medium) %></div>
@@ -20,6 +20,8 @@
 <style>
   .brand-about {
     margin-bottom: 52px;
+    padding: 1.2em 1.25em .45em;
+    border: 1px solid #0c9494;
     }
     .brand-about .image {
       float: right;

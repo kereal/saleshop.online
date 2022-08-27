@@ -26,7 +26,7 @@ module SaleshopOnline
       domain:                 'saleshop.online',
       authentication:         'plain',
       user_name:              'robot@saleshop.online',
-      password:               'w26a7sEa'
+      password:               ''
     }
 
   end

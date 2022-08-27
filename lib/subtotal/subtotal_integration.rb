@@ -1,9 +1,9 @@
 class SubtotalIntegration
 
   SERVER = 'https://app.subtotal.ru'
-  LOGIN = 'kereal@gmail.com'
-  PASSWORD = '12345'
-  CLIENT_ID = 'id11542'
+  LOGIN = ''
+  PASSWORD = ''
+  CLIENT_ID = ''
   # require File.join(Rails.root, "lib", "subtotal", "subtotal_integration.rb")
   # Rails.application.secrets.some_api_key  # secrets.yml
   # response = RestClient.get('https://app.subtotal.ru/id11542/webapi/goods', { good_type_id: 2 })
